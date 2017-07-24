@@ -1,0 +1,319 @@
+// ===============================================================
+// Sai Mixins Extension for LESS v0.2
+// ==================================================================
+// Author: Hassadee Pimsuwan | @hapztron
+// More info at: http://saimixins.appspot.com
+// GitHub Repository at: https://github.com/hapztron/sai
+//
+// Copyright (c) 2013 - Hassadee Pimsuwan
+// Licensed under the MIT license:
+// http://www.opensource.org/licenses/mit-license.php
+// =================================================================
+// CSS3 : Table of Contents
+// =================================================================
+// Background Gradient
+// Background Size
+// Border
+// Border Radius
+// Box Shadow
+// Calculate
+// Columns
+// Font Face
+// Opacity
+// Text Shadow
+// Transform
+// Transition Duration
+// =================================================================
+// Typography : Table of Contents
+// =================================================================
+// Links
+// Lists
+// Text
+// =================================================================
+// Utilities : Table of Contents
+// =================================================================
+// Links
+// Lists
+// Text
+// Color
+// General
+// Sprites
+// Tables
+// ================================================================
+
+
+// Background Gradient
+// ================================================================
+.gradient(
+    @color: #F5F5F5;
+    @start: #EEE;
+    @stop: #FFF
+) {
+    background: @color;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, @start), color-stop(1, @stop));
+    background: -ms-linear-gradient(bottom, @start, @stop);
+    background: -moz-linear-gradient(center bottom, @start 0%, @stop 100%);
+    background: -o-linear-gradient(@stop, @start);
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)", @stop, @start));
+}
+
+.rgba-gradient(
+    @color: #F5F5F5;
+    @start: 0;
+    @start-alpha: 0.75;
+    @stop: 255;
+    @stop-alpha: 0.75
+) {
+    background: @color;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgba(@start,@start,@start,@start-alpha)), color-stop(1, rgba(@stop,@stop,@stop,@stop-alpha)));
+    background: -ms-linear-gradient(bottom, rgba(@start,@start,@start,@start-alpha) 0%, rgba(@stop,@stop,@stop,@stop-alpha) 100%);
+    background: -moz-linear-gradient(center bottom, rgba(@start,@start,@start,@start-alpha) 0%, rgba(@stop,@stop,@stop,@stop-alpha) 100%);
+    background: -o-linear-gradient(rgba(@stop,@stop,@stop,@stop-alpha), rgba(@start,@start,@start,@start-alpha));
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",rgba(@stop,@stop,@stop,@stop-alpha),rgba(@start,@start,@start,@start-alpha)));
+}
+
+
+// Background Size
+// ===============================================================
+.background-size(
+    @size: cover
+) {
+    -webkit-background-size:    @size;
+    -moz-background-size:       @size;
+    -o-background-size:         @size;
+    background-size:            @size;
+}
+
+
+// Border
+// ===============================================================
+.border (
+    @style: solid;
+    @border-width: 1px;
+    @top-color: #EEEEEE;
+    @right-color: #EEEEEE;
+    @bottom-color: #EEEEEE;
+    @left-color: #EEEEEE
+) {
+    border-top:     @arguments;
+    border-left:    @arguments;
+    border-right:   @arguments;
+    border-bottom:  @arguments;
+}
+
+
+// Border Radius
+// ===============================================================
+.border-radius (
+    @radius: 5px
+) {
+    -webkit-border-radius:  @radius;
+    -moz-border-radius:     @radius;
+    -ms-border-radius:      @radius;
+    -o-border-radius:       @radius;
+    border-radius:          @radius;
+}
+
+
+// Box Shadow
+// ===============================================================
+.box-shadow (
+    @x-axis: 0;
+    @y-axis: 1px;
+    @blur: 2px;
+    @color: #333
+) when (iscolor(@color)) {
+    -moz-box-shadow:    @arguments;
+    -webkit-box-shadow: @arguments;
+    -ms-box-shadow:     @arguments;
+    -o-box-shadow:      @arguments;
+    box-shadow:         @arguments;
+}
+
+
+// Calculate
+// ===============================================================
+.width-calc (
+    @expression
+) {
+    width:  -webkit-calc(@expression);
+    width:  -moz-calc(@expression);
+    width:  calc(@expression);
+}
+
+.height-calc (
+    @expression
+) {
+    height:  -webkit-calc(@expression);
+    height:  -moz-calc(@expression);
+    height:  calc(@expression);
+}
+
+
+// Columns
+// ===============================================================
+.column-count(
+    @quantity: 2
+) {
+    -webkit-column-count:   @quantity;
+    -moz-column-count:      @quantity;
+    -ms-column-count:       @quantity;
+    -o-column-count:        @quantity;
+    column-count:           @quantity;
+}
+
+.column-rule(
+    @width: 1px;
+    @style: solid;
+    @color: #333333
+) {
+    -webkit-column-rule:    @arguments;
+    -moz-column-rule:       @arguments;
+    -ms-column-rule:        @arguments;
+    -o-column-rule:         @arguments;
+    column-rule:            @arguments;
+}
+
+
+// Font Face
+// ===============================================================
+.font-face (
+    @name;
+    @font-file;
+    @format;
+    @weight: normal;
+    @style: normal
+) {
+    font-family:    @name;
+    src: url(@font-file), format(@format);
+    font-weight:    @weight;
+    font-style:     @style;
+}
+
+
+// Opacity
+// ===============================================================
+.opacity (
+    @opa: 0.75
+) {
+    @ms-opa:        (@opa * 100);
+    -ms-filter:     "progid:DXImageTransform.Microsoft.Alpha(Opacity=@ms-opa)";
+    filter:         alpha(opacity=@ms-opa);
+    -moz-opacity:   @opa;
+    -khtml-opacity: @opa;
+    opacity:        @opa;
+}
+
+
+// Text Shadow
+// ===============================================================
+.text-shadow(
+    @h-offset: 0px;
+    @v-offset: 0px;
+    @blur: 1px;
+    @color: #333333
+) {
+    text-shadow: @arguments;
+}
+
+
+// Transform
+// ===============================================================
+.translate3d(
+    @x: 0;
+    @y: 0;
+    @z: 0
+) {
+    -webkit-transform:  translate3d(@x, @y, @z);
+    -moz-transform:     translate3d(@x, @y, @z);
+    -ms-transform:      translate3d(@x, @y, @z);
+    -o-transform:       translate3d(@x, @y, @z);
+    transform:          translate3d(@x, @y, @z);
+}
+
+
+// Transition Duration
+// ===============================================================
+.transition-duration(
+    @duration: 0.4s
+) {
+    -moz-transition-duration:       @duration;
+    -webkit-transition-duration:    @duration;
+    -o-transition-duration:         @duration;
+    transition-duration:            @duration;
+}
+
+
+// Typography | Links
+// ===============================================================
+.hover-link(
+    @active: none;
+    @hover: underline
+) {
+    text-decoration: @active;
+    &:hover {
+        text-decoration: @hover;
+    }
+}
+
+.link-colors(
+    @normal: #00c;
+    @hover: #0cc;
+    @active: #c0c;
+    @visited: #ccc;
+    @focus: #cc0
+) {
+    color: @normal;
+    &:hover {
+        color: @hover;
+    }
+    &:active {
+        color: @active;
+    }
+    &:visited {
+        color: @visited;
+    }
+    &:focus {
+        color: @focus;
+    }
+}
+
+.unstyled-link() {
+    color: inherit;
+    text-decoration: inherit;
+    cursor: inherit;
+    &:active,
+    &:focus {
+        outline: none;
+    }
+}
+
+
+// Typography | Lists
+// ===============================================================
+.no-bullet() {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0;
+}
+
+.no-bullets() {
+    list-style: none;
+    li {
+        .no-bullet;
+    }
+}
+
+.inline-list() {
+    list-style-type: none;
+    li {
+        margin: 0px;
+        padding: 0px;
+        display: inline;
+    }
+}
+
+.ellipsis() {
+    white-space: nowrap;
+    overflow: hidden;
+}

@@ -1,0 +1,27 @@
+@import "libs\myvars.less";
+/* menu */
+#topHeader {
+    .Logo('../img/logo.jpg');
+    .HeaderText();
+}
+.navcontainer {
+    .BarNavArea(@coGrey; .9em);
+}
+.topnav {
+    .BarNav(@coBlue);
+}
+.bottomnav {
+    .BarNav(@coPurple);
+}
+.hmenu {
+    .BarNav(@coPurpleLight; 10px; 22px);
+    .PadRight();    
+    text-align: right;
+}
+#liMenu li {
+    display: inline;
+    a {  
+        .GetValWC(@coWhite);
+        .PadRight();
+    }
+}

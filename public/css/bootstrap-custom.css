@@ -1,0 +1,75 @@
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+}
+
+.mainbody {
+    width: 80%; /* must set width to be same as mainbocy since use fixed position */
+    background: none repeat scroll 0 0 transparent;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: arial, helvetica, sans-serif;
+    min-height: 80%;
+    height: auto;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+#footerholder {
+    margin: 0 auto;     
+    background: none repeat scroll 0 0 transparent; 
+    /* must set width to be same as mainbocy since use fixed position */    
+    width: 80%;    
+    position: fixed;  
+    bottom:0; 
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto;
+ /*   margin: 0 auto 250px;      */
+    /* Pad bottom by footer height */
+    padding: 0 0 20px;
+}
+
+#wrap > .container {
+    /*  padding: 60px 15px 0; */
+    padding: 10px 15px 0; 
+}
+
+.footer {
+  background: none repeat scroll 0 0 #eaeaea;
+  color: #999999;
+  text-align: right;
+}
+.footer a {
+  color: #999999;
+  padding-right: 15px;
+}
+
+
+/* this is it */
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* this is it */
+.navbar {
+    position: relative;
+    min-height: 30px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+}
+
+/* set a max-width for horizontal fluid layout and make it centered */
+.containerex {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 100%;
+    text-align: center;      
+}

@@ -1,0 +1,48 @@
+// my custom less from libs
+/*
+@import "libs\sai.less";
+@import "libs\elements.less";
+@import "libs\responsive.less";
+*/
+@import "libs\myvars.less";
+// main body
+root { 
+    display: block;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: @minHeight;
+}
+.mainbody {
+    .BgImg('../img/background.png');
+    .GetValWC(@mxWidth);
+    .CoBackground();
+    .AlignCenter();
+    .MyFont();
+    min-height: @minHeight;
+    height: auto;    
+    position: relative; 
+    padding-bottom: 5px;  
+}
+.main-content {
+    .AlignCenter();
+    text-align: center;   
+    max-width: 100%;
+}
+.footerholder {
+    .CoBackground(transparent);
+    .GetValWC(@mxWidth);
+    margin: auto;
+    position: fixed;     
+    bottom: 0; 
+}
+.footer {
+    .CoBackground(@coOffWhite);
+    .GetValWC(@coGreyDark);
+    text-align: right; 
+    a {
+    .GetValWC(@coGreyDark);
+    .PadRight();    
+    }
+}

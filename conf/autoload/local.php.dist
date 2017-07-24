@@ -1,0 +1,8 @@
+<?php
+return [
+    'db' => [
+        'dsn' => 'sqlite:db/mvclite.sqlite',
+        'username' => '',    
+        'password' => '',  
+    ],
+]; 

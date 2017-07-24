@@ -1,0 +1,82 @@
+// variables
+@coWhite: #ffffff;
+@coOffWhite: #eaeaea;
+@coGrey: #eeeeee;
+@coGreyDark: #999999;
+@coPurple: #5a5a93;
+@coPurpleLight: #a1a1cc;
+@coBlue: #333399;
+@coBlueLight: #b0e0e6;
+@mxWidth: 90%;
+@minHeight: 80%;
+@hdrFont: 2em;
+@roundSize: 4px;
+// mixins
+// use to set color or width value
+.GetValWC (@a) when (iscolor(@a)) {
+  color: @a;
+}
+.GetValWC (@a) when (ispixel(@a)),(ispercentage(@a)) {
+  width: @a;
+}
+
+.MyFont() {
+    font-family: arial, helvetica, sans-serif;
+}
+.BgImg(@file : '../img/logo.jpg';) {
+    background-image: url('@{file}');
+}
+.Logo(@file : '../img/logo.jpg'; @pos: left) {
+    .BgImg(@file);
+    background-position: @pos;
+    background-repeat: no-repeat;
+}
+.HeaderText(@fontsize: @hdrFont; @height: 65px; @pos: right) {
+    .GetValWC(@coGrey);
+    height: @height;
+    margin: 0 auto;
+    .PadRight();    
+    text-align: @pos;
+    font-size: @fontsize;
+    line-height: @fontsize;    /* to vertical center title text */
+}
+.PadRight(@size: 15px) {
+    padding-right: @size;  
+}
+.PadVertical(@size: .0px) {
+    padding-top: @size;
+    padding-bottom: @size;
+}
+.AlignVertical(@fontsize: 13px; @height: 36px) {
+    /* valign */
+    .PadVertical();    
+    font-size: @fontsize;
+    line-height: @height;  
+}
+.AlignCenter() {
+    margin-left: auto;
+    margin-right: auto; 
+}
+.RoundedCorner(@radius: @roundSize) {
+    -moz-border-radius: @radius;
+    border-radius: @radius; 
+}
+.CoBackground(@color: transparent) {
+    background: none repeat scroll 0 0 @color; 
+}
+.BarNav(@color: @coPurple; @size: 13px; @height: 36px ) {
+    background: @color;
+    .RoundedCorner();
+    .AlignVertical(@size, @height);
+}
+.BarNavArea(@color: @coGrey; @fontsize: .9em) {
+    .GetValWC(@color);
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    list-style-type: none;
+    font-size: @fontsize;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}

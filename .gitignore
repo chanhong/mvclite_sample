@@ -1,2 +1,6 @@
 /nbproject
-
+/conf/autoload/local.php
+/conf/autoload/xlocal.php
+/apps/views/mya
+/apps/layouts/mya.php
+/apps/src/controller/Mya.php
