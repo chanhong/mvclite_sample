@@ -5,7 +5,7 @@
   <?php
         echo @$data['header_bef'];
         echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.min.css');
-        echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
+//        echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
         echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
         echo @$data['header_aft'];               
 ?>

@@ -32,7 +32,7 @@ class BaseController extends MvcController {
             "js/jquery-3.2.1.min",
             "js/jquery-migrate-git.min",
 //            "public/js/less-1.5.1.js",
-            "js/bootstrap.js",
+            "js/bootstrap.min.js",
             "js/ie-emulation-modes-warning.js",
         ];
     }
