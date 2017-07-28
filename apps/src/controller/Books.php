@@ -9,9 +9,6 @@ class Books extends BaseController {
         $this->layout = "default_nofooter";  
         $this->meTable = "books"; 
         $this->model = new BookModel($this->meTable);  
-//        $this->add2Array4Layout("css", "css/bootstrap-custom.css");
-// but not float when list is long
-//        $this->add2Array4Layout("cssaft", "css/sticky-footer-my-navbar.css");
         $this->add2Array4Layout("meta", "utf-8");
         $this->_view_data['profile'] = BaseCore::$_userInfo;            
         $this->setViewData($this->_class_path);

@@ -34,8 +34,6 @@ class BaseController extends MvcController {
 //            "public/js/less-1.5.1.js",
             "js/bootstrap.js",
             "js/ie-emulation-modes-warning.js",
-//            "js/footer_resize.js",
-            "js/sticky_footer.js",
         ];
     }
     

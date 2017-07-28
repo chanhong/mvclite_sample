@@ -14,9 +14,6 @@ class Users extends BaseController {
         $this->layout = "default";        
         $this->model = new UserModel($this->meTable);
         $this->_view_data['meta'] = $this->h->meta("utf-8"); // in view $data['meta']
-        $this->add2Array4Layout("css", "css/menu.css");
-        $this->add2Array4Layout("css", "css/menu-original.css");
-//        $this->add2Header("css", "public/css/yuiapp.css");
         $this->home = $this->h->tap('/users/index');
         $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['front']);            
         $this->_view_data['menu'] .= $this->h->getLiMenu(BaseCore::$_cfg['menu']['user']);            

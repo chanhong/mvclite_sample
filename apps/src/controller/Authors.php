@@ -10,7 +10,6 @@ class Authors extends BaseController {
         $this->meTable = "authors"; 
         $this->model = new AuthorModel($this->meTable);   
         $this->add2Array4Layout("meta", "utf-8");
-//        $this->add2Array4Layout("css", "css/menu-original.css");
         $this->_view_data['profile'] = BaseCore::$_userInfo;            
         $this->setViewData($this->_class_path);
         $this->home = $this->h->tap('/authors/index');
