@@ -14,9 +14,12 @@ class Users extends BaseController {
         $this->layout = "default";        
         $this->model = new UserModel($this->meTable);
         $this->_view_data['meta'] = $this->h->meta("utf-8"); // in view $data['meta']
+        $this->add2Array4Layout("css", "css/menu.css");
+        $this->add2Array4Layout("css", "css/menu-original.css");
 //        $this->add2Header("css", "public/css/yuiapp.css");
         $this->home = $this->h->tap('/users/index');
-        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['user']);            
+        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['front']);            
+        $this->_view_data['menu'] .= $this->h->getLiMenu(BaseCore::$_cfg['menu']['user']);            
     }
 
     public function start($args = false) {
@@ -37,14 +40,16 @@ class Users extends BaseController {
         }
         
         $this->_view_data['arr'] = $this->model->_dbt("select",['where'=>"1 = 1 $search_sql ORDER BY username"]);
-        $this->_view_data['title'] = 'User List';       
+        $this->_view_data['header_title'] = 'User List';       
         echo self::doView($this, "index");        
     }
 
     public function login($args = false) {
 
         $this->_view_data['winuser'] = $this->Auth->winUser();
-        $this->_view_data['winlogin'] = $this->renderAppView("_winlogin");
+        if (!empty($this->_view_data['winuser'])) {
+            $this->_view_data['winlogin'] = $this->renderAppView("_winlogin");
+        }
         $this->_view_data['weblogin'] = $this->renderAppView("_weblogin");
         echo $this->doView($this,"login");
     }
@@ -65,38 +70,35 @@ class Users extends BaseController {
                 if (BaseCore::$_userInfo = $this->isAuthorized($winUser, $where, $this->meTable)) {
                     $this->redirect2Url($this->retUrl); // good login                           
                 } 
-//                $this->model->login($winUser, $where);
             }
         }
-        // use common login form
         echo $this->doView($this,"winlogin");
     }
 
     public function _weblogin($args = false) {
 
-        if (!empty($this->post['username']) and ! empty($this->post['password'])) {
+        if (!empty($this->post['username'])) {
             $username = $this->post['username'];
+            $r = $this->model->_dbt("dbrow",['where'=>"username='$username'"]); 
+        }
+
+        if (!empty($r) and !empty($this->post['password'])) {
             $password = $this->post['password'];
-            $userRow = $this->model->_dbt("dbrow",['where'=>"username='$username'"]); 
-            if (!empty($userRow)) {         
-                $hashed_password = $this->Auth->md5Hash($password, $userRow['nid']);
-                $_SESSION['debug'] = "User: [$username]";
-                $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
-//                $this->model->login($password, $where);
-                $userInfo = $this->isAuthorized($password, $where, $this->meTable);
-                if (!empty($userInfo)) {
-                    $this->redirect2Url($this->retUrl); // good login                           
-                } else {
-                    $this->Error->add('username', "We're sorry, incorrect login. Please try again.");
-                }
+            $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
+            $_SESSION['debug'] = "User: [$username]";
+            $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
+            if (BaseCore::$_userInfo =  $this->isAuthorized($password, $where, $this->meTable)) {
+                $this->redirect2Url($this->retUrl); // good login                           
+            } else {
+                $this->Error->add('username', "We're sorry, login failed. Please try again.");
             }
-        } elseif (!empty($this->post['webbtnlogin'])) {
+        } else {
             $this->Error->add('username', "We're sorry, wrong login. Please try again.");
         }
-        // use common login form
+
         echo $this->doView($this,"_weblogin");
     }
-    
+
     public function logout($args = false) {
         
         $this->Auth->logout();

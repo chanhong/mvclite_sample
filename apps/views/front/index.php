@@ -1,8 +1,5 @@
 <?php
-$this->_view_data['title'] = 'Front';
-
+$this->_view_data['header_title'] = 'Front';
 $this->db->pln(BaseCore::$_userInfo,'_userinfo @front');
+//echo $this->redirect2Url($this->h->tap("/books/index"));
 
-?>
-<p /><center>
-    <p />This is the front page index</center>

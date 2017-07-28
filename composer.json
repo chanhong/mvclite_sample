@@ -13,7 +13,8 @@
         "php": ">=5.3.0",
         "chanhong/pdolite": "1.0.x-dev",
         "chanhong/phploaderlite": "1.0.x-dev",
-        "chanhong/mvclite": "1.0.x-dev"
+        "chanhong/mvclite": "1.0.x-dev",
+        "twbs/bootstrap": "^3.3"
     },
     "autoload": {
         "psr-4": {

@@ -8,11 +8,9 @@ class Pages extends BaseController {
     public function __construct() {
         
         parent::__construct();
-        $this->layout = "default";                
-        $this->add2HeaderArrays("css", "css/default.css");
-        $this->add2HeaderArrays("css", "css/menu.css");
-        $this->add2HeaderArrays("meta", "utf-8");
-        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['hmenu']);
+        $this->layout = "default";         
+        $this->add2Array4Layout("meta", "utf-8");
+        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['front']);
         $this->_view_data['menu'] .= $this->h->getLiMenu(BaseCore::$_cfg['menu']['page']);
         $this->setViewData($this->_class_path);
     }

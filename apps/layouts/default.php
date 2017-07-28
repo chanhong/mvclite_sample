@@ -1,51 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <?php
-        echo @$data['header'];        
-        echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-less.css');
+<html>
+
+<head>
+  <?php
+        echo @$data['header_bef'];
+        echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.min.css');
+        echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
         echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
-        ?>      
-    </head>
-    <body>
-        <div class="mainbody">  
-            <!-- Wrap all page content here -->
-            <div id="wrap">
-                <div id="topHeader">
-                    <?php echo @$data['title']; ?>
-                </div> 
-                <!-- Fixed navbar -->
-                <div class="navbar navbar-default" role="navigation">
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
-                                <?php echo @$data['top']; ?>
-                            </ul>
-                        </div><!--/.nav-collapse -->
-                </div>
-                <?php echo @$data['before_body']; ?>
-                <!-- Begin page content -->
-                <div class="containerex">
-                    <?php echo $this->doBody(); ?>
-                </div>
-            </div>
-            <div id="footerholder">      
-                <div class="navbar navbar-default" role="navigation">
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
-                              <?php echo @$data['footer']; ?>
-                            </ul>
-                        </div><!--/.nav-collapse -->
-                </div> 
-                <div class="footer">
-                  <?php echo @$data['after_footer']; ?>
-                </div>                
-            </div>
+        echo @$data['header_aft'];               
+?>
+</head>
+
+<body>
+  <div class="mainbody">
+    <div id="topHeader">
+      <?php echo @$data['header_title']; ?>
+    </div>
+    <div class="navbar navbar-default" role="navigation">
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <?php echo @$data['top']; ?>
+        </ul>
+      </div>
+      <?php echo @$data['body_bef']; ?>
+    </div>
+    <div class="container">
+      <?php echo $this->doBody(); ?>
+      <?php echo @$data['body_aft']; ?>
+    </div>
+    <div id="footer">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <?php echo @$data['footer_bef']; ?>
+          </ul>
         </div>
-        <?php echo @$data['loadjs']; ?>
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="public/js/html5shiv.js"></script>
-        <script src="public/js/respond.min.js"></script>
-        <![endif]-->  
-    </body>
+      </div>
+      <div class="footer">
+        <?php echo @$data['footer_aft']; ?>
+      </div>
+    </div>
+  </div>
+  <?php echo @$data['loadjs']; ?>
+
+</body>
+
 </html>

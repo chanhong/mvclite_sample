@@ -1,51 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <?php
-        echo @$data['header'];        
-        echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-less.css');
-        echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
-        ?>      
-    </head>
-    <body>
-        <div class="mainbody">  
-            <!-- Wrap all page content here -->
-            <div id="wrap">
-                <div id="topHeader">
-                    <?php echo @$data['title']; ?>
-                </div> 
-                <!-- Fixed navbar -->
-                <div class="navbar navbar-default" role="navigation">
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
-                                <?php echo @$data['top']; ?>
-                            </ul>
-                        </div><!--/.nav-collapse -->
-                </div>
-                <?php echo @$data['before_body']; ?>
-                <!-- Begin page content -->
-                <div class="containerex">
-                    <?php echo $this->doBody(); ?>
-                </div>
-            </div>
-            <div id="footerholder">      
-                <div class="navbar navbar-default" role="navigation">
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
-                              <?php echo @$data['footer']; ?>
-                            </ul>
-                        </div><!--/.nav-collapse -->
-                </div> 
-                <div class="footer">
-                  <?php echo @$data['after_footer']; ?>
-                </div>                
-            </div>
+
+<head>
+  <?php
+    echo @$data['header_bef'];        
+    echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.min.css');
+    echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
+    echo $this->h->css($this->publicFolder . '/' .'css/sticky-footer-navbar.css');
+    echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
+    echo @$data['header_aft'];        
+?>
+</head>
+
+<body>
+  <div class="mainbody">
+    <div id="topHeader">
+      <?php echo @$data['header_title']; ?>
+    </div>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <?php echo @$data['top']; ?>
+          </ul>
         </div>
-        <?php echo @$data['loadjs']; ?>
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="public/js/html5shiv.js"></script>
-        <script src="public/js/respond.min.js"></script>
-        <![endif]-->  
-    </body>
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+      <div class="page-header">
+        <?php echo @$data['body_bef']; ?>
+      </div>
+      <?php echo $this->doBody(); ?>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <?php echo @$data['footer_bef']; ?>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+      <p />
+      <?php echo @$data['footer_aft']; ?>
+    </div>
+  </footer>
+  <?php echo @$data['loadjs']; ?>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</body>
+
 </html>

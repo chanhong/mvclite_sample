@@ -2,16 +2,17 @@
 <html lang="en">
     <head>
         <?php
-        echo @$data['header'];        
-        echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-less.css');
+        echo @$data['header_bef'];        
+        echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.css');
         echo $this->h->css($this->publicFolder . '/' .'css/sticky-footer-navbar.css');
+    echo @$data['header_aft'];                
         ?> 
     </head>
     <body>
         <!-- Wrap all page content here -->
         <div id="wrap">
             <div id="topHeader">
-                <?php echo @$data['title']; ?>
+                <?php echo @$data['header_title']; ?>
             </div> 
             <!-- Fixed navbar -->
             <div class="navbar navbar-default" role="navigation">
@@ -21,7 +22,7 @@
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
-                <?php echo @$data['before_body']; ?>
+                <?php echo @$data['body_bef']; ?>
             <!-- Begin page content -->
             <div class="containerex">
                 <?php echo $this->doBody(); ?>
@@ -31,12 +32,12 @@
             <div class="navbar navbar-default" role="navigation">
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                              <?php echo @$data['footer']; ?>
+                              <?php echo @$data['footer_bef']; ?>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div> 
             <div>
-                  <?php echo @$data['after_footer']; ?>
+                  <?php echo @$data['footer_aft']; ?>
             </div>                 
         </div>
                 <?php echo @$data['loadjs']; ?>

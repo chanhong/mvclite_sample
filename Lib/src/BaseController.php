@@ -15,18 +15,28 @@ class BaseController extends MvcController {
         
         parent::__construct();  
         // common set of header stuff like css, jv, etc
-        $this->styleless = array(// not use since it is not cross browser compatible yet
+        // not use since it is not cross browser compatible yet
+        $this->layoutHeader['less'] = [
 //            "public/less/default-less.less",
-        );
-        $this->stylesheets = array(
+        ];
+
+        $this->layoutHeader['cssbef'] = [
             "css/bootstrap/normalize.css",
-//            "public/css/default.css",
-            "css/menu.css",
-        );
-        $this->javascripts = array(
-            "js/jquery-2.0.3.min.js",
+        ];
+
+        $this->layoutHeader['cssaft'] = [
+            "css/custom.css",
+        ];
+
+        $this->layoutFooter['js'] = [
+            "js/jquery-3.2.1.min",
+            "js/jquery-migrate-git.min",
 //            "public/js/less-1.5.1.js",
             "js/bootstrap.js",
-        );
+            "js/ie-emulation-modes-warning.js",
+//            "js/footer_resize.js",
+            "js/sticky_footer.js",
+        ];
     }
+    
 }

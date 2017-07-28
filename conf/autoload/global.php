@@ -9,8 +9,6 @@ use MvcLite\Util;
  */
 $routecfg = [
     'page404' => "notfound",
-    'controllers' => Util::filesListNameOnly(CONTROLLER,".php"),
-    'models' => Util::filesListNameOnly(MODEL,".php"),
     'routes' => [
         'default_controller' => 'front',
         'alias' => [
@@ -25,26 +23,31 @@ $routecfg = [
     'menu' => [
         'main' => [
             ['title' => 'Front', 'path' => '/front/index'],
-            ['title' => 'Pages', 'path' => '/pages/index'],
-            ['title' => 'Mya', 'path' => '/mya/index'],
-            ['title' => 'Plain', 'path' => '/plain/index'],
             ['title' => 'Login', 'path' => '/login'],
             ['title' => 'Logout', 'path' => '/logout'],
             ['title' => 'Register', 'path' => '/register'],
-            ['title'=> 'Users', 'path'=>'/users/index'],
-            ['title'=> 'Weblogin', 'path'=>'/users/_weblogin'],
-            ['title'=> 'Winlogin', 'path'=>'/users/_winlogin'],
         ],
         'daskboard' => [
+            ['title'=>'Home','path'=>'/'],
             ['title' => 'dashboard', 'path' => '/dashboard/index'],
         ],        
+        'front' => [
+            ['title'=>'Home','path'=>'/'],
+            ['title'=>'About','path'=>'/front/about'],
+            ['title'=>'Books List','path'=>'/books/index'],
+            ['title'=>'Authors List','path'=>'/authors/index'],
+            ['title'=> 'Users', 'path'=>'/users/index'],
+            ['title' => 'Pages', 'path' => '/pages/index'],
+            ['title' => 'Mya', 'path' => '/mya/index'],
+            ['title' => 'Plain', 'path' => '/plain/index'],
+        ],
         'page' => [
             ['title' => 'Pages 1','path' => '/pages/page1'],
             ['title' => 'Pages 2','path' => '/pages/page2'],
         ],
         'hmenu' => [
             ['title' => 'Pages','path' => '/pages/index'],
-            ['title'=>'Users','path'=>'/users/index'],
+            ['title'=>'Links','path'=>'/links/index'],
         ],
         'mya' => [
             ['title'=>'Contacts','path'=>'/mya/contacts'],
