@@ -1,0 +1,3 @@
+[submodule "mvclite"]
+	path = mvclite
+	url = https://github.com/chanhong/mvclite.git
