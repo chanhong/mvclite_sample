@@ -6,8 +6,6 @@ class Plain extends BaseController {
         
         parent::__construct();
         $this->layout = "plain";                
-        $this->add2Array4Layout("meta", "utf-8");
-        $this->setViewData($this->_class_path);
     }
 
     public function start($args = false) {

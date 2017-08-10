@@ -52,7 +52,7 @@
                 "mvc",
                 "mvclite"
             ],
-            "time": "2017-07-21T22:13:06+00:00"
+            "time": "2017-07-21 22:13:06"
         },
         {
             "name": "chanhong/pdolite",
@@ -98,7 +98,7 @@
                 "lite",
                 "pdolite"
             ],
-            "time": "2017-03-12T23:23:48+00:00"
+            "time": "2017-03-12 23:23:48"
         },
         {
             "name": "chanhong/phploaderlite",
@@ -144,7 +144,7 @@
                 "loader",
                 "phploaderlite"
             ],
-            "time": "2017-07-05T21:22:02+00:00"
+            "time": "2017-07-05 21:22:02"
         }
     ],
     "packages-dev": [],

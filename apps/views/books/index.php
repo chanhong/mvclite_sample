@@ -1,5 +1,4 @@
 <?php
-$this->_view_data['header_title'] = 'Book List';
 $this->ut->debug(BaseCore::$_userInfo,'_userinfo');
 $usrQryUrl = $this->h->tap('/books/index');
 if (empty($data['arr'])) return;

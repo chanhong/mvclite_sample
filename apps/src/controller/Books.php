@@ -7,13 +7,10 @@ class Books extends BaseController {
         
         parent::__construct();
         $this->layout = "default_nofooter";  
-        $this->meTable = "books"; 
         $this->model = new BookModel($this->meTable);  
-        $this->add2Array4Layout("meta", "utf-8");
         $this->_view_data['profile'] = BaseCore::$_userInfo;            
-        $this->setViewData($this->_class_path);
-        $this->home = $this->h->tap('/books/index');
-        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['front']);        
+        $this->_view_data['cmenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
+        $this->_view_data['submenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['submenu']['front']);
     }
 
     public function start($args = false) {
@@ -34,7 +31,7 @@ class Books extends BaseController {
         
         $this->_view_data['arr'] = $this->model->_dbt("select",['where'=>"1 = 1 $search_sql ORDER BY title"]);
         $this->_view_data['header_title'] = 'Books List';       
-        echo self::doView($this, $args['a']);        
+        echo $this->doView($this, $args['a']);        
     }
 
     public function edit($args = false) {
@@ -54,7 +51,8 @@ class Books extends BaseController {
         } elseif (!empty($r)) {
             $this->_view_data['arr'] = (array) $r;
             $this->_view_data['arr']['p1'] = $r->id;
-            echo self::doView($this, $args['a']);        
+            $this->_view_data['header_title'] = 'Book Edit';
+            echo $this->doView($this, $args['a']);        
         }
     } 
 

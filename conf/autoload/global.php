@@ -22,40 +22,82 @@ $routecfg = [
     ],
     'menu' => [
         'main' => [
+            ['title'=>'Home','path'=>'/'],
             ['title' => 'Front', 'path' => '/front/index'],
             ['title' => 'Login', 'path' => '/login'],
             ['title' => 'Logout', 'path' => '/logout'],
             ['title' => 'Register', 'path' => '/register'],
         ],
-        'daskboard' => [
-            ['title'=>'Home','path'=>'/'],
-            ['title' => 'dashboard', 'path' => '/dashboard/index'],
+        'cmenu' => [
+            'front' => [
+                ['title'=>'Front','path'=>'/front/index'],
+                ['title'=>'About','path'=>'/front/about'],
+            ],
+            'daskboard' => [
+                ['title'=>'Home','path'=>'/'],
+                ['title' => 'Dashboard', 'path' => '/dashboard/index'],
+            ],        
+            
+        ],
+        'submenu' => [
+            'front' => [
+                ['title'=>'Books List','path'=>'/books/index'],
+                ['title'=>'Authors List','path'=>'/authors/index'],
+                ['title'=> 'Users', 'path'=>'/users/index'],
+                ['title' => 'Pages', 'path' => '/pages/index'],
+                ['title' => 'Mya', 'path' => '/mya/index'],
+                ['title' => 'Plain', 'path' => '/plain/index'],
+            ],
+            'user' => [
+                ['title'=>'List','path'=>'/users/index'],
+                ['title'=>'Create new user','path'=>'/users/create'],
+            ],
+            'mya' => [
+                ['title'=>'Contacts','path'=>'/mya/contacts'],
+                ['title'=>'Userful Links','path'=>'/mya/usefullinks'],
+            ],
+            'page' => [
+                ['title' => 'Pages 1','path' => '/pages/page1'],
+                ['title' => 'Pages 2','path' => '/pages/page2'],
+            ],
+            'daskboard' => [
+                ['title'=>'Home','path'=>'/'],
+                ['title' => 'Dashboard', 'path' => '/dashboard/index'],
+            ],        
+        ]
+    ]
+];
+
+// if not set then default to view as the title
+$controllerViewCfg = [
+    'controller' => [
+        'router' => [
+            'notfound'=>'Not Found Page',
         ],        
-        'front' => [
-            ['title'=>'Home','path'=>'/'],
-            ['title'=>'About','path'=>'/front/about'],
-            ['title'=>'Books List','path'=>'/books/index'],
-            ['title'=>'Authors List','path'=>'/authors/index'],
-            ['title'=> 'Users', 'path'=>'/users/index'],
-            ['title' => 'Pages', 'path' => '/pages/index'],
-            ['title' => 'Mya', 'path' => '/mya/index'],
-            ['title' => 'Plain', 'path' => '/plain/index'],
-        ],
-        'page' => [
-            ['title' => 'Pages 1','path' => '/pages/page1'],
-            ['title' => 'Pages 2','path' => '/pages/page2'],
-        ],
-        'hmenu' => [
-            ['title' => 'Pages','path' => '/pages/index'],
-            ['title'=>'Links','path'=>'/links/index'],
-        ],
         'mya' => [
-            ['title'=>'Contacts','path'=>'/mya/contacts'],
-            ['title'=>'Userful Links','path'=>'/mya/usefullinks'],
+            'index'=>'UWMC Accounting',
+            'usefullinks'=>'Useful Links',
+        ],        
+        'dashboard' => [
+            'index'=>'Dashboard List',
         ],
-        'user' => [
-            ['title'=>'List','path'=>'/users/index'],
-            ['title'=>'Create new user','path'=>'/users/create'],
+        'authors' => [
+            'index'=>'Authors List',
+        ],
+        'books' => [
+            'index'=>'Books List',
+        ],
+        'users' => [
+            'index'=>'Users List',
+        ],
+        'front' => [
+            'index'=>'Front Page',
+            'about'=>'About Page',
+        ],
+        'pages' => [
+            'index'=>'Pages',
+            'page1'=>'Page 1',
+            'page2'=>'Page 2',
         ],
     ]
 ];
@@ -65,7 +107,7 @@ if (file_exists(__DIR__  . '/local.php')) {
 } elseif (file_exists(__DIR__  . '/local.php.dist')){
    $localcfg = require_once(__DIR__  . '/local.php.dist');
 }
-BaseCore::$_cfg = array_merge($routecfg, $localcfg);
+BaseCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg);
 
 function pCStat($className) {
     $msg = "<>loaded";

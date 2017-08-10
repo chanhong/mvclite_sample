@@ -9,18 +9,6 @@ class UserModel extends BaseModel {
         parent::__construct($tname, $id = null); 
     }
 
-    public function xxlogin($validate, $where) {
-
-        if (BaseCore::$_userInfo = $this->isAuthorized($validate, $where, $this->meTable)) {
-            $this->redirect2Url($this->retUrl); // good login                           
-        } 
-    }
-
-    public function notuse_setPassword($password) {
-        
-        $this->password = sha1($password . $this->Auth->salt);
-    }
-
     public function delete($id) {
         
         if (ctype_digit($id)) {
@@ -68,9 +56,10 @@ class UserModel extends BaseModel {
         if (!empty($password)) {
             // new password with nid as salt
             $password = $this->Auth->md5Hash($password, $nid);
+            $sqlUpdList = ['username'=>$username, 'level'=>$level, 'password'=>$password];
+        } else {
+            $sqlUpdList = ['username'=>$username, 'level'=>$level];
         }
-
-        $sqlUpdList = ['username'=>$username, 'level'=>$level, 'password'=>$password];
         $this->_dbt("update",['fl'=>$sqlUpdList, 'where'=>"id='$id'"]);
     }
     

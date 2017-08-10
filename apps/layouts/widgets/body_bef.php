@@ -1,8 +1,12 @@
 <?php
-$menu = "";
+$menu = $submenu = "";
 
-if (!empty($data['menu'])){
-    $menu = $data['menu'];
+if (!empty($data['cmenu'])){
+    $menu = $data['cmenu'];
+}
+
+if (!empty($data['submenu'])){
+    $submenu = $data['submenu'];
 }
 
 $buff = <<<code
@@ -12,7 +16,14 @@ $buff = <<<code
 code
         . $menu
         . <<<code
+    </ul></div>
+        <div>
+          <ul class="nav navbar-nav navbar-right">    
+code
+        . $submenu
+        . <<<code
     </ul>
 </div>
-code;
+code
+;
 echo $buff;

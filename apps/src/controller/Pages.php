@@ -1,18 +1,12 @@
 <?php
-//namespace MvcSample;
-
-//use MvcLite\MvcController;
 
 class Pages extends BaseController {
 
     public function __construct() {
         
         parent::__construct();
-        $this->layout = "default";         
-        $this->add2Array4Layout("meta", "utf-8");
-        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['front']);
-        $this->_view_data['menu'] .= $this->h->getLiMenu(BaseCore::$_cfg['menu']['page']);
-        $this->setViewData($this->_class_path);
+        $this->_view_data['cmenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
+        $this->_view_data['submenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['submenu']['page']);
     }
 
     public function start($args = false) {

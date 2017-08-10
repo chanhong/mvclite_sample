@@ -3,7 +3,8 @@
 use PhpLoaderLite\NsClassLoader;
 
 // small set of functions to bootstrap 
-define('_MVCDEBUG', true); // false when in production
+defined('_MVCDEBUG') 
+    || define('_MVCDEBUG', true); // false when in production
 defined('DS') 
     || define('DS', DIRECTORY_SEPARATOR);
 

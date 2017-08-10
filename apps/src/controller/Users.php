@@ -2,6 +2,7 @@
 //namespace MvcSample;
 
 use MvcLite\Util;
+use MvcLite\MvcRouter;
 
 class Users extends BaseController {
 
@@ -11,17 +12,14 @@ class Users extends BaseController {
         
         parent::__construct();
         $this->meTable = "users";         
-        $this->layout = "default";        
         $this->model = new UserModel($this->meTable);
-        $this->_view_data['meta'] = $this->h->meta("utf-8"); // in view $data['meta']
-        $this->home = $this->h->tap('/users/index');
-        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['front']);            
-        $this->_view_data['menu'] .= $this->h->getLiMenu(BaseCore::$_cfg['menu']['user']);            
+        $this->_view_data['cmenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
+        $this->_view_data['submenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['submenu']['user']);               
+        
     }
 
     public function start($args = false) {
 
-        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['user']);                
         $ret = self::doAction($args, self::class);
     }
 
@@ -38,16 +36,17 @@ class Users extends BaseController {
         
         $this->_view_data['arr'] = $this->model->_dbt("select",['where'=>"1 = 1 $search_sql ORDER BY username"]);
         $this->_view_data['header_title'] = 'User List';       
-        echo self::doView($this, "index");        
+        echo $this->doView($this, "index");        
     }
 
     public function login($args = false) {
 
         $this->_view_data['winuser'] = $this->Auth->winUser();
         if (!empty($this->_view_data['winuser'])) {
-            $this->_view_data['winlogin'] = $this->renderAppView("_winlogin");
+            $this->_view_data['winlogin'] = $this->renderAppView("_winlogin", $this->_class_path);
         }
-        $this->_view_data['weblogin'] = $this->renderAppView("_weblogin");
+        $this->_view_data['weblogin'] = $this->renderAppView("_weblogin", $this->_class_path);
+        $this->_view_data['header_title'] = 'User Login';       
         echo $this->doView($this,"login");
     }
 
@@ -64,35 +63,30 @@ class Users extends BaseController {
                 
                 $_SESSION['debug'] = "Windows user: [$winUser] $msg";
                 $where = "winuser='$winUser' and is_confirmed = '1' $entity";
-                if (BaseCore::$_userInfo = $this->isAuthorized($winUser, $where, $this->meTable)) {
+                if ($this->isAuthorized($winUser, $where, $this->meTable)) {
                     $this->redirect2Url($this->retUrl); // good login                           
                 } 
             }
         }
-        echo $this->doView($this,"winlogin");
+        $this->_view_data['header_title'] = 'Win Login';       
+        echo $this->doView($this,"_winlogin");
     }
 
     public function _weblogin($args = false) {
 
-        if (!empty($this->post['username'])) {
-            $username = $this->post['username'];
-            $r = $this->model->_dbt("dbrow",['where'=>"username='$username'"]); 
-        }
-
-        if (!empty($r) and !empty($this->post['password'])) {
-            $password = $this->post['password'];
+        extract($this->post); // extract array into respective variables  
+        if (!empty($username) and !empty($r = $this->Auth->isUserExist($this->meTable, $username)) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
             $_SESSION['debug'] = "User: [$username]";
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
-            if (BaseCore::$_userInfo =  $this->isAuthorized($password, $where, $this->meTable)) {
+            if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
                 $this->redirect2Url($this->retUrl); // good login                           
-            } else {
-                $this->Error->add('username', "We're sorry, login failed. Please try again.");
-            }
-        } else {
+            } 
+        }            
+        if (empty($good)) {
             $this->Error->add('username', "We're sorry, wrong login. Please try again.");
         }
-
+        $this->_view_data['header_title'] = 'Web Login';       
         echo $this->doView($this,"_weblogin");
     }
 
@@ -143,7 +137,7 @@ class Users extends BaseController {
         } elseif (!empty($u)) {
             $this->_view_data['arr'] = (array) $u;
             $this->_view_data['arr']['p1'] = $u->id;
-            echo self::doView($this, "edit");        
+            echo $this->doView($this, "edit");        
         }
     }
 
@@ -165,6 +159,7 @@ class Users extends BaseController {
         } else {
             $this->_view_data['arr'] = array('username' => '', 'level' => 'user');
         }
-        echo self::doView($this, "create");        
+        $this->_view_data['header_title'] = 'User Create';       
+        echo $this->doView($this, "create");        
     }
 }

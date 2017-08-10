@@ -1,5 +1,4 @@
 <?PHP
-$this->_view_data['header_title'] = 'Users List';
 $usrQryUrl = $this->h->tap('/users/index');
 //$this->requireAdmin($usrQryUrl); // if not admin redirect to login and return here
 if (empty($data['arr'])) return;

@@ -1,5 +1,4 @@
 <?PHP
-$this->_view_data['header_title'] = 'Book Edit';
 $rUrl = $this->h->tap('/books/edit');
 //$this->requireAdmin($rUrl); // if not admin redirect to login and return here
 $rec = $data['arr'];

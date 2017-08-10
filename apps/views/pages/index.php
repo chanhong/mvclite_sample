@@ -1,5 +1,5 @@
 <?php
-
 ?>
-<p /><center>
+<p />
+<center>
     <p />This is the page index</center>

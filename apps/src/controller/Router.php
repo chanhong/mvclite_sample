@@ -10,10 +10,10 @@ class Router extends BaseController {
     public static function start($args = false) {
 
         // must get userinfo from SESSION
-        if (!empty($_SESSION['userinfo'])) {
-            BaseCore::$_userInfo = $_SESSION['userinfo'];
+        if (!empty($_SESSION['cache']['userinfo'])) {
+            BaseCore::$_userInfo = $_SESSION['cache']['userinfo'];
         }
 
-        self::doRouter($args, BaseCore::$_cfg['routes'], self::class);
+        self::doRouter(BaseCore::$_cfg['routes'], self::class);
     }
 }

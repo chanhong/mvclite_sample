@@ -1,5 +1,4 @@
 <?PHP
-$this->_view_data['header_title'] = 'User Reister';
 $rUrl = $this->h->tap('/users/register');
 ?>
 <div>

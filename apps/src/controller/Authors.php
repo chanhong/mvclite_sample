@@ -7,13 +7,10 @@ class Authors extends BaseController {
         
         parent::__construct();
         $this->layout = "default_nofooter";  
-        $this->meTable = "authors"; 
         $this->model = new AuthorModel($this->meTable);   
-        $this->add2Array4Layout("meta", "utf-8");
         $this->_view_data['profile'] = BaseCore::$_userInfo;            
-        $this->setViewData($this->_class_path);
-        $this->home = $this->h->tap('/authors/index');
-        $this->_view_data['menu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['front']);        
+        $this->_view_data['cmenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
+        $this->_view_data['submenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['submenu']['front']);
     }
 
     public function start($args = false) {
@@ -33,7 +30,7 @@ class Authors extends BaseController {
         }
         $this->_view_data['arr'] = $this->model->_dbt("select",['where'=>"1 = 1 $search_sql ORDER BY name"]);
         $this->_view_data['header_title'] = 'Authors List';       
-        echo self::doView($this, $args['a']);        
+        echo $this->doView($this, $args['a']);        
     }
 
     public function edit($args = false) {
@@ -44,7 +41,6 @@ class Authors extends BaseController {
             $this->_view_data['arr'] = $this->post;
             $this->_view_data['arr']['id'] = $r->id;
             $this->Error->blank($this->post['name'], 'Name');
-            $this->Error->blank($this->post['biography'], 'Biography');
             if ($this->Error->ok()) {
                 $this->model->edit($this->_view_data['arr']);
                 $_SESSION["feedback"] = $this->post['name'] . " has been save!";
@@ -54,7 +50,8 @@ class Authors extends BaseController {
         if (!empty($r)) {
             $this->_view_data['arr'] = (array) $r;
             $this->_view_data['arr']['p1'] = $r->id;
-            echo self::doView($this, $args['a']);        
+            $this->_view_data['header_title'] = 'Author Edit';
+            echo $this->doView($this, $args['a']);        
         }
     } 
 

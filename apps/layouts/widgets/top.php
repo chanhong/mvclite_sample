@@ -1,14 +1,9 @@
 <?php
-
-$buff = "";
-$home = $this->h->alink(array(
-    'title' => 'Home',
-    'path' => '/'));
-
 $buff = <<<code
-<li class="active">
+<!-- htmnl go here -->
+
 code
-        . $home
-        . $this->h->getLiMenu(BaseCore::$_cfg['menu']['main'])
-        ;
+// render right here since main menu is same for all controller
+    . $this->h->getLiMenu(BaseCore::$_cfg['menu']['main'])
+    ;
 echo $buff;
