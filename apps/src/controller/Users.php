@@ -3,6 +3,7 @@
 
 use MvcLite\Util;
 use MvcLite\MvcRouter;
+use MvcLite\MvcAuth;
 
 class Users extends BaseController {
 
@@ -41,6 +42,7 @@ class Users extends BaseController {
 
     public function login($args = false) {
 
+
         $this->_view_data['winuser'] = $this->Auth->winUser();
         if (!empty($this->_view_data['winuser'])) {
             $this->_view_data['winlogin'] = $this->renderAppView("_winlogin", $this->_class_path);
@@ -52,7 +54,7 @@ class Users extends BaseController {
 
     public function _winlogin($args = false) {
 
-        $this->_view_data['winuser'] = $winUser = $this->Auth->winUser();
+        $this->_view_data['winuser'] = $winUser = MvcAuth::winUser();
         if (!empty($this->post['winbtnlogin'])) {
             $entity = $msg = "";
             if (!empty($winUser)) {
@@ -75,7 +77,8 @@ class Users extends BaseController {
     public function _weblogin($args = false) {
 
         extract($this->post); // extract array into respective variables  
-        if (!empty($username) and !empty($r = $this->Auth->isUserExist($this->meTable, $username)) and !empty($password)) {
+        $r = $this->Auth->isUserExist($this->meTable, $username);
+        if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
             $_SESSION['debug'] = "User: [$username]";
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
