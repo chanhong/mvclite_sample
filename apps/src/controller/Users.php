@@ -14,8 +14,8 @@ class Users extends BaseController {
         parent::__construct();
         $this->meTable = "users";         
         $this->model = new UserModel($this->meTable);
-        $this->_view_data['cmenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
-        $this->_view_data['submenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['submenu']['user']);               
+        $this->_view_data['cmenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
+        $this->_view_data['submenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['submenu']['user']);               
         
     }
 
@@ -54,7 +54,7 @@ class Users extends BaseController {
 
     public function _winlogin($args = false) {
 
-        $this->_view_data['winuser'] = $winUser = MvcAuth::winUser();
+        $this->_view_data['winuser'] = $winUser = $this->Auth->winUser();
         if (!empty($this->post['winbtnlogin'])) {
             $entity = $msg = "";
             if (!empty($winUser)) {
@@ -66,14 +66,17 @@ class Users extends BaseController {
                 $_SESSION['debug'] = "Windows user: [$winUser] $msg";
                 $where = "winuser='$winUser' and is_confirmed = '1' $entity";
                 if ($this->isAuthorized($winUser, $where, $this->meTable)) {
+// after redirect, the   MvcAuth::myProfile() are gone, why?
                     $this->redirect2Url($this->retUrl); // good login                           
+//                    echo $this->doView($this, $this->retUrl);
                 } 
             }
+        } else {
+            $this->_view_data['header_title'] = 'Win Login';       
+            echo $this->doView($this,"_winlogin");
         }
-        $this->_view_data['header_title'] = 'Win Login';       
-        echo $this->doView($this,"_winlogin");
     }
-
+       
     public function _weblogin($args = false) {
 
         extract($this->post); // extract array into respective variables  
@@ -83,15 +86,37 @@ class Users extends BaseController {
             $_SESSION['debug'] = "User: [$username]";
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
             if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
+// after redirect, the   MvcAuth::myProfile() are gone, why?
                 $this->redirect2Url($this->retUrl); // good login                           
+//                echo $this->doView($this, $this->retUrl);
             } 
-        }            
-        if (empty($good)) {
-            $this->Error->add('username', "We're sorry, wrong login. Please try again.");
         }
-        $this->_view_data['header_title'] = 'Web Login';       
-        echo $this->doView($this,"_weblogin");
+        if (empty($good)) {
+            $this->_view_data['header_title'] = 'Web Login';       
+            $this->Error->add('username', "We're sorry, wrong login. Please try again.");
+            echo $this->doView($this,"_weblogin");
+        }
     }
+
+public function xx_weblogin($args = false) {
+    
+    extract($this->post); // extract array into respective variables  
+    $r = $this->Auth->isUserExist($this->meTable, $username);
+    if (!empty($username) and !empty($r) and !empty($password)) {
+        $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
+        $_SESSION['debug'] = "User: [$username]";
+        $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
+        if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
+            $this->redirect2Url($this->retUrl); // good login                           
+        } 
+        
+    }            
+    if (empty($good)) {
+        $this->Error->add('username', "We're sorry, wrong login. Please try again.");
+    }
+    $this->_view_data['header_title'] = 'Web Login';       
+    echo $this->doView($this,"_weblogin");
+}
 
     public function logout($args = false) {
         

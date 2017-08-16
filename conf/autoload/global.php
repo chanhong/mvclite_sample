@@ -17,8 +17,12 @@ $routecfg = [
         ]
     ],
     'auth' => [
-        'admin' => ['/users/index'],
-        'user' => ['/users/logout'],
+        'admin' => [
+            '/users/index',
+        ],
+        'user' => [
+            '/logout',
+        ],
     ],
     'menu' => [
         'main' => [
