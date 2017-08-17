@@ -2,13 +2,20 @@
 
 use MvcLite\Util;
 
+defined('_MVCLOGIN') 
+|| define('_MVCLOGIN', '/login'); 
+defined('_MVCLOGOUT') 
+|| define('_MVCLOGOUT', '/logout'); 
+defined('_MVCREGISTER') 
+|| define('_MVCREGISTER', '/register'); 
+
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 $authCfg = [
-    'roles' => [
+    'levels' => [
         'guest' => '0',
         'inq' => '10',
         'user' => '20',
@@ -16,12 +23,11 @@ $authCfg = [
         'admin' => '90',
     ],
     'auth' => [
-        'admin' => [
-            '/users/index',
-        ],
-        'user' => [
-            '/logout',
-        ],
+        '/users/index' => 'admin',
+        '/users/create' => 'admin',
+        '/books/index' => 'admin',
+        '/authors/index' => 'admin',
+        _MVCLOGOUT => 'user',
     ],
 ]; 
 $routecfg = [
@@ -39,9 +45,9 @@ $menucfg = [
         'main' => [
             ['title'=>'Home','path'=>'/'],
             ['title' => 'Front', 'path' => '/front/index'],
-            ['title' => 'Register', 'path' => '/register'],
-            ['title' => 'Login', 'path' => '/login'],
-            ['title' => 'Logout', 'path' => '/logout'],
+            ['title' => 'Register', 'path' => _MVCREGISTER],
+            ['title' => 'Login', 'path' => _MVCLOGIN],
+            ['title' => 'Logout', 'path' => _MVCLOGOUT],
         ],
         'cmenu' => [
             'front' => [
