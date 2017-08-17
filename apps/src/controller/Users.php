@@ -14,7 +14,7 @@ class Users extends BaseController {
         parent::__construct();
         $this->meTable = "users";         
         $this->model = new UserModel($this->meTable);
-        $this->_view_data['cmenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
+//        $this->_view_data['cmenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
         $this->_view_data['submenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['submenu']['user']);               
         
     }

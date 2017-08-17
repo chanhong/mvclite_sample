@@ -9,7 +9,7 @@ class Authors extends BaseController {
         $this->layout = "default_nofooter";  
         $this->model = new AuthorModel($this->meTable);   
         $this->_view_data['profile'] = BaseCore::$_userInfo;            
-        $this->_view_data['cmenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
+//        $this->_view_data['cmenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
         $this->_view_data['submenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['submenu']['front']);
     }
 
