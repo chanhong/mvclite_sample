@@ -23,11 +23,15 @@ $authCfg = [
         'admin' => '90',
     ],
     'auth' => [
-        '/users/index' => 'admin',
-        '/users/create' => 'admin',
-        '/books/index' => 'admin',
-        '/authors/index' => 'admin',
-        _MVCLOGOUT => 'user',
+        'admin' => [
+            '/users/index',
+            '/users/create',
+            '/authors/index',
+        ],
+        'user' => [
+            '/books/index',
+            _MVCLOGOUT,
+        ],
     ],
 ]; 
 $routecfg = [
