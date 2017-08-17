@@ -7,14 +7,13 @@ use MvcLite\Util;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$routecfg = [
-    'page404' => "notfound",
-    'routes' => [
-        'default_controller' => 'front',
-        'alias' => [
-            'mya' => ['contacts', 'usefullinks'], 
-            'users' => ["login", "logout", "register", "weblogin", "winlogin"],
-        ]
+$authCfg = [
+    'roles' => [
+        'guest' => '0',
+        'inq' => '10',
+        'user' => '20',
+        'supper' => '30',
+        'admin' => '90',
     ],
     'auth' => [
         'admin' => [
@@ -24,13 +23,25 @@ $routecfg = [
             '/logout',
         ],
     ],
+]; 
+$routecfg = [
+    'page404' => "notfound",
+    'routes' => [
+        'default_controller' => 'front',
+        'alias' => [
+            'mya' => ['contacts', 'usefullinks'], 
+            'users' => ["login", "logout", "register", "weblogin", "winlogin"],
+        ]
+    ],
+];
+$menucfg = [
     'menu' => [
         'main' => [
             ['title'=>'Home','path'=>'/'],
             ['title' => 'Front', 'path' => '/front/index'],
+            ['title' => 'Register', 'path' => '/register'],
             ['title' => 'Login', 'path' => '/login'],
             ['title' => 'Logout', 'path' => '/logout'],
-            ['title' => 'Register', 'path' => '/register'],
         ],
         'cmenu' => [
             'front' => [
@@ -111,7 +122,7 @@ if (file_exists(__DIR__  . '/local.php')) {
 } elseif (file_exists(__DIR__  . '/local.php.dist')){
    $localcfg = require_once(__DIR__  . '/local.php.dist');
 }
-BaseCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg);
+BaseCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg, $authCfg, $menucfg);
 
 function pCStat($className) {
     $msg = "<>loaded";
@@ -133,30 +144,7 @@ function permDbg($iVar, $iStr = "", $iFormat = "") {
     return MvcLite\Util::debug($iVar, $iStr, $iFormat);
 }
 
-function pdbg($iVar, $iStr = "", $iFormat = "") {
-    print dbg($iVar, $iStr, $iFormat);
-}
 
-function pbr($iVar, $iStr = "", $iFormat = "") {
-    pdbg($iVar, $iStr, $iFormat) . "<br />";
-}
 
-function pbrx($iVar, $iStr = "", $iFormat = "") {
-    pbr($iVar, $iStr, $iFormat);
-    exit;
-}
-
-// Redirects user to $url
-function redirect($url = null) {
-    if (is_null($url))
-        $url = $_SERVER['PHP_SELF'];
-    header("Location: $url");
-    exit();
-}
-/*
-function notFound($inVar) {
-    redirect("?t=$inVar");
-}
-*/
 
 
