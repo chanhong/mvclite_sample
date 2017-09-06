@@ -26,7 +26,8 @@ $authCfg = [
         'admin' => [
             '/users/index',
             '/users/create',
-            '/authors/index',
+            '/users/delete',
+            '/authors/*',
         ],
         'user' => [
             '/books/index',
