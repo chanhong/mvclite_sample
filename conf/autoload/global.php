@@ -26,11 +26,14 @@ $authCfg = [
         'admin' => [
             '/users/index',
             '/users/create',
-            '/users/delete',
-            '/authors/*',
+            '/users/delete/*',
+            '/users/edit/*',
+            '/authors/delete/*',
+            '/authors/edit/*',
+            '/books/delete/*',
+            '/books/edit/*',
         ],
         'user' => [
-            '/books/index',
             _MVCLOGOUT,
         ],
     ],

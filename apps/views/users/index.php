@@ -24,8 +24,19 @@ $users = $data['arr'];
                     <tr>
                         <td><?PHP echo $u['username']; ?></td>
                         <td><?PHP echo $u['level']; ?></td>
-                        <td><a href="<?php echo $this->h->tap('/users/edit/' . $u['id']); ?>">Edit</a>
-                            <a href="<?php echo $this->h->tap('/users/delete/' . $u['id']); ?>"<?php echo $this->h->jsConfirm(); ?>>Delete</a>
+                        <td>
+                        <?php 
+                        $eUrl = $dUrl = "";
+                        $uPath = '/users/edit/'. $u['id']; 
+                        if ($this->isAllow($uPath)==true) {
+                            $eUrl = $this->h->alink(['title'=>'Edit','path'=>$uPath]); 
+                        }
+                        $uPath = '/users/delete/'. $u['id']; 
+                        if ($this->isAllow($uPath)==true) {
+                            $dUrl = $this->h->alink(['title'=>'Delete','path'=>$uPath,'confirm'=>"Y"]); 
+                        }
+                        echo "$eUrl $dUrl";
+                        ?>
                         </td>
                     </tr>
                 <?PHP endforeach; ?>

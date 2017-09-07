@@ -1,6 +1,4 @@
 <?php
-//namespace MvcSample;
-
 class Books extends BaseController {
 
     public function __construct() {
@@ -9,7 +7,6 @@ class Books extends BaseController {
         $this->layout = "default_nofooter";  
         $this->model = new BookModel($this->meTable);  
         $this->_view_data['profile'] = BaseCore::$_userInfo;            
-//        $this->_view_data['cmenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
         $this->_view_data['submenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['submenu']['front']);
     }
 
@@ -36,7 +33,9 @@ class Books extends BaseController {
 
     public function edit($args = false) {
         
-        $r = $this->db->findRow("SELECT * FROM books where id =".$this->get['p1']);
+        if (!empty($this->get['p1'])) {
+            $r = $this->db->findRow("SELECT * FROM books where id =".$this->get['p1']);
+        }
         if (isset($this->post['btnEditAccount']) and !empty($r)) {
             $this->_view_data['arr'] = $this->post;
             $this->_view_data['arr']['id'] = $r->id;
@@ -53,6 +52,8 @@ class Books extends BaseController {
             $this->_view_data['arr']['p1'] = $r->id;
             $this->_view_data['header_title'] = 'Book Edit';
             echo $this->doView($this, $args['a']);        
+        } else {
+            $this->redirect2Url();
         }
     } 
 

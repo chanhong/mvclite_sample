@@ -25,8 +25,19 @@ $recs = $data['arr'];
                         <td><?PHP echo $r['author_id']; ?></td>
                         <td><?PHP echo $r['title']; ?></td>
                         <td><?PHP echo $r['isbn']; ?></td>
-                        <td><a href="<?php echo $this->h->tap('/books/edit/' . $r['id']); ?>">Edit</a>
-                            <a href="<?php echo $this->h->tap('/books/delete/' . $r['id']); ?>"<?php echo $this->h->jsConfirm(); ?>>Delete</a>
+                        <td>
+                        <?php 
+                        $eUrl = $dUrl = "";
+                        $uPath = '/books/edit/'. $r['id']; 
+                        if ($this->isAllow($uPath)==true) {
+                            $eUrl = $this->h->alink(['title'=>'Edit','path'=>$uPath]); 
+                        }
+                        $uPath = '/books/delete/'. $r['id']; 
+                        if ($this->isAllow($uPath)==true) {
+                            $dUrl = $this->h->alink(['title'=>'Delete','path'=>$uPath,'confirm'=>"Y"]); 
+                        }
+                        echo "$eUrl $dUrl";
+                        ?>
                         </td>
                     </tr>
                 <?PHP endforeach; ?>
