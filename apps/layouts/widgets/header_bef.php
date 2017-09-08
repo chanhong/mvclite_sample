@@ -9,9 +9,9 @@ foreach (@$data['title'] as $title) {
     $buff .= $this->h->tag("title", $title);
 }
 foreach (@$data['less'] as $styleless) {
-    $buff .= $this->h->less($this->publicFolder . '/' . $styleless);
+    $buff .= $this->h->less($styleless);
 }
 foreach (@$data['cssbef'] as $stylesheet) {
-    $buff .= $this->h->css($this->publicFolder . '/' . $stylesheet);
+    $buff .= $this->h->css($stylesheet);
 }
 echo $buff;

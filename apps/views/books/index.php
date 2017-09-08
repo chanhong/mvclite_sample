@@ -4,6 +4,11 @@ $usrQryUrl = $this->h->tap('/books/index');
 if (empty($data['arr'])) return;
 $recs = $data['arr'];
 ?>
+  <script type="text/javascript">
+  $( function() {
+    $( "#resizable" ).resizable();
+  } ); 
+ </script>   
 <div>
     <div>
         <form action="<?php echo $usrQryUrl; ?>" method="post" class="form-inline" role="form">
@@ -11,7 +16,8 @@ $recs = $data['arr'];
             <input type="submit" name="btnSearch" id="btnSearch" class="btn btn-default btn-sm" value="Search">            
         </form>
     </div>
-    <div>
+
+    <div id="pagination">
         <table class="table table-hover table-condensed">
             <thead>
             <td>Author ID</td>

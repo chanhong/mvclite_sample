@@ -3,8 +3,9 @@
   <head>
     <?php
     echo @$data['header_bef'];
-    echo $this->h->css('public/css/default-less.css');
-    echo @$data['header_aft'];           
+    echo $this->h->css($this->publicFolder . '/' .'public/css/default-less.css');
+    echo @$data['header_aft'];  
+    echo @$data['loadjs_bef'];           
     ?>
   </head>
   <body>
@@ -36,6 +37,6 @@
         </div>
       </div>
     </div>
-    <?php echo @$data['loadjs']; ?>
+    <?php echo @$data['loadjs_aft']; ?>
   </body>
 </html>

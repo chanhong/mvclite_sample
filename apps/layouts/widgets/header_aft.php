@@ -1,8 +1,8 @@
 <?php
 // for the controller to append to override css in layout
-$buff = "<br >";
+$buff = "<br />";
 
 foreach (@$data['cssaft'] as $stylesheet) {
-    $buff .= $this->h->css($this->publicFolder . '/' . $stylesheet);
+    $buff .= $this->h->css($stylesheet);
 }
 echo $buff;

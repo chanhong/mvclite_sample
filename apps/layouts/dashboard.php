@@ -2,13 +2,14 @@
 <html>
 
 <head>
-    <?php
+<?php
     echo @$data['header_bef'];
     echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.min.css');
     echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
     echo $this->h->css($this->publicFolder . '/' .'css/sticky-footer-navbar.css');
     echo $this->h->css($this->publicFolder . '/' .'css/dashboard.css');        
-    echo @$data['header_aft'];        
+    echo @$data['header_aft']; 
+    echo @$data['loadjs_bef'];           
 ?>
 </head>
 
@@ -80,7 +81,7 @@
             </div>
         </div>
     </div>
-    <?php echo @$data['loadjs']; ?>
+    <?php echo @$data['loadjs_aft']; ?>
 </body>
 
 </html>
