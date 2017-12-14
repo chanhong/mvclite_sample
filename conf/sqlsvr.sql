@@ -12,7 +12,7 @@ CREATE TABLE users (
   password varchar(65) NOT NULL DEFAULT '',
   confirm_hash varchar(65) NOT NULL DEFAULT '',
   winuser varchar(15) NOT NULL DEFAULT '',
-  is_confirmed varchar(11),
+  is_confirmed varchar(255),
   level varchar(15) NOT NULL DEFAULT 'user',
   email varchar(65) NOT NULL DEFAULT '',
   PRIMARY KEY (id),

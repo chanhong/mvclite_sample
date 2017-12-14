@@ -1,3 +1,6 @@
+INSERT INTO users (username, password, nid, is_confirmed) VALUES ('admin', '4b0093e2dc58019c8b6f67fb73ccb3fb', '7b8ff0b5a7dbf7de25d3b3b65433ae7a', '1');
+INSERT INTO users (username, password, nid, is_confirmed) VALUES ('user', '3064ed3beb1d0d7cf0a20971a6429ffe', '96a56e10ff55fe8e3aaa123a206ebb98', '1');
+
 DECLARE @id int;
 
 INSERT INTO authors (name, biography) VALUES ('Suzanne Collins', 'Suzanne Marie Collins is an American television writer and novelist, best known as the author of The Underland Chronicles and The Hunger Games trilogy');
