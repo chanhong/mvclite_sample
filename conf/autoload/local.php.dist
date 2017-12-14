@@ -1,8 +1,39 @@
 <?php
-return [
+$dbtype = 'pdo-sqlsrv';
+$dbtype = "pdo-mysql";
+$dbtype = "sqlite";
+
+$pdosqlsrv = [
+    'db' => [    
+        'dsn' => "sqlsrv:server=(local);Database=mvclite",        
+        'username' => '',    
+        'password' => ''        
+    ],
+];
+
+$pdomysql = [
+    'db' => [    
+        'dsn' => 'mysql:host=localhost;dbname=mvclite;charset=utf8',
+        'username' => '',    
+        'password' => ''      
+    ],
+];
+
+$sqlite = [
     'db' => [
         'dsn' => 'sqlite:db/mvclite.sqlite',
         'username' => '',    
         'password' => '',  
     ],
-]; 
+];
+
+if ($dbtype = "pdo-mysql") {
+    $db = $pdomysql;
+} else if ($dbtype = "pdo-sqlsrv") {
+    $db = $pdomysql;
+} else if ($dbtype = "sqlite") {
+    $db = $sqlite;
+}
+
+return $db;
+
