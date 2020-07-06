@@ -14,8 +14,8 @@ class Users extends BaseController {
         parent::__construct();
         $this->meTable = "users";         
         $this->model = new UserModel($this->meTable);
-//        $this->_view_data['cmenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
-        $this->_view_data['submenu'] = $this->getLiMenu(BaseCore::$_cfg['menu']['submenu']['user']);               
+//        $this->_view_data['cmenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
+        $this->_view_data['submenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['submenu']['user']);               
         
     }
 
@@ -42,7 +42,7 @@ class Users extends BaseController {
 
     public function login($args = false) {
 
-
+        $this->_view_data['winlogin'] = "";
         $this->_view_data['winuser'] = $this->Auth->winUser();
         if (!empty($this->_view_data['winuser'])) {
             $this->_view_data['winlogin'] = $this->renderAppView("_winlogin", $this->_class_path);

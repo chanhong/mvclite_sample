@@ -20,7 +20,7 @@ class AuthorModel extends BaseModel {
 
     public function edit($rInfo) {
         
-        Util::debug($rInfo,'rInfo in model');
+        permDbg($rInfo,'rInfo in model');
         extract($rInfo); // extract array into respective variables
 
         $sqlUpdList = ['name'=>$name, 'biography'=>$biography];

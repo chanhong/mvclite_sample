@@ -4,6 +4,6 @@ $buff = <<<code
 
 code
 // render right here since main menu is same for all controller
-    . $this->getLiMenu(BaseCore::$_cfg['menu']['main'])
+    . $this->h->getLiMenu(BaseCore::$_cfg['menu']['main'])
     ;
 echo $buff;

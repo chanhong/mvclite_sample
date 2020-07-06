@@ -1,6 +1,9 @@
 <?php
 
+
+use MvcLite\MvcCore;
 use MvcLite\Util;
+#use MvcSample\BaseCore;
 
 defined('_MVCLOGIN') 
 || define('_MVCLOGIN', '/login'); 
@@ -137,13 +140,14 @@ if (file_exists(__DIR__  . '/local.php')) {
    $localcfg = require_once(__DIR__  . '/local.php.dist');
 }
 BaseCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg, $authCfg, $menucfg);
+//permDbg(BaseCore::$_cfg, "_cfg");  
 
 function pCStat($className) {
     $msg = "<>loaded";
     if (class_exists($className)) {
         $msg = "loaded";
     } 
-    permDbg($className, "$msg");    
+//    permDbg($className, "$msg");    
 }
 
 function dbgt() {
@@ -155,7 +159,7 @@ function dbg($iVar, $iStr = "", $iFormat = "") {
 }
 
 function permDbg($iVar, $iStr = "", $iFormat = "") {
-    return MvcLite\Util::debug($iVar, $iStr, $iFormat);
+    return $_SESSION["debug"] .= MvcLite\Util::debug($iVar, $iStr, $iFormat);
 }
 
 

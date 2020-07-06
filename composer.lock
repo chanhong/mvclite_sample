@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "ddb1ed3c80dbc73c44cc29879a8e4a4f",
@@ -52,7 +52,7 @@
                 "mvc",
                 "mvclite"
             ],
-            "time": "2017-07-21 22:13:06"
+            "time": "2017-07-21T22:13:06+00:00"
         },
         {
             "name": "chanhong/pdolite",
@@ -60,12 +60,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chanhong/pdolite.git",
-                "reference": "0dc86cefce57e4b598101e40dcda53d6d3e71cd9"
+                "reference": "93f35e6df25db2f0a03ff8fed751ddac1439b68a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chanhong/pdolite/zipball/0dc86cefce57e4b598101e40dcda53d6d3e71cd9",
-                "reference": "0dc86cefce57e4b598101e40dcda53d6d3e71cd9",
+                "url": "https://api.github.com/repos/chanhong/pdolite/zipball/93f35e6df25db2f0a03ff8fed751ddac1439b68a",
+                "reference": "93f35e6df25db2f0a03ff8fed751ddac1439b68a",
                 "shasum": ""
             },
             "require": {
@@ -98,7 +98,7 @@
                 "lite",
                 "pdolite"
             ],
-            "time": "2017-03-12 23:23:48"
+            "time": "2017-12-18T22:36:26+00:00"
         },
         {
             "name": "chanhong/phploaderlite",
@@ -144,7 +144,7 @@
                 "loader",
                 "phploaderlite"
             ],
-            "time": "2017-07-05 21:22:02"
+            "time": "2017-07-05T21:22:02+00:00"
         }
     ],
     "packages-dev": [],
@@ -160,5 +160,6 @@
     "platform": {
         "php": ">=5.3.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }

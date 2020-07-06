@@ -18,7 +18,7 @@ defined('MODEL')
 
 NsClassLoader::addPath(LIBROOT .DS. 'src');
 // loaded by compuser
-//NsClassLoader::addPath(LIBROOT .DS. 'mvclite'. DS . "src");
+NsClassLoader::addPath(LIBROOT .DS. 'mvclite'. DS . "src");
 NsClassLoader::addPath(CONTROLLER);
 NsClassLoader::addPath(MODEL);
 $autoloader = new NsClassLoader();

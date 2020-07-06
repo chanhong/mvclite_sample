@@ -50,7 +50,7 @@ class UserModel extends BaseModel {
 
     public function edit($userInfo) {
         
-        Util::debug($userInfo,'userInfo in model');
+        permDbg($userInfo,'userInfo in model');
         extract($userInfo); // extract array into respective variables
         // Leave the password alone if it's not set
         if (!empty($password)) {

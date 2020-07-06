@@ -1,4 +1,10 @@
 <?php
+#namespace MvcSample;
+
+/*
+use MvcSample\BaseCore;
+use MvcSample\BaseController;
+*/
 class Router extends BaseController {
 
     public function __construct() {
@@ -13,7 +19,7 @@ class Router extends BaseController {
             BaseCore::$_userInfo = $_SESSION['cache']['userinfo'];
         }
 
-
+        permDbg(BaseCore::$_cfg['routes'], "routes");    
         self::doRouter(BaseCore::$_cfg['routes'], self::class);
     }
 }

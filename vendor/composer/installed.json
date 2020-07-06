@@ -1,101 +1,5 @@
 [
     {
-        "name": "chanhong/phploaderlite",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/chanhong/phploaderlite.git",
-            "reference": "dee172b62c5ef4f8a9164eb661dcbfbf29d90736"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/chanhong/phploaderlite/zipball/dee172b62c5ef4f8a9164eb661dcbfbf29d90736",
-            "reference": "dee172b62c5ef4f8a9164eb661dcbfbf29d90736",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2017-07-05T21:22:02+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "PhpLoaderLite\\": "/src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Chanh Ong",
-                "homepage": "https://github.com/chanhong"
-            }
-        ],
-        "description": "PHP class auto loader lite",
-        "keywords": [
-            "lite",
-            "loader",
-            "phploaderlite"
-        ]
-    },
-    {
-        "name": "chanhong/pdolite",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/chanhong/pdolite.git",
-            "reference": "0dc86cefce57e4b598101e40dcda53d6d3e71cd9"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/chanhong/pdolite/zipball/0dc86cefce57e4b598101e40dcda53d6d3e71cd9",
-            "reference": "0dc86cefce57e4b598101e40dcda53d6d3e71cd9",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2017-03-12T23:23:48+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "PdoLite\\": "/src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Chanh Ong",
-                "homepage": "https://github.com/chanhong"
-            }
-        ],
-        "description": "database lite classes for mysql, sqlsrv, sqlite, odbc, pdo (mysql, sqlite, sqlsrv)",
-        "keywords": [
-            "db",
-            "lite",
-            "pdolite"
-        ]
-    },
-    {
         "name": "chanhong/mvclite",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -143,6 +47,102 @@
             "lite",
             "mvc",
             "mvclite"
+        ]
+    },
+    {
+        "name": "chanhong/pdolite",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/chanhong/pdolite.git",
+            "reference": "93f35e6df25db2f0a03ff8fed751ddac1439b68a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/chanhong/pdolite/zipball/93f35e6df25db2f0a03ff8fed751ddac1439b68a",
+            "reference": "93f35e6df25db2f0a03ff8fed751ddac1439b68a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-12-18T22:36:26+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "PdoLite\\": "/src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chanh Ong",
+                "homepage": "https://github.com/chanhong"
+            }
+        ],
+        "description": "database lite classes for mysql, sqlsrv, sqlite, odbc, pdo (mysql, sqlite, sqlsrv)",
+        "keywords": [
+            "db",
+            "lite",
+            "pdolite"
+        ]
+    },
+    {
+        "name": "chanhong/phploaderlite",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/chanhong/phploaderlite.git",
+            "reference": "dee172b62c5ef4f8a9164eb661dcbfbf29d90736"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/chanhong/phploaderlite/zipball/dee172b62c5ef4f8a9164eb661dcbfbf29d90736",
+            "reference": "dee172b62c5ef4f8a9164eb661dcbfbf29d90736",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2017-07-05T21:22:02+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "PhpLoaderLite\\": "/src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chanh Ong",
+                "homepage": "https://github.com/chanhong"
+            }
+        ],
+        "description": "PHP class auto loader lite",
+        "keywords": [
+            "lite",
+            "loader",
+            "phploaderlite"
         ]
     }
 ]
