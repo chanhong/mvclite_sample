@@ -4,7 +4,7 @@
 <head>
 <?php
         echo @$data['header_bef'];
-        echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.min.css');
+        echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
 //        echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
         echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
         echo @$data['header_aft']; 
@@ -18,7 +18,7 @@
       <?php echo @$data['header_title']; ?>
     </div>
     <div class="navbar navbar-default" role="navigation">
-      <div class="collapse navbar-collapse">
+    <div class="navbar navbar-expand-sm hmenu">
         <ul class="nav navbar-nav">
           <?php echo @$data['top']; ?>
         </ul>

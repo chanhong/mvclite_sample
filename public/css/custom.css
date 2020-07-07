@@ -22,7 +22,7 @@
 
 
 #topHeader {
-  background-image: url('../img/logo.jpg');
+  background-image: url('../../img/logo.jpg');
   background-position: left;
   background-repeat: no-repeat;
   color: #eeeeee;
@@ -93,3 +93,17 @@
     text-align: center;      
 }
 
+
+.hmenu {
+  background: #eaeaf1;
+  font-size: 12px;
+  padding-top: 0;
+  padding-bottom: 0;
+  /*
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  line-height: 22px;
+  padding-right: 8px;
+  text-align: right;
+  */
+}

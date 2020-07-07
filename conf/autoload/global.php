@@ -107,7 +107,7 @@ $controllerViewCfg = [
             'notfound'=>'Not Found Page',
         ],        
         'mya' => [
-            'index'=>'UWMC Accounting',
+            'index'=>'My App',
             'usefullinks'=>'Useful Links',
         ],        
         'dashboard' => [
@@ -135,7 +135,7 @@ $controllerViewCfg = [
 ];
 
 $localcfg = [];
-permDbg(__DIR__, "__dir__");   
+//permDbg(__DIR__, "__dir__");   
 if (file_exists(__DIR__  . '/local.php')) {
    $localcfg = require_once(__DIR__  . '/local.php');
 } elseif (file_exists(__DIR__  . '/local.php.dist')){
@@ -163,8 +163,3 @@ function dbg($iVar, $iStr = "", $iFormat = "") {
 function permDbg($iVar, $iStr = "", $iFormat = "") {
     return $_SESSION["debug"] .= MvcLite\Util::debug($iVar, $iStr, $iFormat);
 }
-
-
-
-
-

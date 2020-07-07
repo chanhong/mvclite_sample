@@ -3,8 +3,8 @@
 
 <head>
     <?php
-        echo @$data['header_bef'];        
-        echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.css');
+        echo @$data['header_bef'];  
+        echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
         echo $this->h->css($this->publicFolder . '/' .'css/sticky-footer-navbar.css');
         echo @$data['header_aft']; 
         echo @$data['loadjs_bef'];           
@@ -19,7 +19,7 @@
         </div>
         <!-- Fixed navbar -->
         <div class="navbar navbar-default" role="navigation">
-            <div class="collapse navbar-collapse">
+        <div class="navbar navbar-expand-sm hmenu">
                 <ul class="nav navbar-nav">
                     <?php echo @$data['top']; ?>
                 </ul>

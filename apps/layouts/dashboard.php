@@ -4,7 +4,7 @@
 <head>
 <?php
     echo @$data['header_bef'];
-    echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.min.css');
+    echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
     echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
     echo $this->h->css($this->publicFolder . '/' .'css/sticky-footer-navbar.css');
     echo $this->h->css($this->publicFolder . '/' .'css/dashboard.css');        
@@ -14,7 +14,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-expand-lg  navbarBGcolor fixed-top">    
+<!--
+    <nav class="navbar navbar-inverse fixed-top">
+    -->
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"

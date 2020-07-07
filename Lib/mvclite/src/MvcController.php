@@ -7,18 +7,11 @@ class MvcController extends MvcCore {
     public function __construct() {
         
         parent::__construct();
-        /*
-        $this->layout = 'default'; //set default template file
-        $this->publicFolder = 'public';
-        $this->layoutsFolder = $this->publicFolder . DS . 'layouts';
-        $this->appsFolder = 'apps';
-        $this->viewFolder = 'views';
-        $this->widgetFolder = 'widgets';
-*/
         $this->layout = 'default'; //set default template file
         $this->_appFolder = 'apps';
         $this->_viewFolder = 'views';
         $this->_widgetFolder = 'widgets';
+        $this->vendorFolder = "vendor";
         $this->publicFolder = 'public';
         $this->viewPath = $this->_appFolder . DS . $this->_viewFolder;
         $this->_layoutFolder = 'layouts';
@@ -146,10 +139,7 @@ class MvcController extends MvcCore {
     }
 
     public function renderWidget($view, $class = "") {
-        /*
-        if (count(explode(DS, $view)) == 1) // if not the full path then append widgets folder
-            $view = 'widgets' . DS . $view;  // if only view name is used then add widgets folder to view 
-*/
+
         $fileName = $view . '.' . $this->view_ext;
         // class widgets override widgets from the layouts folder
         $cvFile = DOCROOT . DS . $this->viewPath .DS . $class .DS.$this->_widgetFolder. DS . $fileName;
@@ -163,10 +153,6 @@ class MvcController extends MvcCore {
 
     public function isAppView($view, $class = "") {
 
-/*        
-        if (count(explode(DS, $view)) == 1) // if not the full path then append views folder
-            $view = 'views' . DS . $view;  // if only view name is used then add views folder to view 
-*/
         $fileName = $view . '.' . $this->view_ext;
         // if not the full path then use class
         (empty($class)) ?
@@ -306,7 +292,7 @@ class MvcController extends MvcCore {
         // safe current action/view to be render by doBodyContent()
         self::$_action = $action = $args['a'];
         $rCtl = Util::getClass($iClassName);
-//        if (strtolower($args['t']) <> strtolower($iClassName) and class_exists($className)
+        if (strtolower($args['t']) <> strtolower($iClassName) and class_exists($className)){
 //        if (self::isRoutable($className, $iClassName)) {
             // if not router, make sure a valid action or view of a controller
             $ctl = Util::getClass($className);
@@ -317,7 +303,6 @@ class MvcController extends MvcCore {
                 // good controller but bad action
                 self::redirect2Url("?".MVCCore::$_cfg['page404']);
             }
-            /*
         // if router has action or view show it (rare)    
         } elseif (!empty($action) 
             and $rCtl->isAppView($action, $iClassName) 
@@ -331,7 +316,6 @@ class MvcController extends MvcCore {
             // all else fail, use internal notfound
             echo $rCtl->_notFound($action);            
         }
-        */
     }  
 
     public static function doView($ctl, $action) {

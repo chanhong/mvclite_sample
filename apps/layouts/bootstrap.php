@@ -3,7 +3,7 @@
 <head>
   <?php
     echo @$data['header_bef']; 
-    echo $this->h->css($this->publicFolder . '/' .'css/bootstrap.min.css');
+    echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
 //    echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
     echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
     echo @$data['header_aft'];  
@@ -17,9 +17,12 @@
       <?php echo @$data['header_title']; ?>
     </div>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-expand-sm" style="background-color: #E8EAED;">
+    <!--
+    <nav class="navbar navbar-expand-lg  navbarBGcolor fixed-top">   
+    --> 
       <div class="container">
-        <div id="navbar" class="collapse navbar-collapse">
+      <div id="navbar navbar-expand-sm hmenu">
           <ul class="nav navbar-nav">
             <?php echo @$data['top']; ?>
           </ul>
@@ -27,6 +30,7 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
+    </div>
     <div class="container">
       <div class="page-header">
         <?php echo @$data['body_bef']; ?>

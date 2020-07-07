@@ -98,25 +98,6 @@ class Users extends BaseController {
         }
     }
 
-public function xx_weblogin($args = false) {
-    
-    extract($this->post); // extract array into respective variables  
-    $r = $this->Auth->isUserExist($this->meTable, $username);
-    if (!empty($username) and !empty($r) and !empty($password)) {
-        $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
-        $_SESSION['debug'] = "User: [$username]";
-        $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
-        if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
-            $this->redirect2Url($this->retUrl); // good login                           
-        } 
-        
-    }            
-    if (empty($good)) {
-        $this->Error->add('username', "We're sorry, wrong login. Please try again.");
-    }
-    $this->_view_data['header_title'] = 'Web Login';       
-    echo $this->doView($this,"_weblogin");
-}
 
     public function logout($args = false) {
         
@@ -142,7 +123,6 @@ public function xx_weblogin($args = false) {
     public function delete($args = false) {
         
         $this->model->delete($this->get['p1']);
-////        $this->db->delete($this->meTable, $this->get['p1']);
         $this->redirect2Url($this->home);
     }
 

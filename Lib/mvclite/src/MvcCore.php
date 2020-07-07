@@ -49,6 +49,7 @@ class MvcCore {
     public $appsFolder;
     public $viewFolder;
     public $widgetFolder;
+    public $vendorFolder;
     public $publicFolder;
     public $layoutsFolder;
     protected $_class_path;
