@@ -4,56 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddb1ed3c80dbc73c44cc29879a8e4a4f",
+    "content-hash": "a11c1f58f6e9b3c8f72c93d93802df2f",
     "packages": [
-        {
-            "name": "chanhong/mvclite",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chanhong/mvclite.git",
-                "reference": "31c52ebf9c435705a3ed9a2e00cebc32705c35f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/chanhong/mvclite/zipball/31c52ebf9c435705a3ed9a2e00cebc32705c35f5",
-                "reference": "31c52ebf9c435705a3ed9a2e00cebc32705c35f5",
-                "shasum": ""
-            },
-            "require": {
-                "chanhong/pdolite": "1.0.x-dev",
-                "chanhong/phploaderlite": "1.0.x-dev",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "MvcLite\\": "/src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chanh Ong",
-                    "homepage": "https://github.com/chanhong"
-                }
-            ],
-            "description": "MVC Lite",
-            "keywords": [
-                "lite",
-                "mvc",
-                "mvclite"
-            ],
-            "time": "2017-07-21T22:13:06+00:00"
-        },
         {
             "name": "chanhong/pdolite",
             "version": "dev-master",
@@ -152,8 +104,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "chanhong/pdolite": 20,
-        "chanhong/phploaderlite": 20,
-        "chanhong/mvclite": 20
+        "chanhong/phploaderlite": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
