@@ -147,7 +147,7 @@ function pCStat($className) {
     if (class_exists($className)) {
         $msg = "loaded";
     } 
-//    permDbg($className, "$msg");    
+    permDbg($className, "here $msg");    
 }
 
 function dbgt() {
