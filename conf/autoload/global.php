@@ -134,7 +134,7 @@ $controllerViewCfg = [
     ]
 ];
 
-$localcfg = null;
+$localcfg = [];
 permDbg(__DIR__, "__dir__");   
 if (file_exists(__DIR__  . '/local.php')) {
    $localcfg = require_once(__DIR__  . '/local.php');
