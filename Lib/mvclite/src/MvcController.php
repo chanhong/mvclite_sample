@@ -7,7 +7,7 @@ class MvcController extends MvcCore {
     public function __construct() {
         
         parent::__construct();
-        $this->layout = 'default'; //set default template file
+        $this->layout = 'bootstrap'; //set default template file
         $this->_appFolder = 'apps';
         $this->_viewFolder = 'views';
         $this->_widgetFolder = 'widgets';
@@ -85,6 +85,8 @@ class MvcController extends MvcCore {
         $this->_view_data['styleless'] = $this->styleless;
         $this->_view_data['stylesheets'] = $this->stylesheets;
         $this->_view_data['javascripts'] = $this->javascripts;
+//        permDbg($this->_view_data, 'vd');        
+
     }
 
     function captureContent($fspec) {
@@ -129,13 +131,16 @@ class MvcController extends MvcCore {
 
 //            echo "<br />class: ".$class;       
         $this->setViewData4Header();
-        $this->_view_data['header'] = $this->renderWidget('header', $class);
         $this->_view_data['top'] = $this->renderWidget('top', $class);
-        $this->_view_data['before_body'] = $this->renderWidget('before_body', $class);
+        $this->_view_data['header_bef'] = $this->renderWidget('header_bef', $class);
+        $this->_view_data['header_aft'] = $this->renderWidget('header_aft', $class);
+        $this->_view_data['body_bef'] = $this->renderWidget('body_bef', $class);
+        $this->_view_data['body_lft'] = $this->renderWidget('body_lft', $class);
 // _body (content and body) can't be override by the class
-        $this->_view_data['footer'] = $this->renderWidget('footer', $class);
-        $this->_view_data['after_footer'] = $this->renderWidget('after_footer', $class);
-        $this->_view_data['loadjs'] = $this->renderWidget('loadjs', $class);
+        $this->_view_data['footer_bef'] = $this->renderWidget('footer_bef', $class);
+        $this->_view_data['footer_aft'] = $this->renderWidget('footer_aft', $class);
+        $this->_view_data['loadjs_bef'] = $this->renderWidget('loadjs_bef', $class);
+        $this->_view_data['loadjs_aft'] = $this->renderWidget('loadjs_aft', $class);
     }
 
     public function renderWidget($view, $class = "") {
@@ -161,13 +166,6 @@ class MvcController extends MvcCore {
         $vFile = strtolower(DOCROOT . DS . $this->viewPath . DS. $fview);
         (file_exists($vFile)) ? $ret = $vFile : $ret = "";
         return $ret;
-    }
-
-    public function ccrenderAppView($view) {
-
-        if ($vFile = $this->isAppView($view)) {
-            return $this->captureContent($vFile);
-        } 
     }
 
     public function renderAppView($view) {
@@ -327,20 +325,17 @@ class MvcController extends MvcCore {
             $ctl->add2HeaderArrays("pagetitle", $action);
         }
         $ctl->setViewData($ctl->_class_path);
-        echo $ctl->appView($ctl, $action, $ctl->layout); 
-    } 
-
-    function appView($ctl, $view, $iLayout = "") {
         
         $buff = "";
         // render content before the layout
-        $vFile = $ctl->isLayout($iLayout);
-        $ctl->_view_data['content'] = $ctl->renderAppView($view);
+        $vFile = $ctl->isLayout($ctl->layout);
+        $ctl->_view_data['content'] = $ctl->renderAppView($action);
         if (!empty($vFile) and !empty($ctl->_view_data['content'])) {
             $ctl->setViewData4Header();
             // render content with layout
-            return $ctl->captureContent($vFile);
+            $buff = $ctl->captureContent($vFile);
         } 
+        echo $buff;
     }
 
     public function doBodyNoLayout() {
@@ -358,9 +353,6 @@ class MvcController extends MvcCore {
 
         $feedback = $this->feedback("feedback", "DarkGreen");
         $alertMsg = $this->feedback("alert", "IndianRed");
-
-        //print_r($this->Auth->loggedIn());
-        //($this->Auth->loggedIn()) ? $youare = $this->alertMsg("You are login as ".$this->profile['username'], "green") : $youare = "";
 
         $buff .=  $youare . $dmsg . $alertMsg . $feedback;
         $buff .=  $this->Error;

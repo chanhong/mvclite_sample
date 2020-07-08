@@ -1,13 +1,4 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-#namespace MvcSample;
-#namespace MvcLite;
-
 use MvcLite\MvcController;
 
 class BaseController extends MvcController {
@@ -30,17 +21,16 @@ class BaseController extends MvcController {
 
         // not use since it is not cross browser compatible yet
         $this->styleless = [
-//            $this->publicFolder . '/' ."public/less/default-less.less",
+            $this->publicFolder . '/' ."public/less/default-less.less",
         ];
 
         $this->stylesheets['before'] = [
+            $this->publicFolder . '/' ."css/custom.css",
 //            $this->publicFolder . '/' ."bootstrap/css/bootstrap/normalize.css",
-        ];
+];
 
         $this->stylesheets['after'] = [
-            $this->publicFolder . '/' ."css/custom.css",
+//            $this->publicFolder . '/' ."css/custom.css",
         ];
-
     }
-    
 }

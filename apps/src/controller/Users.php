@@ -68,7 +68,6 @@ class Users extends BaseController {
                 if ($this->isAuthorized($winUser, $where, $this->meTable)) {
 // after redirect, the   MvcAuth::myProfile() are gone, why?
                     $this->redirect2Url($this->retUrl); // good login                           
-//                    echo $this->doView($this, $this->retUrl);
                 } 
             }
         } else {
@@ -88,7 +87,6 @@ class Users extends BaseController {
             if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
 // after redirect, the   MvcAuth::myProfile() are gone, why?
                 $this->redirect2Url($this->retUrl); // good login                           
-//                echo $this->doView($this, $this->retUrl);
             } 
         }
         if (empty($good)) {

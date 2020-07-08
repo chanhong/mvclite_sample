@@ -5,11 +5,13 @@
 <?php
     echo @$data['header_bef'];
     echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
-    echo $this->h->css($this->publicFolder . '/' .'css/ie10-viewport-bug-workaround.css');
     echo $this->h->css($this->publicFolder . '/' .'css/sticky-footer-navbar.css');
-    echo $this->h->css($this->publicFolder . '/' .'css/dashboard.css');        
-    echo @$data['header_aft']; 
-    echo @$data['loadjs_bef'];           
+    echo $this->h->css($this->publicFolder . '/' .'css/dashboard.css');  
+    echo $this->h->css($this->publicFolder . '/' .'css/custom.css');
+    echo $this->h->jsSrc($this->vendorFolder . '/' ."components/jquery.min.js");
+    echo $this->h->jsSrc($this->vendorFolder . '/' ."components/jqueryui/jquery-ui.min.js");
+    echo $this->h->jsSrc($this->vendorFolder . '/' ."twbs/bootstrap/dist/js/bootstrap.min.js");
+    echo $this->h->jsSrc($this->publicFolder . '/' ."js/ie-emulation-modes-warning.js");
 ?>
 </head>
 
@@ -39,7 +41,6 @@
             </div>
         </div>
     </nav>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
@@ -84,7 +85,5 @@
             </div>
         </div>
     </div>
-    <?php echo @$data['loadjs_aft']; ?>
 </body>
-
 </html>

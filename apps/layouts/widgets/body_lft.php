@@ -8,16 +8,17 @@ if (!empty($data['submenu'])){
     $submenu = $data['submenu'];
 }                
 
+
 $buff = <<<code
-<ul class="nav nav-sidebar">
+<ul class="nav navbar-nav">
 <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
 </ul>
-<ul class="nav nav-sidebar">
+<ul class="nav navbar-nav">
 code
 . $cmenu
 . <<<code
 </ul>
-<ul class="nav nav-sidebar">
+<ul class="nav navbar-nav">
 code
 . $submenu
 . <<<code

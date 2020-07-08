@@ -1,8 +1,23 @@
-/* my custom css code */
+/* my custom css code 
+ set a max-width for horizontal fluid layout and make it centered 
+ */
+
+ .footer {
+  color: #999999;
+  text-align: right;
+  font-size: smaller;
+  padding: 10px;
+}
+
+  .footer a {
+    color: #999999;
+    padding-right: 13px;
+  }
+
 .mainbody {
-  background-image: url('../img/background.png');
-  /* must batch #footer width */
-  width: 95%;
+  background-image: url('../../img/background.png');
+  /* must batch #footer width if use fixed bottom */
+  width: 98%;
   background: none repeat scroll 0 0 transparent;
   margin-left: auto;
   margin-right: auto;
@@ -20,13 +35,14 @@
   max-width: 100%;
 }
 
+.main-body {
+  text-align: center;
+  max-width: 90%;
+}
 
 #topHeader {
-  background-image: url('../../img/logo.jpg');
-  background-position: left;
-  background-repeat: no-repeat;
   color: #eeeeee;
-  height: 65px;
+  height: 70px;
   margin: 0 auto;
   padding-right: 8px;
   text-align: right;
@@ -34,76 +50,67 @@
   line-height: 2em;
   /* to vertical center title text */
 }
-.navcontainer {
-  color: #eeeeee;
-  margin: 0;
-  padding: 0;
-  white-space: nowrap;
-  list-style-type: none;
-  font-size: 0.9em;
-  font-weight: bold;
-  text-decoration: none;
-  text-align: center;
+.main .page-header {
+  margin-top: 0;
 }
-.topnav {
-  background: #333399;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  /* valign */
-  padding-top: 0px;
-  padding-bottom: 0px;
-  font-size: 13px;
-  line-height: 36px;
-}
-.bottomnav {
-  background: #5a5a93;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  /* valign */
-  padding-top: 0px;
-  padding-bottom: 0px;
-  font-size: 13px;
-  line-height: 36px;
-}
-.hmenu {
-  background: #a1a1cc;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  /* valign */
-  padding-top: 0px;
-  padding-bottom: 0px;
-  font-size: 10px;
-  line-height: 22px;
-  padding-right: 8px;
-  text-align: right;
-}
-#liMenu li {
-  display: inline;
-}
-#liMenu li a {
-  color: #ffffff;
-  padding-right: 8px;
-}
-
-/* set a max-width for horizontal fluid layout and make it centered */
-.containerex {
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 100%;
-    text-align: center;      
-}
-
 
 .hmenu {
   background: #eaeaf1;
   font-size: 12px;
   padding-top: 0;
   padding-bottom: 0;
-  /*
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  line-height: 22px;
-  padding-right: 8px;
+}
+
+.list-group {
+  margin: auto;
+  float: right;
+  padding-top: 0;
+}
+
+.vmenu {
+  text-align: left;
+  float: right;
+  max-width: 10%;
+  background: #eaeaf1;
+  font-size: 12px;
+  padding-left: 5px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.screenOdd {
+  text-align: left;
+  background-color: #fdfffc;
+}
+
+.screenEven {
+  text-align: left;
+  background-color: #F6FAEE;
+}
+table.jvtable {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #e2efe0;
+  border-collapse: separate;
+}
+
+th.jvtable, .jvcolhdr {
+  /*  font-size: larger; */
+  text-align: center;
+  background-color: #eaeaf1;
+  color: #6F3E3E;
+}
+
+td.jvtable {
+  /*	border: 1px dashed #ffefff; */
+  /*    text-align: center; */
+  vertical-align: top;
+}
+
+.txtRt {
   text-align: right;
-  */
+}
+.txtReadOnly {
+  background-color: lightgray;
 }
