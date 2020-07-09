@@ -1,72 +1,64 @@
 /* override the default bootstrip code */
 html,
 body {
-    height: 90%;
-    /* allow space for the footer */
-    /* The html and body elements cannot have any padding or margin. */
+  height: 90%;
+  /* allow space for the footer */
+  /* The html and body elements cannot have any padding or margin. why? */
 }
 
 #footer {
-    margin: 0 auto;
-    background: none repeat scroll 0 0 transparent;
-    bottom: 0;
-    /* fix footer to the bottom */
-    position: fixed;
-    /* when use fixed, width must be the same as mainbody in custom.css */    
-    width: 95%;
+  margin: 0 auto;
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  /* fix footer to the bottom, not good for fluid */
+  position: fixed;
+  /* when use fixed, width must be the same as mainbody in custom.css */
+  width: 95%;
 }
 
 
 /* Wrapper for page content to push down footer */
-
 #wrap {
-    min-height: 100%;
-    height: auto;
-    /*    padding: 0 0 20px; */
+  min-height: 100%;
+  height: auto;
+  /*    padding: 0 0 20px; */
 }
 
-#wrap>.container {
+  #wrap > .container {
     /*  padding: 60px 15px 0; */
     padding: 10px 15px 0;
-}
-
-.footer {
-    background: none repeat scroll 0 0 #eaeaea;
-    color: #999999;
-    text-align: right;
-}
-
-.footer a {
-    color: #999999;
-    padding-right: 15px;
-}
-
+  }
 
 /* this is it */
+.navbar-nav {
+  /*    font-size: 13px;     */
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /*    border: 1px solid; */
+}
 
+  .navbar-nav a {
+    color: #999999;
+    padding-right: 18px;
+  }
+
+/*
+div .menubar {
+    margin: 0 auto;
+    max-width: 98%;
+    background: #dddeee; 
+}
 .nav>li>a {
     position: relative;
     display: block;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
-
-
-/* this is it */
 
 .navbar {
     position: relative;
     min-height: 30px;
     margin-bottom: 10px;
     border: 1px solid transparent;
-    padding: .8rem;
 }
-
-  
-  .navbar-nav li {
-    padding-right: 25px;
-  }
-  
-  .nav-link {
-    font-size: 1.1em;
-  }
+    */

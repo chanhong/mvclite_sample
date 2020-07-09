@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-  <title>$Data["Title"]</title>
+  <title>@PageData["Title"]</title>
   <meta content="text/html; charset=windows-1252" http-equiv="Content-Type">
   <?php
     echo @$data['header_bef']; 
@@ -12,7 +12,6 @@
     echo $this->h->jsSrc($this->vendorFolder . '/' ."components/jqueryui/jquery-ui.min.js");
     echo $this->h->jsSrc($this->vendorFolder . '/' ."twbs/bootstrap/dist/js/bootstrap.min.js");
     echo $this->h->jsSrc($this->publicFolder . '/' ."js/ie-emulation-modes-warning.js");
-    $userinfo ="";
 ?>  
   <style type="text/css">
     .xl39 {
@@ -24,60 +23,51 @@
 <body>
   <div class="mainbody">
     <div id="topHeader">
-      <table class="mainbody" border="0" cellpadding="0" cellspacing="0">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr valign="middle" width="100%">
           <td align="left">
-            <img alt="Logo" src="<?php echo $this->publicFolder;?>/img/logo.jpg" vspace="2">
+            <img alt="[@AppState["Name"]]" border="1" src="~/Shared/images/logo.gif" vspace="2">
+          </td>
+          <td align="right">
+            <font color="LightGrey" face="helvetica, sans-serif;" size="6">@PageData["Title"]</font>
           </td>
           <td></td>
-          <td align="right">
-            <font color="LightGrey" face="helvetica, sans-serif;" size="6">
-            <?php echo @$Data["Title"]; ?>
-            </font>
-          </td>
         </tr>
       </table>
     </div>
     <div class="navbar navbar-expand-sm" style="background-color: #E8EAED;">
-      <ul class="navbar-nav mr-auto text-center">
-      <?php
-      echo $this->h->getLiMenu(BaseCore::$_cfg['menu']['main']);
-    ?>
-      </ul>
+      <ul class="navbar-nav mr-auto text-center">@RenderPage("~/Shared/views/_top.cshtml")</ul>
     </div>
     <div class="main-content">
       <div class="text-right">
         <font color="LightGrey">
-          <?php echo @$usrinfo; ?>
+          @Html.Raw(usrinfo)
         </font>
       </div>
-      <div class="navbar navbar-expand-sm hmenu">
-        <ul class="navbar-nav ml-auto text-center">
-        <?php 
-          echo $this->renderWidget('header_bef');          
-          ?>
-        </ul>
+      <div class="vmenu">
+        <ul class="navbar-nav ml-auto">@RenderPage("~/Shared/views/_top_header.cshtml")</ul>
       </div>
-      <div class="text-center">
-      <?php 
-        echo @$Data["feedback"];
-        echo @$Data["fbdmsg"];
-        ?>
+      <div class="main-body">
+        <div class="text-center">
+          @Html.Raw(CUtils.getAppMsg("broadcast"))
+          @Html.Raw(CUtils.getSessMsg("feedback"))
+          @Html.Raw(CUtils.getSessMsg("fbdmsg", "grey"))
+        </div>
+        @RenderBody()
       </div>
-      <?php echo $this->doBody(); ?>
     </div>
     <div class="navbar navbar-expand-sm" style="background-color: #E8EAED;">
-      <ul class="navbar-nav mx-auto text-center">
-      <?php 
-          echo $this->renderWidget('footer_bef');          
-          ?>
-      </ul>
+      <ul class="navbar-nav mx-auto text-center">@RenderPage("~/Shared/views/_footer_bef.cshtml")</ul>
     </div>
     <div class="footer">
-    <?php 
-          echo $this->renderWidget('footer_aft');          
-          ?>
+      @RenderPage("~/Shared/views/_footer_aft.cshtml")
+      @if (IsSectionDefined("address"))
+      {
+        @RenderSection("address")
+      }
     </div>
   </div>
+  <script src="~/Shared/js/site.js"></script>
+  @RenderSection("Scripts", required: false)
 </body>
 </html>
