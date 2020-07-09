@@ -1,7 +1,7 @@
 <?PHP
 $usrQryUrl = $this->h->tap('/authors/index');
-if (empty($data['arr'])) return;
-$recs = $data['arr'];
+if (empty($pageData['arr'])) return;
+$recs = $pageData['arr'];
 ?>
 <div>
     <div>

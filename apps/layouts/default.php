@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <?php
-    echo @$data['header_bef']; 
+    echo @$pageData['header_bef']; 
     echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
     echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
     echo $this->h->css($this->publicFolder . '/' .'css/custom.css');
@@ -16,19 +16,30 @@
 <body>
   <div class="mainbody">
     <div id="topHeader">
-      <?php echo @$data['header_title']; ?>
+      <?php echo @$pageData['header_title']; ?>
     </div>
     <!-- Fixed navbar -->
     <div class="navbar navbar-expand-sm" style="background-color: #E8EAED;">
       <ul class="navbar-nav mr-auto text-center">
       <?php
-        echo $this->h->getLiMenu(BaseCore::$_cfg['menu']['main']);
+      echo $this->h->getLiMenu(BaseCore::$_cfg['menu']['main']) ."=>&nbsp;&nbsp;".@$pageData["cmenu"];
       ?>
       </ul>
     </div>    
     <div class="container">
       <div class="page-header">
-        <?php echo @$data['body_bef']; ?>
+      <font color="LightGrey"> &nbsp;
+        <?php 
+          echo @$pageData["usrinfo"];
+          ?>
+        </font>
+      </div>
+      <div class="navbar navbar-expand-sm hmenu">
+        <ul class="navbar-nav ml-auto text-center">        
+        <?php
+        echo @$pageData["submenu"];
+      ?> 
+      </ul>
       </div>
       <?php echo $this->doBody(); ?>
     </div>

@@ -2,7 +2,7 @@
 ?>
 <div>
 <p />
-<?php echo $data['winlogin'];?>
+<?php echo $pageData['winlogin'];?>
 <p />
-<?php echo $data['weblogin'];?>
+<?php echo $pageData['weblogin'];?>
 </div>

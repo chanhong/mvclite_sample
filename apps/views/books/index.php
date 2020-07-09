@@ -1,8 +1,8 @@
 <?php
 $this->ut->debug(BaseCore::$_userInfo,'_userinfo');
 $usrQryUrl = $this->h->tap('/books/index');
-if (empty($data['arr'])) return;
-$recs = $data['arr'];
+if (empty($pageData['arr'])) return;
+$recs = $pageData['arr'];
 ?>
   <script type="text/javascript">
   $( function() {

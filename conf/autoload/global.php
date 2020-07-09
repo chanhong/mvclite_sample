@@ -95,6 +95,9 @@ $menucfg = [
             'daskboard' => [
                 ['title'=>'Home','path'=>'/'],
                 ['title' => 'Dashboard', 'path' => '/dashboard/index'],
+                ['title'=>'Books List','path'=>'/books/index'],
+                ['title'=>'Authors List','path'=>'/authors/index'],
+                ['title'=> 'Users', 'path'=>'/users/index'],
             ],        
         ]
     ]

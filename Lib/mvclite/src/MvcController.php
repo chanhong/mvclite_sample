@@ -94,7 +94,7 @@ class MvcController extends MvcCore {
         if (!file_exists($fspec))
             return;
 
-        (!empty($this->_view_data)) ? $data = $this->_view_data : $data = ""; // in view $data['meta']
+        (!empty($this->_view_data)) ? $pageData = $this->_view_data : $pageData = ""; // in view $pageData['meta']
         ob_start();
         include $fspec;
         $contents = ob_get_contents();
@@ -105,7 +105,7 @@ class MvcController extends MvcCore {
     // does not seem to do anything useful
     function captureBuffer($buff) {
 
-        (!empty($this->_view_data)) ? $data = $this->_view_data : $data = ""; // in view $data['meta']
+        (!empty($this->_view_data)) ? $pageData = $this->_view_data : $pageData = ""; // in view $pageData['meta']
         ob_start();
         echo $buff;
         $contents = ob_get_contents();

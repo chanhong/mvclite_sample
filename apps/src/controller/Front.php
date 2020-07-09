@@ -10,7 +10,6 @@ class Front extends BaseController {
         $this->_view_data['profile'] = BaseCore::$_userInfo;            
         $this->_view_data['cmenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['cmenu']['front']);        
         $this->_view_data['submenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['submenu']['front']);
-        
     }
 
     public function start($args = false) {

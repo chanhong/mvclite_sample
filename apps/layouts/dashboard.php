@@ -3,7 +3,7 @@
 
 <head>
 <?php
-    echo @$data['header_bef'];
+    echo @$pageData['header_bef'];
     echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
     echo $this->h->css($this->publicFolder . '/' .'css/sticky-footer-navbar.css');
     echo $this->h->css($this->publicFolder . '/' .'css/dashboard.css');  
@@ -33,7 +33,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <?php echo @$data['top']; ?>
+                    <?php echo @$pageData['top']; ?>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Search...">
@@ -44,11 +44,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
-                    <?php echo @$data['body_lft']; ?>
+                    <?php
+        echo @$pageData["submenu"];
+      ?> 
+
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">
-                    <?php echo @$data['header_title']; ?>
+                    <?php echo @$pageData['header_title']; ?>
                 </h1>
 
                 <div class="row placeholders">

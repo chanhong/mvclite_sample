@@ -6,7 +6,7 @@
         ?>  
         <fieldset>
             <legend>Login Form</legend>
-            <p>Your Windows login [<?php echo $data['winuser'];?>] is pre-authorized to have direct access without using username and password.
+            <p>Your Windows login [<?php echo $pageData['winuser'];?>] is pre-authorized to have direct access without using username and password.
             <p /><font size="-1"><i>(Click button below to login with your Windows credential)</i></font>
             </p>
             <p><input type="submit" name="winbtnlogin" value="Login with your Windows credential" id="winbtnlogin" />

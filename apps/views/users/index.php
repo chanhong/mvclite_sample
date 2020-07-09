@@ -1,8 +1,8 @@
 <?PHP
 $usrQryUrl = $this->h->tap('/users/index');
 //$this->requireAdmin($usrQryUrl); // if not admin redirect to login and return here
-if (empty($data['arr'])) return;
-$users = $data['arr'];
+if (empty($pageData['arr'])) return;
+$users = $pageData['arr'];
 ?>
 <div>
     <div>

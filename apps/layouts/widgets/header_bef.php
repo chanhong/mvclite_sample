@@ -2,10 +2,10 @@
 
 $buff = "";
 
-foreach (@$data['meta'] as $meta) {
+foreach (@$pageData['meta'] as $meta) {
     $buff .= $this->h->meta($meta);
 }
-if ($data['title']!="") {
-        $buff .= $this->h->tag("title", $data['title']);
+if ($pageData['title']!="") {
+        $buff .= $this->h->tag("title", $pageData['title']);
 }
 echo $buff;
