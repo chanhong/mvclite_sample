@@ -346,26 +346,34 @@ class MvcController extends MvcCore {
 
     public function doBody() {
 
-        $youare = $dmsg = $alertMsg = $feedback = $buff = "";
+        $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = "";
 
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
         (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
 
+        if (!empty(MvcCore::$_userInfo['debug'])) {
+            $ui = "[".MvcCore::$_userInfo['debug']."]";
+        }
         $feedback = $this->feedback("feedback", "DarkGreen");
         $alertMsg = $this->feedback("alert", "IndianRed");
 
-        $buff .=  $youare . $dmsg . $alertMsg . $feedback;
+        $buff .=  $youare .$ui. $dmsg . $alertMsg . $feedback;
         $buff .=  $this->Error;
         $buff .=  $this->doBodyNoLayout();
         $_SESSION["debug"] = $_SESSION["feedback"] = $_SESSION["alert"] = "";
         echo $buff; 
-    }   
+    } 
+
     public function isAllow($uPath) {
-        /*
-                $uPath = '/authors/edit/'. $r['id']; 
-                if ($this->isAllow($uPath)==true) {
-        */
-                return true;
-            }
+        $isGood=false;
+        // PENDING, to make it works.
+        $_SESSION['debug'] .= "ia: [$uPath]";
+        MvcCore::$_userInfo["debug"] .= "ua: [$uPath]";
+//        $_SESSION['feedback'] .= "ia: [$uPath]";
+        if ($this->Auth->loggedIn()) {
+            $isGood = true;
+        }
+        return $isGood;
+    }
     
 }

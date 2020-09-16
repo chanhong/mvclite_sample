@@ -30,6 +30,8 @@ class Util {
         }
         $ret = $str . $dTrace . " ";
         (!empty($_SESSION['debug'])) ? $_SESSION['debug'] .= $ret : $_SESSION['debug'] = $ret;
+// try to use static var instead of session
+        (!empty(MvcCore::$_userInfo['debug'])) ? MvcCore::$_userInfo['debug'] .= $ret : MvcCore::$_userInfo['debug'] = $ret;
         return $ret;
     }
 

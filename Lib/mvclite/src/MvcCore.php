@@ -93,7 +93,8 @@ class MvcCore {
             $ret2URL = $_SERVER['PHP_SELF'];
 
 //        self::pln($ret2URL, 'ret2URL');
-        $_SESSION['debug'] = "r: [$ret2URL]";
+        MvcCore::$_userInfo['debug'] .= "u: [$ret2URL]";
+        $_SESSION['debug'] .= "r: [$ret2URL]";
         header("Location: $ret2URL");
     }
 
