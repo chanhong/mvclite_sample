@@ -91,7 +91,7 @@ class MvcAuth {
         
         // if login via form or win login
         if (!empty($user['username'])) {
-//                $this->pln($user);
+            $this->pln($user);
             if (!empty($user['password']) and $user['password'] == $this->md5Hash($validate)) {
 //                if (!empty($user['password']) and $user['password'] == $this->md5Hash($validate, $user['confirm_hash'])) {
                 $status = true;

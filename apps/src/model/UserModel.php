@@ -56,9 +56,9 @@ class UserModel extends BaseModel {
         if (!empty($password)) {
             // new password with nid as salt
             $password = $this->Auth->md5Hash($password, $nid);
-            $sqlUpdList = ['username'=>$username, 'level'=>$level, 'password'=>$password];
+            $sqlUpdList = ['username'=>$username, 'level'=>$level, 'password'=>$password, 'is_confirmed'=>$is_confirmed];
         } else {
-            $sqlUpdList = ['username'=>$username, 'level'=>$level];
+            $sqlUpdList = ['username'=>$username, 'level'=>$level, 'is_confirmed'=>$is_confirmed];
         }
         $this->_dbt("update",['fl'=>$sqlUpdList, 'where'=>"id='$id'"]);
     }
@@ -102,7 +102,7 @@ class UserModel extends BaseModel {
         
         srand(time());
         $this->user->nid = self::newNid();
-        $this->user->password = $this->Auth->md5Hash($new_password);
+        $this->user->password = $this->Auth->md5Hash($new_password, $this->user->nid);
         $this->user->update();
         $this->nid = $this->user->nid;
         $this->generateBCCookies();
@@ -132,15 +132,18 @@ class UserModel extends BaseModel {
 
         if ($u->ok()) {
             $u->nid = self::newNid();
-            $u->password = $this->Auth->md5Hash($new_password);
+            $u->password = $this->Auth->md5Hash($new_password, $u->nid);
             $u->update();
         }
     }
     public function isUserExist($username) {
 
+        permDbg($username, "isUserExist");    
+        $_SESSION["feedback"] .= $username;
         $user_exists = null;
         if (!empty($username)) {
             $user_exists = $this->_dbt("dbrow",['where'=>"username ='$username'"]);
+            $this->ut->pln($user_exists);        
         } 
         return $user_exists;
     }

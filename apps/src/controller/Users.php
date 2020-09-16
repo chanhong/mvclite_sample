@@ -78,17 +78,28 @@ class Users extends BaseController {
        
     public function _weblogin($args = false) {
 
+        $good="";
         extract($this->post); // extract array into respective variables  
+        $_SESSION["feedback"] .= $username;
+        permDbg($username);    
+                
         $r = $this->model->isUserExist($username);
+        $this->ut->pln($username);        
+        $this->ut->pln($password);        
+        $this->ut->pln($r);        
+
         if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
             $_SESSION['debug'] = "User: [$username]";
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
+            $_SESSION["feedback"] .= $where;
+            permDbg($where);    
             if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
 // after redirect, the   MvcAuth::myProfile() are gone, why?
                 $this->redirect2Url($this->retUrl); // good login                           
             } 
         }
+
         if (empty($good)) {
             $this->_view_data['header_title'] = 'Web Login';       
             $this->Error->add('username', "We're sorry, wrong login. Please try again.");
