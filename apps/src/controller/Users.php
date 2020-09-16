@@ -84,10 +84,11 @@ class Users extends BaseController {
         permDbg($username);    
                 
         $r = $this->model->isUserExist($username);
+        /*
         $this->ut->pln($username);        
         $this->ut->pln($password);        
         $this->ut->pln($r);        
-
+*/
         if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
             $_SESSION['debug'] = "User: [$username]";

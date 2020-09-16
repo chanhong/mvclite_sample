@@ -143,7 +143,7 @@ class UserModel extends BaseModel {
         $user_exists = null;
         if (!empty($username)) {
             $user_exists = $this->_dbt("dbrow",['where'=>"username ='$username'"]);
-            $this->ut->pln($user_exists);        
+//            $this->ut->pln($user_exists);        
         } 
         return $user_exists;
     }
