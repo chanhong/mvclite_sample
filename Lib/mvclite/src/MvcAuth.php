@@ -349,5 +349,7 @@ class MvcAuth {
             $u->password = self::hashedPassword($new_password);
             $u->update();
         }
-    }    
+    }  
+    
+    
 }

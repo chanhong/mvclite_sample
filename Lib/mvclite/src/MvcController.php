@@ -360,5 +360,12 @@ class MvcController extends MvcCore {
         $_SESSION["debug"] = $_SESSION["feedback"] = $_SESSION["alert"] = "";
         echo $buff; 
     }   
+    public function isAllow($uPath) {
+        /*
+                $uPath = '/authors/edit/'. $r['id']; 
+                if ($this->isAllow($uPath)==true) {
+        */
+                return true;
+            }
     
 }

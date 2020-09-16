@@ -112,7 +112,9 @@ class MvcCore {
             }
         } 
     }
-       
+
+        
+    
     public static function pln($iVar, $iStr = "", $iFormat = "br") {
     
         print Util::debug($iVar, $iStr, $iFormat);

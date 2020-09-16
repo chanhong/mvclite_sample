@@ -136,5 +136,13 @@ class UserModel extends BaseModel {
             $u->update();
         }
     }
+    public function isUserExist($username) {
+
+        $user_exists = null;
+        if (!empty($username)) {
+            $user_exists = $this->_dbt("dbrow",['where'=>"username ='$username'"]);
+        } 
+        return $user_exists;
+    }
 
 }

@@ -79,7 +79,7 @@ class Users extends BaseController {
     public function _weblogin($args = false) {
 
         extract($this->post); // extract array into respective variables  
-        $r = $this->Auth->isUserExist($this->meTable, $username);
+        $r = $this->model->isUserExist($username);
         if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
             $_SESSION['debug'] = "User: [$username]";
@@ -171,4 +171,6 @@ class Users extends BaseController {
         $this->_view_data['header_title'] = 'User Create';       
         echo $this->doView($this, "create");        
     }
+
+
 }
