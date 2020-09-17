@@ -349,15 +349,15 @@ class MvcController extends MvcCore {
         $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
 
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
-        BaseCore::$_userInfo['debug'] = $this->ut->getSafeVar($_SESSION, "debug");        
-        BaseCore::$_userInfo['feedback'] = $this->ut->getSafeVar($_SESSION, "feedback");        
+        MvcCore::$_userInfo['debug'] = $this->ut->getSafeVar($_SESSION, "debug");        
+        MvcCore::$_userInfo['feedback'] = $this->ut->getSafeVar($_SESSION, "feedback");        
         (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
 
-        if (!empty(BaseCore::$_userInfo['debug'])) {
-            $ui = "[".BaseCore::$_userInfo['debug']."]";
+        if (!empty(MvcCore::$_userInfo['debug'])) {
+            $ui = "[".MvcCore::$_userInfo['debug']."]";
         }
-        if (!empty(BaseCore::$_userInfo['feedback'])) {
-            $uf = "[".BaseCore::$_userInfo['feedback']."]";
+        if (!empty(MvcCore::$_userInfo['feedback'])) {
+            $uf = "[".MvcCore::$_userInfo['feedback']."]";
         }
         $feedback = $this->feedback("feedback", "DarkGreen");
         $alertMsg = $this->feedback("alert", "IndianRed");
@@ -373,7 +373,7 @@ class MvcController extends MvcCore {
         $isGood=false;
         // PENDING, to make it works.
         $_SESSION['debug'] .= "ia: [$uPath]";
-        BaseCore::$_userInfo["debug"] .= "ua: [$uPath]";
+        MvcCore::$_userInfo["debug"] .= "ua: [$uPath]";
 //        $_SESSION['feedback'] .= "ia: [$uPath]";
         if ($this->Auth->loggedIn()) {
             $isGood = true;
