@@ -58,15 +58,6 @@
         </ul>
       </div>
       <div class="main-body">
-        <div class="text-center">
-        <?php 
-        /*
-          echo @$pageData["broadcast"];
-          echo @$pageData["feedback"];
-          echo @$pageData["fbdmsg"];
-          */
-          ?>
-        </div>
         <?php echo $this->doBody(); ?>
       </div>
     </div>

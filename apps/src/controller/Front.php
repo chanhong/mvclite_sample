@@ -13,7 +13,6 @@ class Front extends BaseController {
     }
 
     public function start($args = false) {
-//        permDbg($this->layout, 'layout');
         $ret = self::doAction($args, self::class);
     }
 

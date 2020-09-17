@@ -13,7 +13,7 @@ class UserModel extends BaseModel {
         
         if (ctype_digit($id)) {
             $where = "id ='$id'";
-            $_SESSION['feedback'] = "delete " . $id ;
+            self::Add2SessVar("feedback", "Deleted " . $id);
             $this->_dbt("delete",['where'=>$where]);
         }
     }
@@ -22,13 +22,8 @@ class UserModel extends BaseModel {
         
         $this->ut->debug($userInfo);
         extract($userInfo); // extract array into respective variables
-//        $user_exists1 = $this->db->findRow("SELECT * FROM ".$this->meTable." where username ='$username'");
-//        if ($user_exists > 0)
-//        if (!empty($user_exists))
-//            return false;
-
         if (!empty($this->_dbt("dbrow",['where'=>"username='$username'"]))) {
-            $_SESSION['feedback'] = "Failed to create " . $userInfo['username'];
+            self::Add2SessVar("feedback", "Failed to create ".$userInfo['username'] . "!");
             return false;
         }; 
 
@@ -44,7 +39,7 @@ class UserModel extends BaseModel {
         $userInfo["nid"] = $this->Auth->newNid();
         $userInfo["password"] = $this->Auth->md5Hash($password, $userInfo["nid"]);
         $this->_dbt("insert",['fl'=>$userInfo]);
-        $_SESSION['feedback'] = "create " . $userInfo['username'];
+        self::Add2SessVar("feedback", $userInfo['username'] . " has been created!");
         return $nextjvid;
     }
 
@@ -66,7 +61,6 @@ class UserModel extends BaseModel {
 // custom version of create, need to look further and compare
     public static function createNewUser($username, $password = null) {
         
-//        $user_exists = $this->db->dbRow($this->meTable, ['where'=>"username ='$username'"]);
         $user_exists = $this->_dbt("dbrow",['where'=>"username ='$username'"]);
         
         if ($user_exists > 0)
@@ -79,7 +73,6 @@ class UserModel extends BaseModel {
         $u = new User();
         $u->username = $username;
         $u->nid = self::newNid();
-//        $u->password = self::hashedPassword($password);
         $u->password = self::hashedPassword($password, $u->nid);
         $u->insert();
         return $u;
@@ -87,7 +80,6 @@ class UserModel extends BaseModel {
 
 
     public function changeCurrentUsername($new_username) {
-//        $db = Database::getDatabase();
        
         srand(time());
         $this->user->nid = Auth::newNid();
@@ -138,12 +130,11 @@ class UserModel extends BaseModel {
     }
     public function isUserExist($username) {
 
-        permDbg($username, "isUserExist");    
-        $_SESSION["feedback"] .= $username;
+        permDbg($username, "usrname");    
         $user_exists = null;
         if (!empty($username)) {
             $user_exists = $this->_dbt("dbrow",['where'=>"username ='$username'"]);
-//            $this->ut->pln($user_exists);        
+            permDbg($user_exists, "usr");    
         } 
         return $user_exists;
     }

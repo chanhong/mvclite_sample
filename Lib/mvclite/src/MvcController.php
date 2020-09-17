@@ -29,6 +29,21 @@ class MvcController extends MvcCore {
         return strtolower(get_class($className));
     }
 
+    function Add2SessVar($iVar, $msg)
+    {
+      if ($iVar != "" && $msg != "")
+      {
+        if ($_SESSION[$iVar] != null || $_SESSION[$iVar] != "")
+        {
+            $_SESSION[$iVar] .= " " . $msg;
+        }
+        else
+        {
+            $_SESSION[$iVar] = $msg;
+        }
+      }
+    }
+
     function alertMsg($iStr, $color = "red") {
 
         if (!empty($iStr))
@@ -349,36 +364,18 @@ class MvcController extends MvcCore {
         $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
 
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
-        MvcCore::$_userInfo['debug'] = $this->ut->getSafeVar($_SESSION, "debug");        
-        MvcCore::$_userInfo['feedback'] = $this->ut->getSafeVar($_SESSION, "feedback");        
+        $ui = $this->ut->getSafeVar(MvcCore::$_userInfo, "debug");
         (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
 
-        if (!empty(MvcCore::$_userInfo['debug'])) {
-            $ui = "[".MvcCore::$_userInfo['debug']."]";
-        }
-        if (!empty(MvcCore::$_userInfo['feedback'])) {
-            $uf = "[".MvcCore::$_userInfo['feedback']."]";
-        }
         $feedback = $this->feedback("feedback", "DarkGreen");
         $alertMsg = $this->feedback("alert", "IndianRed");
 
-        $buff .=  $youare .$ui. $dmsg . $alertMsg .$uf. $feedback;
+        $buff .=  $youare .$ui. $dmsg . $alertMsg .$feedback;
         $buff .=  $this->Error;
         $buff .=  $this->doBodyNoLayout();
         $_SESSION["debug"] = $_SESSION["feedback"] = $_SESSION["alert"] = "";
         echo $buff; 
     } 
 
-    public function isAllow($uPath) {
-        $isGood=false;
-        if (!empty($_SESSION['userinfo']['username']) && $_SESSION['userinfo']['level']=="admin")
-        {
-            $isGood = true;
-        } else{
-            permDbg(MvcCore::$_userInfo,"N:");
-            permDbg($_SESSION,"N:");
-        }
-        return $isGood;
-    }
     
 }

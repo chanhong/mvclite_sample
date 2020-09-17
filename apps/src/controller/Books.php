@@ -4,7 +4,9 @@ class Books extends BaseController {
     public function __construct() {
         
         parent::__construct();
-        $this->layout = "default_nofooter";  
+        $this->layout = "bootstrap";   
+        $this->meTable = "books";         
+
         $this->model = new BookModel($this->meTable);  
         $this->_view_data['profile'] = MvcCore::$_userInfo;            
         $this->_view_data['submenu'] = $this->h->getLiMenu(MvcCore::$_cfg['menu']['submenu']['front']);

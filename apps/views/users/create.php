@@ -8,6 +8,7 @@ $user = $pageData['arr'];
     <form action="<?php echo $this->h->tap('/users/create'); ?>" method="post">
         <p><label for="username">Username</label> <input type="text" name="username" id="username" value="<?PHP echo $user['username']; ?>" class="text"></p>
         <p><label for="password">Password</label> <input type="password" name="password" id="password" value="" class="text"></p>
+        <p><label for="is_confirmed">Confirmed?</label> <input type="text" name="is_confirmed" id="is_confirmed" value="" class="text"></p>
         <p><label for="level">Level</label>
             <select name="level" id="level">
                 <option <?PHP if ($user['level'] == 'user') echo 'selected="selected"'; ?> value="user">User</option>

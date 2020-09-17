@@ -28,11 +28,22 @@ class BaseController extends MvcController {
 
         $this->stylesheets['before'] = [
             $this->publicFolder . '/' ."css/custom.css",
-//            $this->publicFolder . '/' ."bootstrap/css/bootstrap/normalize.css",
 ];
 
         $this->stylesheets['after'] = [
 //            $this->publicFolder . '/' ."css/custom.css",
         ];
     }
+    public function isAllow($uPath) {
+        $isGood=false;
+        if (!empty($_SESSION['userinfo']['username']) && $_SESSION['userinfo']['level']=="admin")
+        {
+            $isGood = true;
+        } else{
+            permDbg(MvcCore::$_userInfo,"N:");
+            permDbg($_SESSION,"N:");
+        }
+        return $isGood;
+    }
+
 }

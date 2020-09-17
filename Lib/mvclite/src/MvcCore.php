@@ -81,7 +81,6 @@ class MvcCore {
         if ($this->className === null) {
             $this->className = get_class($this);
         }
-//        $this->_class_path = strtolower($this->className);
         $this->_class_path = $this->className;
         (!empty($_REQUEST['r'])) ? $this->retUrl = $_REQUEST['r'] : $this->retUrl = "?";        
     }
@@ -93,7 +92,7 @@ class MvcCore {
 
 //        self::pln($ret2URL, 'ret2URL');
         MvcCore::$_userInfo['debug'] .= "u: [$ret2URL]";
-        $_SESSION['debug'] .= "r: [$ret2URL]";
+        $_SESSION['debug'] .= "s: [$ret2URL]";
         header("Location: $ret2URL");
     }
 
@@ -108,14 +107,12 @@ class MvcCore {
                 unset($_SESSION['userinfo']['nid']);
                 unset($_SESSION['userinfo']['password']);
                 unset($_SESSION['userinfo']['confirm_hash']);  
-                MVCCore::$_userInfo = $_SESSION['userinfo'];                
+                MVCCore::$_userInfo = $_SESSION['userinfo']; 
                 return $userRow;
             }
         } 
     }
 
-        
-    
     public static function pln($iVar, $iStr = "", $iFormat = "br") {
     
         print Util::debug($iVar, $iStr, $iFormat);

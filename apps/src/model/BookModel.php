@@ -13,7 +13,7 @@ class BookModel extends BaseModel {
         
         if (ctype_digit($id)) {
             $where = "id ='$id'";
-            $_SESSION['feedback'] = "delete " . $id ;
+            self::Add2SessVar("feedback", "Deleted " . $id);
             $this->_dbt("delete",['where'=>$where]);
         }
     }
@@ -22,7 +22,6 @@ class BookModel extends BaseModel {
         
         permDbg($rInfo,'rInfo in model');
         extract($rInfo); // extract array into respective variables
-
         $sqlUpdList = ['title'=>$title, 'isbn'=>$isbn, 'author_id'=>$author_id];
         $this->_dbt("update",['fl'=>$sqlUpdList, 'where'=>"id='$id'"]);
     }    

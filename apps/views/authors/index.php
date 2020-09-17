@@ -1,4 +1,7 @@
 <?PHP
+permDbg(MvcCore::$_userInfo,'_userinfo');
+permDbg($pageData["profile"],'profile');
+
 $usrQryUrl = $this->h->tap('/authors/index');
 if (empty($pageData['arr'])) return;
 $recs = $pageData['arr'];

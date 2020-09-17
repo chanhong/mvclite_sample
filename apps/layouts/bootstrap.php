@@ -57,15 +57,6 @@
       ?> 
       </ul>
       </div>
-      <div class="text-center">
-      <?php 
-      /*
-          echo @$pageData["broadcast"];
-          echo @$pageData["feedback"];
-          echo @$pageData["fbdmsg"];
-          */
-          ?>
-      </div>
       <?php echo $this->doBody(); ?>
     </div>
     <div class="navbar navbar-expand-sm" style="background-color: #E8EAED;">

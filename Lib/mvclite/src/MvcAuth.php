@@ -26,10 +26,8 @@ class MvcAuth {
     public function __construct() {
         
         $this->ut = new Util;
-        
         $this->nid = null;
         $this->loggedIn = false;
-//        $this->expiryDate = mktime(0, 0, 0, 6, 2, 2037);
         $this->expiryDate = time() + self::ONEMONTH;
 
         // to be removed
@@ -56,11 +54,6 @@ class MvcAuth {
 
         $this->setInitCookie();
         $this->loggedIn = $this->attemptCookieLogin();
-    }
-
-    public static function debug($iVar, $iStr = "", $iFormat = "") {
-        
-        return Util::debug($iVar, $iStr, $iFormat);
     }
 
      /* 
@@ -243,26 +236,9 @@ class MvcAuth {
         $nid = base64_decode($c['n']);
         if ($nid === false)
             return false;
-
-        // handle this outside of Auth
-        /*
-        // We SELECT * so we can load the full user record into the user DBObject later
-        $row = $this->db->dbRow("users", ['where'=>"nid ='$nid'"]);
-        
-        if ($row === false)
-            return false;
-
-        $this->id = $row['id'];
-        $this->nid = $row['nid'];
-        $this->username = $row['username'];
-        $this->user = new User();
-        $this->user->id = $this->id;
-        $this->user->load($row);
-        return true;
-         * 
-         */
     }
-// from custom, check it out
+
+    // from custom, check it out
     public function requireUser($rUrl = "") {
         if (!$this->loggedIn())
             $this->sendToLoginPage($rUrl);
@@ -278,7 +254,6 @@ class MvcAuth {
     }
 
     public function changeCurrentUsername($new_username) {
-//        $db = Database::getDatabase();
        
         srand(time());
         $this->user->nid = Auth::newNid();
@@ -308,6 +283,7 @@ class MvcAuth {
 
         return true;
     }
+    
     public function changeCurrentPassword($new_password) {
         
         srand(time());

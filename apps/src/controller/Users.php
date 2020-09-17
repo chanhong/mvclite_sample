@@ -62,14 +62,11 @@ class Users extends BaseController {
                     $entity = "and entities like '%".$args['wuentity']."%'";
                     $msg = " Entity: [".$args['wuentity']."]";
                 }
-                
                 $_SESSION['debug'] = "Windows user: [$winUser] $msg";
-                MvcCore::$_userInfo['debug'] = "Windows user: [$winUser] $msg";
-
                 $where = "winuser='$winUser' and is_confirmed = '1' $entity";
-                if ($this->isAuthorized($winUser, $where, $this->meTable)) {
+                if (self::isAuthorized($winUser, $where, $this->meTable)) {
 // after redirect, the   MvcAuth::myProfile() are gone, why?
-                    $this->redirect2Url($this->retUrl); // good login                           
+                    self::redirect2Url($this->retUrl); // good login                           
                 } 
             }
         } else {
@@ -80,28 +77,22 @@ class Users extends BaseController {
        
     public function _weblogin($args = false) {
 
-        $good="";
+        $userinfo="";
         extract($this->post); // extract array into respective variables  
-        $_SESSION["feedback"] .= $username;
-        permDbg($username);    
-                
         $r = $this->model->isUserExist($username);
         if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
-            $_SESSION['debug'] = "User: [$username]";
-            MvcCore::$_userInfo['debug'] = "User: [$username]";
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
-            $_SESSION["feedback"] .= $where;
-            permDbg($where);    
-            if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
-                $_SESSION["loggedIn"] = $username;
-                $_SESSION["feedback"] = "You has been login as [$username]!";
-// after redirect, the   MvcAuth::myProfile() are gone, why?
-                $this->redirect2Url($this->retUrl); // good login                           
+            if ($userinfo = self::isAuthorized($password, $where, $this->meTable)) {
+                pln(MVCCore::$_userInfo,"ui");
+                self::Add2SessVar("loggedIn", $username);                
+                self::Add2SessVar("feedback", "You has been login as [$username]!");
+                // after redirect, the   MvcAuth::myProfile() are gone, why?
+                self::redirect2Url($this->retUrl); // good login                           
             } 
         }
 
-        if (empty($good)) {
+        if (empty($userinfo)) {
             $this->_view_data['header_title'] = 'Web Login';       
             $this->Error->add('username', "We're sorry, wrong login. Please try again.");
             echo $this->doView($this,"_weblogin");
@@ -111,9 +102,7 @@ class Users extends BaseController {
 
     public function logout($args = false) {
         
-        $_SESSION["feedback"] .= "You has been logout!";
-        MvcCore::$_userInfo['feedback'] .= "You has been logout!";
-        permDbg(MvcCore::$_userInfo,'_userinfo logout');    
+        self::Add2SessVar("feedback", "You has been logout!");                
         $this->Auth->logout();
         $this->redirect2Url($this->retUrl);
     }
@@ -122,7 +111,7 @@ class Users extends BaseController {
         
         if (!empty($this->post['username']) and ! empty($this->post['password']) ) {
             if ($ret = $this->model->create($this->post)) {
-                $_SESSION["feedback"] = $this->post['username'] . " has been created!";
+                self::Add2SessVar("feedback", $this->post['username'] . " has been created!");
                 $this->redirect2Url($this->retUrl);
             } else {
                 $this->Error->add('username', "We're sorry, registration failed! Please try again.");
@@ -155,7 +144,7 @@ class Users extends BaseController {
             $this->Error->blank($this->post['level'], 'Level');
             if ($this->Error->ok()) {
                 $this->model->edit($this->_view_data['arr']);
-                $_SESSION["feedback"] = $this->post['username'] . " has been save!";
+                self::Add2SessVar("feedback", $this->post['username'] . " has been saved!");
                 $this->redirect2Url($this->home);
             }
         } elseif (!empty($u)) {
@@ -176,10 +165,10 @@ class Users extends BaseController {
 
             if ($this->Error->ok()) {
                 $this->model->create($this->post);
-                $_SESSION["feedback"] = $this->post['username'] . " has been created!";
+                self::Add2SessVar("feedback", $this->post['username'] . " has been created!");
                 $this->redirect2Url($this->home);
             } else {
-                $_SESSION["feedback"] = "Failed to create ".$this->post['username'] . "!";
+                self::Add2SessVar("feedback", "Failed to create ".$this->post['username'] . "!");
                 $this->_view_data['arr'] = $this->post;
             }
         } else {
