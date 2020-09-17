@@ -164,5 +164,9 @@ function dbg($iVar, $iStr = "", $iFormat = "") {
 }
 
 function permDbg($iVar, $iStr = "", $iFormat = "") {
-    return $_SESSION["debug"] .= MvcLite\Util::debug($iVar, $iStr, $iFormat);
+    return MvcLite\Util::debug($iVar, $iStr, $iFormat);
+}
+
+function pln($iVar, $iStr = "", $iFormat = "") {
+    print MvcLite\Util::debug($iVar, $iStr, $iFormat);
 }

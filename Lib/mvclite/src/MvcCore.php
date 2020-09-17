@@ -22,7 +22,7 @@ class MvcCore {
     public static $_cfg;
     public static $_userInfo;
     public static $_action;
-    public static $profile;
+    public static $_profile;
     
     public static $loginUrl = '?login'; // Where to direct users to login
     public $retUrl;
@@ -73,7 +73,6 @@ class MvcCore {
         $this->ut = new Util;
         $this->h = new Helper;
         $this->db = new PdoLite;  
-//        $this->Auth = MVCAuth::getAuth('insert some random text here');
         $this->Auth = MVCAuth::getAuth('MvcLiteSALT');
         $this->Error = MVCError::getError();
         
@@ -103,12 +102,13 @@ class MvcCore {
         if (!empty($validate) and !empty($where) and !empty($meTable)) {
             $this->Auth->logout();
             $userRow = $this->db->dbRow($meTable, ['where'=>$where]);
-            if ($this->Auth->login($validate, $userRow)) {
+            if ($this->Auth->login($validate, $userRow)<>null) {
                 $_SESSION['userinfo'] = $userRow; 
                 // mask out sensitive user info
                 unset($_SESSION['userinfo']['nid']);
                 unset($_SESSION['userinfo']['password']);
-                unset($_SESSION['userinfo']['confirm_hash']);                               
+                unset($_SESSION['userinfo']['confirm_hash']);  
+                MVCCore::$_userInfo = $_SESSION['userinfo'];                
                 return $userRow;
             }
         } 

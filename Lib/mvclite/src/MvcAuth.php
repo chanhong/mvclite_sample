@@ -7,6 +7,7 @@ class MvcAuth {
     const DOMAIN = "MVCLite";
     const ONEMONTH = 2592000;
        
+    
     private static $me;
     private static $salt;
     private $loggedIn;
@@ -87,26 +88,20 @@ class MvcAuth {
     public function login($validate, $user) {
         
         $status = false;
-        if (empty($validate) or empty($user)) return $status;
-        
         // if login via form or win login
-        if (!empty($user['username'])) {
-//            $this->pln($user);
+        if (!empty($user['username']) and !empty($validate)) {
             if (!empty($user['password']) and $user['password'] == $this->md5Hash($validate)) {
-//                if (!empty($user['password']) and $user['password'] == $this->md5Hash($validate, $user['confirm_hash'])) {
                 $status = true;
             } elseif (!empty($user['winuser']) and $user['winuser'] == $validate ) {
                 $status = true;
             }
+            if ($status = true) {
+                $this->profile = $user;
+                $this->loggedIn = $status;
+                $this->generateBCCookies();
+            }
         }
-        
-        if ($status = true) {
-            $this->profile = $user;
-            MvcCore::$profile = $user;
-            $this->loggedIn = $status;
-            $this->generateBCCookies();
-            return $status;
-        }
+        return $status;
     }
 
     public function logout() {

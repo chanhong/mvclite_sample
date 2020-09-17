@@ -371,21 +371,12 @@ class MvcController extends MvcCore {
 
     public function isAllow($uPath) {
         $isGood=false;
-        // PENDING, to make it works.
-        /*
-        $_SESSION['debug'] .= "ia: [$uPath]";
-        MvcCore::$_userInfo["debug"] .= "ua: [$uPath]";
-        $_SESSION['feedback'] .= "ia: [$uPath]";
-        MvcCore::$_userInfo["feedback"] .= "ua: [$uPath]";
-        */
-        if ($this->Auth->loggedIn()) {
-            $_SESSION['debug'] .= "good ia: [$uPath]";
-            MvcCore::$_userInfo["debug"] .= "good ua: [$uPath]";
+        if (!empty($_SESSION['userinfo']['username']) && $_SESSION['userinfo']['level']=="admin")
+        {
             $isGood = true;
         } else{
-            $_SESSION['debug'] .= "NOT  a: [$uPath]";
-            MvcCore::$_userInfo["debug"] .= "NOT ua: [$uPath]";
-
+            permDbg(MvcCore::$_userInfo,"N:");
+            permDbg($_SESSION,"N:");
         }
         return $isGood;
     }

@@ -59,9 +59,11 @@
       </div>
       <div class="text-center">
       <?php 
+      /*
           echo @$pageData["broadcast"];
           echo @$pageData["feedback"];
           echo @$pageData["fbdmsg"];
+          */
           ?>
       </div>
       <?php echo $this->doBody(); ?>

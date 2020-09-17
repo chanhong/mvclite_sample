@@ -86,11 +86,6 @@ class Users extends BaseController {
         permDbg($username);    
                 
         $r = $this->model->isUserExist($username);
-        /*
-        $this->ut->pln($username);        
-        $this->ut->pln($password);        
-        $this->ut->pln($r);        
-*/
         if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
             $_SESSION['debug'] = "User: [$username]";
@@ -99,12 +94,8 @@ class Users extends BaseController {
             $_SESSION["feedback"] .= $where;
             permDbg($where);    
             if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
+                $_SESSION["loggedIn"] = $username;
                 $_SESSION["feedback"] = "You has been login as [$username]!";
-                $this->ut->debug($username, "login");
-                MvcCore::$_userInfo['feedback'] .= "_UI: You has been login as [$username]!";
-                MvcCore::$_userInfo['debug'] .= "_UI: You has been login as [$username]!";
-                MvcCore::$_userInfo['username'] = $username;
-
 // after redirect, the   MvcAuth::myProfile() are gone, why?
                 $this->redirect2Url($this->retUrl); // good login                           
             } 
@@ -122,7 +113,7 @@ class Users extends BaseController {
         
         $_SESSION["feedback"] .= "You has been logout!";
         MvcCore::$_userInfo['feedback'] .= "You has been logout!";
-        $this->ut->debug(MvcCore::$_userInfo,'_userinfo logout');
+        permDbg(MvcCore::$_userInfo,'_userinfo logout');    
         $this->Auth->logout();
         $this->redirect2Url($this->retUrl);
     }
