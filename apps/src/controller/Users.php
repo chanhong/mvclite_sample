@@ -149,9 +149,11 @@ class Users extends BaseController {
     }
 
     public function edit($args = false) {
+        $u=null;
         if (!empty($this->get['p1'])) {
             $u = $this->db->findRow("SELECT * FROM users where id =".$this->get['p1']);
         }
+        
         if (isset($this->post['btnEditAccount']) and !empty($u)) {
             $this->_view_data['arr'] = $this->post;
             $this->_view_data['arr']['id'] = $u->id;

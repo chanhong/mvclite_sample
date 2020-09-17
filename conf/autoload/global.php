@@ -82,7 +82,6 @@ $menucfg = [
             ],
             'user' => [
                 ['title'=>'List','path'=>'/users/index'],
-                ['title'=>'Edit','path'=>'/users/edit'],
                 ['title'=>'Create new user','path'=>'/users/create'],
             ],
             'mya' => [
