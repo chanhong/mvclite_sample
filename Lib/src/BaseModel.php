@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 #namespace MvcSample;
-#namespace MvcLite;
+namespace MvcLite;
 
 use MvcLite\MvcModel;
 use MvcLite\Util;

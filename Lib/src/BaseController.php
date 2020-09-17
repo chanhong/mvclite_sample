@@ -1,4 +1,6 @@
 <?php
+namespace MvcLite;
+
 use MvcLite\MvcController;
 
 class BaseController extends MvcController {

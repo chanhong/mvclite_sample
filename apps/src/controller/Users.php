@@ -64,7 +64,7 @@ class Users extends BaseController {
                 }
                 
                 $_SESSION['debug'] = "Windows user: [$winUser] $msg";
-                MvcCore::$_userInfo['debug'] = "Windows user: [$winUser] $msg";
+                BaseCore::$_userInfo['debug'] = "Windows user: [$winUser] $msg";
 
                 $where = "winuser='$winUser' and is_confirmed = '1' $entity";
                 if ($this->isAuthorized($winUser, $where, $this->meTable)) {
@@ -93,14 +93,18 @@ class Users extends BaseController {
 */
         if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
-            $_SESSION['debug'] .= "User: [$username]";
-            MvcCore::$_userInfo['debug'] .= "User: [$username]";
+            $_SESSION['debug'] = "User: [$username]";
+            BaseCore::$_userInfo['debug'] = "User: [$username]";
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
             $_SESSION["feedback"] .= $where;
             permDbg($where);    
             if ($good = $this->isAuthorized($password, $where, $this->meTable)) {
-                $_SESSION["feedback"] .= "You has been login as [$username]!";
+                $_SESSION["feedback"] = "You has been login as [$username]!";
                 $this->ut->debug($username, "login");
+                BaseCore::$_userInfo['feedback'] .= "_UI: You has been login as [$username]!";
+                BaseCore::$_userInfo['debug'] .= "_UI: You has been login as [$username]!";
+                BaseCore::$_userInfo['username'] = $username;
+
 // after redirect, the   MvcAuth::myProfile() are gone, why?
                 $this->redirect2Url($this->retUrl); // good login                           
             } 
@@ -117,7 +121,8 @@ class Users extends BaseController {
     public function logout($args = false) {
         
         $_SESSION["feedback"] .= "You has been logout!";
-        $this->ut->debug(MvcCore::$_userInfo,'_userinfo logout');
+        BaseCore::$_userInfo['feedback'] .= "You has been logout!";
+        $this->ut->debug(BaseCore::$_userInfo,'_userinfo logout');
         $this->Auth->logout();
         $this->redirect2Url($this->retUrl);
     }

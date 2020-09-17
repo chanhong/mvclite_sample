@@ -6,7 +6,7 @@ class Authors extends BaseController {
         parent::__construct();
         $this->layout = "default_nofooter";  
         $this->model = new AuthorModel($this->meTable);   
-        $this->_view_data['profile'] = MvcCore::$_userInfo;            
+        $this->_view_data['profile'] = BaseCore::$_userInfo;            
         $this->_view_data['submenu'] = $this->h->getLiMenu(BaseCore::$_cfg['menu']['submenu']['front']);
     }
 

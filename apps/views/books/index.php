@@ -1,5 +1,5 @@
 <?php
-$this->ut->debug(MvcCore::$_userInfo,'_userinfo');
+$this->ut->debug(BaseCore::$_userInfo,'_userinfo');
 $usrQryUrl = $this->h->tap('/books/index');
 if (empty($pageData['arr'])) return;
 $recs = $pageData['arr'];

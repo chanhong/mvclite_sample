@@ -346,18 +346,23 @@ class MvcController extends MvcCore {
 
     public function doBody() {
 
-        $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = "";
+        $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
 
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
+        BaseCore::$_userInfo['debug'] = $this->ut->getSafeVar($_SESSION, "debug");        
+        BaseCore::$_userInfo['feedback'] = $this->ut->getSafeVar($_SESSION, "feedback");        
         (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
 
-        if (!empty(MvcCore::$_userInfo['debug'])) {
-            $ui = "[".MvcCore::$_userInfo['debug']."]";
+        if (!empty(BaseCore::$_userInfo['debug'])) {
+            $ui = "[".BaseCore::$_userInfo['debug']."]";
+        }
+        if (!empty(BaseCore::$_userInfo['feedback'])) {
+            $uf = "[".BaseCore::$_userInfo['feedback']."]";
         }
         $feedback = $this->feedback("feedback", "DarkGreen");
         $alertMsg = $this->feedback("alert", "IndianRed");
 
-        $buff .=  $youare .$ui. $dmsg . $alertMsg . $feedback;
+        $buff .=  $youare .$ui. $dmsg . $alertMsg .$uf. $feedback;
         $buff .=  $this->Error;
         $buff .=  $this->doBodyNoLayout();
         $_SESSION["debug"] = $_SESSION["feedback"] = $_SESSION["alert"] = "";
@@ -368,7 +373,7 @@ class MvcController extends MvcCore {
         $isGood=false;
         // PENDING, to make it works.
         $_SESSION['debug'] .= "ia: [$uPath]";
-        MvcCore::$_userInfo["debug"] .= "ua: [$uPath]";
+        BaseCore::$_userInfo["debug"] .= "ua: [$uPath]";
 //        $_SESSION['feedback'] .= "ia: [$uPath]";
         if ($this->Auth->loggedIn()) {
             $isGood = true;
