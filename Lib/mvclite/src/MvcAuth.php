@@ -102,6 +102,7 @@ class MvcAuth {
         
         if ($status = true) {
             $this->profile = $user;
+            MvcCore::$profile = $user;
             $this->loggedIn = $status;
             $this->generateBCCookies();
             return $status;

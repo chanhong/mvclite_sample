@@ -19,7 +19,7 @@ class Router extends BaseController {
             MvcCore::$_userInfo = $_SESSION['cache']['userinfo'];
         }
 
-//        permDbg(BaseCore::$_cfg['routes'], "routes");    
-        self::doRouter(BaseCore::$_cfg['routes'], self::class);
+//        permDbg(MvcCore::$_cfg['routes'], "routes");    
+        self::doRouter(MvcCore::$_cfg['routes'], self::class);
     }
 }

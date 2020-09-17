@@ -38,7 +38,7 @@
     <div class="navbar navbar-expand-sm" style="background-color: #E8EAED;">
       <ul class="navbar-nav mr-auto text-center">
       <?php
-      echo $this->h->getLiMenu(BaseCore::$_cfg['menu']['main']) ."=>&nbsp;&nbsp;".@$pageData["cmenu"];
+      echo $this->h->getLiMenu(MvcCore::$_cfg['menu']['main']) ."=>&nbsp;&nbsp;".@$pageData["cmenu"];
       ?> 
       </ul>
     </div>

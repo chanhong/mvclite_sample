@@ -22,12 +22,12 @@ class MvcCore {
     public static $_cfg;
     public static $_userInfo;
     public static $_action;
+    public static $profile;
     
     public static $loginUrl = '?login'; // Where to direct users to login
     public $retUrl;
 
     static $LoggedIn;
-    public $profile;
     public $Auth;
     public $Error;
     public $ut;

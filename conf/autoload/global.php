@@ -82,6 +82,7 @@ $menucfg = [
             ],
             'user' => [
                 ['title'=>'List','path'=>'/users/index'],
+                ['title'=>'Edit','path'=>'/users/edit'],
                 ['title'=>'Create new user','path'=>'/users/create'],
             ],
             'mya' => [
@@ -144,8 +145,8 @@ if (file_exists(__DIR__  . '/local.php')) {
 } elseif (file_exists(__DIR__  . '/local.php.dist')){
    $localcfg = require_once(__DIR__  . '/local.php.dist');
 }
-BaseCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg, $authCfg, $menucfg);
-//permDbg(BaseCore::$_cfg, "_cfg");  
+MvcCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg, $authCfg, $menucfg);
+//permDbg(MvcCore::$_cfg, "_cfg");  
 
 function pCStat($className) {
     $msg = "<>loaded";
