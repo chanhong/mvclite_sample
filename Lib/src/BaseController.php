@@ -36,11 +36,11 @@ class BaseController extends MvcController {
     }
     public function isAllow($uPath) {
         $isGood=false;
-        if (!empty($_SESSION['userinfo']['username']) && $_SESSION['userinfo']['level']=="admin")
+        if (!empty($_SESSION['uinfo']['username']) && $_SESSION['uinfo']['level']=="admin")
         {
             $isGood = true;
         } else{
-            permDbg(MvcCore::$_userInfo,"N:");
+            permDbg(MvcCore::$_usrInfo,"N:");
             permDbg($_SESSION,"N:");
         }
         return $isGood;

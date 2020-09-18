@@ -8,7 +8,7 @@
     echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
     echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
     echo $this->h->css($this->publicFolder . '/' .'css/custom.css');
-    echo $this->h->jsSrc($this->vendorFolder . '/' ."components/jquery.min.js");
+    echo $this->h->jsSrc($this->vendorFolder . '/' ."components/jquery/jquery.min.js");
     echo $this->h->jsSrc($this->vendorFolder . '/' ."components/jqueryui/jquery-ui.min.js");
     echo $this->h->jsSrc($this->vendorFolder . '/' ."twbs/bootstrap/dist/js/bootstrap.min.js");
     echo $this->h->jsSrc($this->publicFolder . '/' ."js/ie-emulation-modes-warning.js");

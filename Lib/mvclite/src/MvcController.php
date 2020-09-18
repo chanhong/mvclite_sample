@@ -364,7 +364,7 @@ class MvcController extends MvcCore {
         $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
 
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
-        $ui = $this->ut->getSafeVar(MvcCore::$_userInfo, "debug");
+        $ui = $this->ut->getSafeVar(MvcCore::$_usrInfo, "debug");
         (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
 
         $feedback = $this->feedback("feedback", "DarkGreen");

@@ -20,7 +20,7 @@ class MvcCore {
 
     public static $_Err;
     public static $_cfg;
-    public static $_userInfo;
+    public static $_usrInfo;
     public static $_action;
     public static $_profile;
     
@@ -91,8 +91,10 @@ class MvcCore {
             $ret2URL = $_SERVER['PHP_SELF'];
 
 //        self::pln($ret2URL, 'ret2URL');
-        MvcCore::$_userInfo['debug'] .= "u: [$ret2URL]";
+/*
+        MvcCore::$_usrInfo['debug'] .= "u: [$ret2URL]";
         $_SESSION['debug'] .= "s: [$ret2URL]";
+        */
         header("Location: $ret2URL");
     }
 
@@ -102,12 +104,12 @@ class MvcCore {
             $this->Auth->logout();
             $userRow = $this->db->dbRow($meTable, ['where'=>$where]);
             if ($this->Auth->login($validate, $userRow)<>null) {
-                $_SESSION['userinfo'] = $userRow; 
+                $_SESSION['uinfo'] = $userRow; 
                 // mask out sensitive user info
-                unset($_SESSION['userinfo']['nid']);
-                unset($_SESSION['userinfo']['password']);
-                unset($_SESSION['userinfo']['confirm_hash']);  
-                MVCCore::$_userInfo = $_SESSION['userinfo']; 
+                unset($_SESSION['uinfo']['nid']);
+                unset($_SESSION['uinfo']['password']);
+                unset($_SESSION['uinfo']['confirm_hash']);  
+                MVCCore::$_usrInfo = $_SESSION['uinfo']; 
                 return $userRow;
             }
         } 

@@ -1,5 +1,5 @@
 <?PHP
-permDbg(MvcCore::$_userInfo,'_userinfo');
+permDbg(MvcCore::$_usrInfo,'_usrinfo');
 permDbg($pageData["profile"],'profile');
 
 $usrQryUrl = $this->h->tap('/authors/index');

@@ -7,7 +7,7 @@ class Authors extends BaseController {
         $this->layout = "bootstrap";     
         $this->meTable = "authors";         
         $this->model = new AuthorModel($this->meTable);   
-        $this->_view_data['profile'] = MvcCore::$_userInfo;            
+        $this->_view_data['profile'] = MvcCore::$_usrInfo;            
         $this->_view_data['submenu'] = $this->h->getLiMenu(MvcCore::$_cfg['menu']['submenu']['front']);
     }
 

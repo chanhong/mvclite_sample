@@ -1,5 +1,5 @@
 <?php
-permDbg(MvcCore::$_userInfo,'_userinfo');
+permDbg(MvcCore::$_usrInfo,'_usrinfo');
 permDbg($pageData["profile"],'profile');
 $usrQryUrl = $this->h->tap('/books/index');
 if (empty($pageData['arr'])) return;

@@ -62,9 +62,10 @@ class Users extends BaseController {
                     $entity = "and entities like '%".$args['wuentity']."%'";
                     $msg = " Entity: [".$args['wuentity']."]";
                 }
-                $_SESSION['debug'] = "Windows user: [$winUser] $msg";
                 $where = "winuser='$winUser' and is_confirmed = '1' $entity";
                 if (self::isAuthorized($winUser, $where, $this->meTable)) {
+                    self::Add2SessVar("debug", "Windows user: [$winUser] $msg!");
+                    self::Add2SessVar("feedback", "You has been login as [$username] $msg!");
 // after redirect, the   MvcAuth::myProfile() are gone, why?
                     self::redirect2Url($this->retUrl); // good login                           
                 } 
@@ -84,8 +85,7 @@ class Users extends BaseController {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
             if ($userinfo = self::isAuthorized($password, $where, $this->meTable)) {
-                pln(MVCCore::$_userInfo,"ui");
-                self::Add2SessVar("loggedIn", $username);                
+                $_SESSION["loggedin"] = $username;                
                 self::Add2SessVar("feedback", "You has been login as [$username]!");
                 // after redirect, the   MvcAuth::myProfile() are gone, why?
                 self::redirect2Url($this->retUrl); // good login                           

@@ -100,7 +100,9 @@ class MvcAuth {
     public function logout() {
         
         $this->loggedIn = false;
-        session_unset();         
+        unset($_SESSION['uinfo']);
+        unset($_SESSION['loggedin']);
+//        session_unset();         
         $this->clearCookies();
     }
 
