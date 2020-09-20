@@ -46,7 +46,7 @@ class Books extends BaseController {
             $this->Error->blank($this->post['isbn'], 'ISBN');
             if ($this->Error->ok()) {
                 $this->model->edit($this->_view_data['arr']);
-                $_SESSION["feedback"] = $this->post['title'] . " has been save!";
+                self::Add2SessVar("feedback", $this->post['title'] . " has been saved!");
                 $this->redirect2Url($this->home);
             }
         } elseif (!empty($r)) {

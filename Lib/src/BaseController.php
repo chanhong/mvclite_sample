@@ -38,6 +38,7 @@ class BaseController extends MvcController {
         $isGood=false;
         if (!empty($_SESSION['uinfo']['username']) && $_SESSION['uinfo']['level']=="admin")
         {
+            permDbg(MvcCore::$_usrInfo,"Y:");
             $isGood = true;
         } else{
             permDbg(MvcCore::$_usrInfo,"N:");
@@ -45,5 +46,25 @@ class BaseController extends MvcController {
         }
         return $isGood;
     }
+
+    public function doBody() {
+
+        $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
+
+        permDbg(MvcCore::$_usrInfo,'ubody');
+//        permDbg(MvcCore::$_cfg,'cfg');
+        $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
+        $ui = $this->ut->getSafeVar(MvcCore::$_usrInfo, "debug");
+        (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
+
+        $feedback = $this->feedback("feedback", "DarkGreen");
+        $alertMsg = $this->feedback("alert", "IndianRed");
+
+        $buff .=  $youare .$ui. $dmsg . $alertMsg .$feedback;
+        $buff .=  $this->Error;
+        $buff .=  $this->doBodyNoLayout();
+        $_SESSION["debug"] = $_SESSION["feedback"] = $_SESSION["alert"] = "";
+        echo $buff; 
+    } 
 
 }

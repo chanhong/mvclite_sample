@@ -42,7 +42,7 @@ class Authors extends BaseController {
             $this->Error->blank($this->post['name'], 'Name');
             if ($this->Error->ok()) {
                 $this->model->edit($this->_view_data['arr']);
-                $_SESSION["feedback"] = $this->post['name'] . " has been save!";
+                self::Add2SessVar("feedback", $this->post['name'] . " has been saved!");
                 $this->redirect2Url($this->home);
             } 
         } 
@@ -52,7 +52,7 @@ class Authors extends BaseController {
             $this->_view_data['header_title'] = 'Author Edit';
             echo $this->doView($this, $args['a']);        
         } else {
-            $this->redirect2Url();
+            $this->redirect2Url($this->home);
         }
     } 
 

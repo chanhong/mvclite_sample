@@ -6,7 +6,8 @@ class MvcAuth {
 
     const DOMAIN = "MVCLite";
     const ONEMONTH = 2592000;
-       
+      
+//    public static $_usrInfo;
     
     private static $me;
     private static $salt;
@@ -36,6 +37,7 @@ class MvcAuth {
         $this->user = null;
     }
 
+    // Get Singleton object
     public static function getAuth($salt="") {
         
         if (is_null(self::$me)) {

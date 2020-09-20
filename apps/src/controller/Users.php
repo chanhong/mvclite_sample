@@ -64,7 +64,7 @@ class Users extends BaseController {
                 }
                 $where = "winuser='$winUser' and is_confirmed = '1' $entity";
                 if (self::isAuthorized($winUser, $where, $this->meTable)) {
-                    self::Add2SessVar("debug", "Windows user: [$winUser] $msg!");
+                    $_SESSION["loggedin"] = $winUser;                
                     self::Add2SessVar("feedback", "You has been login as [$username] $msg!");
 // after redirect, the   MvcAuth::myProfile() are gone, why?
                     self::redirect2Url($this->retUrl); // good login                           
@@ -86,6 +86,7 @@ class Users extends BaseController {
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
             if ($userinfo = self::isAuthorized($password, $where, $this->meTable)) {
                 $_SESSION["loggedin"] = $username;                
+                $_SESSION["uinfo"] = $userinfo;                
                 self::Add2SessVar("feedback", "You has been login as [$username]!");
                 // after redirect, the   MvcAuth::myProfile() are gone, why?
                 self::redirect2Url($this->retUrl); // good login                           
@@ -122,6 +123,7 @@ class Users extends BaseController {
         echo $this->doView($this,"register");
     }
 
+
     public function delete($args = false) {
         
         $this->model->delete($this->get['p1']);
@@ -131,7 +133,7 @@ class Users extends BaseController {
     public function edit($args = false) {
         $u=null;
         if (!empty($this->get['p1'])) {
-            $u = $this->db->findRow("SELECT * FROM users where id =".$this->get['p1']);
+            $u = $this->db->findRow("SELECT * FROM " .$this->meTable." where id =".$this->get['p1']);
         }
         
         if (isset($this->post['btnEditAccount']) and !empty($u)) {

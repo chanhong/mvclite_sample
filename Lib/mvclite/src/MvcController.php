@@ -16,7 +16,6 @@ class MvcController extends MvcCore {
         $this->viewPath = $this->_appFolder . DS . $this->_viewFolder;
         $this->_layoutFolder = 'layouts';
         $this->layoutsPath = $this->_appFolder . DS . $this->_layoutFolder;
-        
         $conn = $this->db->dbConnect(MVCCore::$_cfg['db']['dsn'],MVCCore::$_cfg['db']['username'],MVCCore::$_cfg['db']['password']);        
         
     }
@@ -58,6 +57,7 @@ class MvcController extends MvcCore {
             $feedback = $this->alertMsg($feedback, $color);
         return $feedback;
     }
+
 
     public function requireUser($rUrl = "") {
 
@@ -266,7 +266,6 @@ class MvcController extends MvcCore {
         if ($app == strtolower($iClassName)) {
             // do action
             if ((self::isMyAction($iClassName, $action) == true) and method_exists($ctl, $action)) {
-//            if  (Util::methodNotParent($iClassName, $action) == true and (method_exists($ctl, $action))) {
                 $ret = $ctl->$action($args);
             // do view
             } elseif (!empty($action) and $ctl->isAppView($action, $app)) {
@@ -359,23 +358,6 @@ class MvcController extends MvcCore {
         return $this->renderAppView(self::$_action);
     }
 
-    public function doBody() {
-
-        $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
-
-        $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
-        $ui = $this->ut->getSafeVar(MvcCore::$_usrInfo, "debug");
-        (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
-
-        $feedback = $this->feedback("feedback", "DarkGreen");
-        $alertMsg = $this->feedback("alert", "IndianRed");
-
-        $buff .=  $youare .$ui. $dmsg . $alertMsg .$feedback;
-        $buff .=  $this->Error;
-        $buff .=  $this->doBodyNoLayout();
-        $_SESSION["debug"] = $_SESSION["feedback"] = $_SESSION["alert"] = "";
-        echo $buff; 
-    } 
 
     
 }

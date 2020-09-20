@@ -13,7 +13,7 @@ class Front extends BaseController {
     }
 
     public function start($args = false) {
-        $ret = self::doAction($args, self::class);
+        $ret = $this->doAction($args, self::class);
     }
 
 }

@@ -24,5 +24,7 @@ class AuthorModel extends BaseModel {
         extract($rInfo); // extract array into respective variables
         $sqlUpdList = ['name'=>$name, 'biography'=>$biography];
         $this->_dbt("update",['fl'=>$sqlUpdList, 'where'=>"id='$id'"]);
-    }    
+    }   
+   
+    
 }

@@ -1,6 +1,6 @@
 <?php
 
-
+// use MvcLite
 use MvcLite\MvcCore;
 use MvcLite\Util;
 #use MvcSample\BaseCore;
@@ -144,6 +144,7 @@ if (file_exists(__DIR__  . '/local.php')) {
 } elseif (file_exists(__DIR__  . '/local.php.dist')){
    $localcfg = require_once(__DIR__  . '/local.php.dist');
 }
+
 MvcCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg, $authCfg, $menucfg);
 //permDbg(MvcCore::$_cfg, "_cfg");  
 
@@ -156,17 +157,17 @@ function pCStat($className) {
 }
 
 function dbgt() {
-    return print MvcLite\Util::dTrace();
+    return print Util::dTrace();
 }
 
 function dbg($iVar, $iStr = "", $iFormat = "") {
-    return MvcLite\Util::debug($iVar, $iStr, $iFormat);
+    return Util::debug($iVar, $iStr, $iFormat);
 }
 
 function permDbg($iVar, $iStr = "", $iFormat = "") {
-    return MvcLite\Util::debug($iVar, $iStr, $iFormat);
+    return Util::debug($iVar, $iStr, $iFormat);
 }
 
 function pln($iVar, $iStr = "", $iFormat = "") {
-    print MvcLite\Util::debug($iVar, $iStr, $iFormat);
+    print Util::debug($iVar, $iStr, $iFormat);
 }
