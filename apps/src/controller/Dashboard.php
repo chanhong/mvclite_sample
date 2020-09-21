@@ -1,5 +1,4 @@
 <?php
-//namespace MvcSample;
 
 class Dashboard extends BaseController {
 

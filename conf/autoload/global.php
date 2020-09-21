@@ -3,7 +3,6 @@
 // use MvcLite
 use MvcLite\MvcCore;
 use MvcLite\Util;
-#use MvcSample\BaseCore;
 
 defined('_MVCLOGIN') 
 || define('_MVCLOGIN', '/login'); 

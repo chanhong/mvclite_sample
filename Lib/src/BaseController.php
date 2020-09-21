@@ -1,7 +1,4 @@
 <?php
-namespace MvcLite;
-
-use MvcLite\MvcController;
 
 class BaseController extends MvcController {
     
@@ -38,11 +35,12 @@ class BaseController extends MvcController {
         $isGood=false;
         if (!empty($_SESSION['uinfo']['username']) && $_SESSION['uinfo']['level']=="admin")
         {
-            permDbg(MvcCore::$_usrInfo,"Y:");
+            permDbg(self::$_usrInfo,"Y:");
             $isGood = true;
         } else{
-            permDbg(MvcCore::$_usrInfo,"N:");
-            permDbg($_SESSION,"N:");
+//            permDbg(self::$_usrInfo,"N:");
+//            permDbg($_SESSION,"N:");
+//                pln("here");
         }
         return $isGood;
     }
@@ -50,11 +48,12 @@ class BaseController extends MvcController {
     public function doBody() {
 
         $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
-
-        permDbg(MvcCore::$_usrInfo,'ubody');
-//        permDbg(MvcCore::$_cfg,'cfg');
+/*
+        permDbg(self::$_usrInfo,'ubody');
+        permDbg(self::$_cfg,'cfg');
+        */
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
-        $ui = $this->ut->getSafeVar(MvcCore::$_usrInfo, "debug");
+        $ui = $this->ut->getSafeVar(self::$_usrInfo, "debug");
         (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
 
         $feedback = $this->feedback("feedback", "DarkGreen");

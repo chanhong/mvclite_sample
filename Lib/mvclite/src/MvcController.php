@@ -16,7 +16,7 @@ class MvcController extends MvcCore {
         $this->viewPath = $this->_appFolder . DS . $this->_viewFolder;
         $this->_layoutFolder = 'layouts';
         $this->layoutsPath = $this->_appFolder . DS . $this->_layoutFolder;
-        $conn = $this->db->dbConnect(MVCCore::$_cfg['db']['dsn'],MVCCore::$_cfg['db']['username'],MVCCore::$_cfg['db']['password']);        
+        $conn = $this->db->dbConnect(MvcCore::$_cfg['db']['dsn'],MvcCore::$_cfg['db']['username'],MvcCore::$_cfg['db']['password']);        
         
     }
     function winUser() {
@@ -73,7 +73,7 @@ class MvcController extends MvcCore {
 
     public function isLevel($type) {
 
-        return (MVCAuth::$_profile['level'] === $type);
+        return ($this->_profile['level'] === $type);
     }
 
     public function sendToLoginPage($rUrl = "") {
@@ -289,9 +289,10 @@ class MvcController extends MvcCore {
 
     public static function isController($className) {
 
+        pln(MvcCore::$_cfg,'cfg');
         if  (!empty($className) 
-            and !empty(MVCCore::$_cfg['controllers'])
-            and array_search(strtolower($className), array_map('strtolower', MVCCore::$_cfg['controllers']))
+            and !empty(MvcCore::$_cfg['controllers'])
+            and array_search(strtolower($className), array_map('strtolower', MvcCore::$_cfg['controllers']))
         ) {
             return true;
         }
@@ -305,15 +306,15 @@ class MvcController extends MvcCore {
         self::$_action = $action = $args['a'];
         $rCtl = Util::getClass($iClassName);
         if (strtolower($args['t']) <> strtolower($iClassName) and class_exists($className)){
-//        if (self::isRoutable($className, $iClassName)) {
             // if not router, make sure a valid action or view of a controller
             $ctl = Util::getClass($className);
+
             if (!empty($ctl)
                 and (method_exists($ctl, $action) or $ctl->isAppView($action, $className))) {
-                $ctl->start($args);
+                    $ctl->start($args);
             } else {
                 // good controller but bad action
-                self::redirect2Url("?".MVCCore::$_cfg['page404']);
+                self::redirect2Url("?".MvcCore::$_cfg['page404']);
             }
         // if router has action or view show it (rare)    
         } elseif (!empty($action) 
@@ -322,8 +323,8 @@ class MvcController extends MvcCore {
         {
             self::doView($rCtl, $action);
         // if not a valid controller and router page404 exist
-        } elseif ($rCtl->isAppView(MVCCore::$_cfg['page404'], $iClassName)) {
-            self::redirect2Url("?".MVCCore::$_cfg['page404']);
+        } elseif ($rCtl->isAppView(MvcCore::$_cfg['page404'], $iClassName)) {
+            self::redirect2Url("?".MvcCore::$_cfg['page404']);
         } else {
             // all else fail, use internal notfound
             echo $rCtl->_notFound($action);            

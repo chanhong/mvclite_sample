@@ -5,10 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-#namespace MvcSample;
-namespace MvcLite;
-
-use MvcLite\MvcCore;
 
 class BaseCore extends MvcCore {
     

@@ -21,7 +21,7 @@ class MvcCore {
     public static $_Err;
     public static $_cfg;
     public static $_action;
-    public static $_profile;
+    public $_profile;
 
     public static $_usrInfo;
 

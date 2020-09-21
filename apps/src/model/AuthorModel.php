@@ -1,6 +1,5 @@
 <?php
-use MvcLite\Util;
-use MvcLite\MvcCore;
+
 
 class AuthorModel extends BaseModel {
 

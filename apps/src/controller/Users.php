@@ -1,9 +1,6 @@
 <?php
-//namespace MvcSample;
 
-use MvcLite\Util;
-use MvcLite\MvcRouter;
-use MvcLite\MvcAuth;
+use MvcLite\MvcCore;
 
 class Users extends BaseController {
 
@@ -86,7 +83,6 @@ class Users extends BaseController {
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
             if ($userinfo = self::isAuthorized($password, $where, $this->meTable)) {
                 $_SESSION["loggedin"] = $username;                
-                $_SESSION["uinfo"] = $userinfo;                
                 self::Add2SessVar("feedback", "You has been login as [$username]!");
                 // after redirect, the   MvcAuth::myProfile() are gone, why?
                 self::redirect2Url($this->retUrl); // good login                           

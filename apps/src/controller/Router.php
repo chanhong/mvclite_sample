@@ -1,10 +1,6 @@
 <?php
-#namespace MvcSample;
 
-/*
-use MvcSample\BaseCore;
-use MvcSample\BaseController;
-*/
+
 class Router extends BaseController {
 
     public function __construct() {

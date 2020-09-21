@@ -1,4 +1,5 @@
 <?php
+
 class Authors extends BaseController {
 
     public function __construct() {

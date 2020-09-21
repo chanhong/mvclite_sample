@@ -1,6 +1,4 @@
 <?php
-use MvcLite\Util;
-use MvcLite\MvcCore;
 
 class UserModel extends BaseModel {
 
@@ -20,7 +18,7 @@ class UserModel extends BaseModel {
 
     public function create($userInfo) {
         
-        $this->ut->debug($userInfo);
+//        $this->ut->debug($userInfo);
         extract($userInfo); // extract array into respective variables
         if (!empty($this->_dbt("dbrow",['where'=>"username='$username'"]))) {
             self::Add2SessVar("feedback", "Failed to create ".$userInfo['username'] . "!");

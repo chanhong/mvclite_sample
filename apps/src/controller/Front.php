@@ -1,5 +1,5 @@
 <?php
-#namespace MvcSample;
+
 
 class Front extends BaseController {
 
