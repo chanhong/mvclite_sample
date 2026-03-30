@@ -9,6 +9,6 @@ $rUrl = $this->h->tap('/users/register');
             <input Type="button" VALUE="Go Back" onClick="history.go(-1);
                     return true;">          
         </p>
-        <input type="hidden" name="r" value="<?PHP echo htmlspecialchars(@$_REQUEST['r']); ?>" id="r">
+        <input type="hidden" name="r" value="<?PHP echo htmlspecialchars(@$_REQUEST['r'] ?? ''); ?>" id="r">
     </form>
 </div>

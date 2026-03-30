@@ -174,13 +174,13 @@ class Util {
                 break;
             case "email":
                 $ret = filter_var($str, FILTER_SANITIZE_EMAIL);
-                $ret = htmlspecialchars($ret); // try to catch single quote
+                $ret = htmlspecialchars($ret ?? ''); // try to catch single quote
                 break;
             case "num":
                 $ret = filter_var($str, FILTER_SANITIZE_NUMBER_INT);
                 break;
             case "txt":
-                $ret = htmlspecialchars($str);
+                $ret = htmlspecialchars($str ?? '');
                 $ret = self::escapeStr($ret); // strip out none ascii chars
                 break;
             case "amt":
@@ -613,12 +613,12 @@ class Util {
     public static function parseQs($routes, $className=self::class) {
 
         $qsArr = Util::qsValue();
-//        Util::debug($qsArr, __METHOD__.':qs','p');  
-//        Util::debug($className,'class');      
+        Util::debug($qsArr, __METHOD__.':qs','p');  
+        Util::debug($className,'class');      
         $args = $qsArr;
         if (!empty($args['t']) and $luArr = Util::aliasLookup($args['t'], $routes['alias'] )) {  
             $args = $luArr;
-//            Util::debug($args, ':aft-alias','p');  
+            Util::debug($args, ':aft-alias','p');  
         }
         // if not a full QS then patch it up with either default controller or this class
         $defCntl = strtolower($routes['default_controller']);
@@ -637,8 +637,10 @@ class Util {
                 $args['a'] = "index";
             }
         }
-//        print Util::debug($routes, 'routes','p');         
-//        print Util::debug($args, ':args','p');         
+        /*
+        print Util::debug($routes, 'routes','p');         
+        print Util::debug($args, ':args','p');         
+        */
         return $args;
     } 
 

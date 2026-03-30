@@ -11,7 +11,7 @@
             </p>
             <p><input type="submit" name="winbtnlogin" value="Login with your Windows credential" id="winbtnlogin" />
                 <!-- input Type="button" VALUE="Go Back" onClick="history.go(-1); return true;" --></p>        
-            <input type="hidden" name="r" value="<?PHP echo htmlspecialchars(@$_REQUEST['r']) ?>" id="r">
+            <input type="hidden" name="r" value="<?PHP echo htmlspecialchars(@$_REQUEST['r'] ?? '') ?>" id="r">
         </fieldset>
     </form>
 </div>

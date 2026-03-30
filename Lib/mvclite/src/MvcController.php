@@ -207,11 +207,11 @@ class MvcController extends MvcCore {
     function _notFound($page="Page") {
 
         if (!is_string($page)) {
-    //        print $this->ut->debug(__METHOD__);
+            print $this->ut->debug(__METHOD__);
             $page = "Unknown: ".print_r($page,true);
         }
         return '<p /><div align="center"><h1>Internal: '.$page. ' is not found!</h1>
-        <p />create views\router\notfound.php will avoid this internal page</div>';
+        <p />create views\router\notfound.html will avoid this internal page</div>';
     } 
 
     function add2HeaderArrays($iType = "css", $iStr = "") {
@@ -299,7 +299,7 @@ class MvcController extends MvcCore {
 
     public static function isController($className) {
 
-        pln(MvcCore::$_cfg,'cfg');
+    //    pln(MvcCore::$_cfg,'cfg');
         if  (!empty($className) 
             and !empty(MvcCore::$_cfg['controllers'])
             and array_search(strtolower($className), array_map('strtolower', MvcCore::$_cfg['controllers']))

@@ -8,8 +8,8 @@ $this->_profile = self::$_usrInfo;
 /*
 pln($this->_profile,'prf@front');
 pln(self::$_cfg["uinfo"],'ucfg');
+pln($_SESSION,'s@front');
 */
-//pln($_SESSION,'s@front');
 ?>
 This is front
 
