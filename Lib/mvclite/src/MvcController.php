@@ -3,11 +3,21 @@ namespace MvcLite;
 
 class MvcController extends MvcCore {
 
+    private array $data = [];
+
+    public function __set($name, $value) {
+        $this->data[$name] = $value;
+    }
+
+    public function __get($name) {
+        return $this->data[$name] ?? null;
+    }
+
 
     public function __construct() {
-        
+
         parent::__construct();
-        $this->layout = 'bootstrap'; //set default template file
+        $this->__set('layout','bootstrap'); //set default template file
         $this->_appFolder = 'apps';
         $this->_viewFolder = 'views';
         $this->_widgetFolder = 'widgets';
@@ -17,8 +27,8 @@ class MvcController extends MvcCore {
         $this->_layoutFolder = 'layouts';
         $this->layoutsPath = $this->_appFolder . DS . $this->_layoutFolder;
         $conn = $this->db->dbConnect(MvcCore::$_cfg['db']['dsn'],MvcCore::$_cfg['db']['username'],MvcCore::$_cfg['db']['password']);        
-        
     }
+
     function winUser() {
         return $this->ut->winUser();
     }
