@@ -82,13 +82,27 @@ class CCore {
         if ($this->className === null) {
             $this->className = get_class($this);
         }
-        $this->_class_path = $this->className;
-        (!empty($_REQUEST['r'])) ? $this->retUrl = $_REQUEST['r'] : $this->retUrl = "?";        
+        $this->_class_path = strtolower((new \ReflectionClass($this))->getShortName()); // "ClassName" change get shortname to work in php 8.5
+
+        (!empty($_REQUEST['r'])) ? $this->retUrl = $_REQUEST['r'] : $this->retUrl = "?";
     }
 
-    public static function redirect2Url($ret2URL = null) {
 
-    $ret2URL = "?";
+    protected static function shortClass(string $fqcn): string
+    {
+        return substr(strrchr($fqcn, '\\'), 1) ?: $fqcn; // same as ReflectionClass($this))->getShortName()
+    }
+
+
+    public static function debug($iVar, $iStr = "", $iFormat = "")
+    {
+        return CDebug::debug($iVar, $iStr, $iFormat); // show if _MVCDebug == true
+    }
+
+    public static function redirect2Url($ret2URL = null)
+    {
+    	$ret2URL="?";
+
         if (is_null($ret2URL))
             $ret2URL = $_SERVER['PHP_SELF'];
 
