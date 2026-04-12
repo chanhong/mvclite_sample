@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chanhong/pdolite.git",
-                "reference": "93f35e6df25db2f0a03ff8fed751ddac1439b68a"
+                "reference": "2bec8f10c68ef730b25b8996c4b5d794c3c90c12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chanhong/pdolite/zipball/93f35e6df25db2f0a03ff8fed751ddac1439b68a",
-                "reference": "93f35e6df25db2f0a03ff8fed751ddac1439b68a",
+                "url": "https://api.github.com/repos/chanhong/pdolite/zipball/2bec8f10c68ef730b25b8996c4b5d794c3c90c12",
+                "reference": "2bec8f10c68ef730b25b8996c4b5d794c3c90c12",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "issues": "https://github.com/chanhong/pdolite/issues",
                 "source": "https://github.com/chanhong/pdolite/tree/master"
             },
-            "time": "2017-12-18T22:36:26+00:00"
+            "time": "2026-04-12T17:51:01+00:00"
         },
         {
             "name": "chanhong/phploaderlite",
