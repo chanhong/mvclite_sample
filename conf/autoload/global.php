@@ -1,8 +1,9 @@
 <?php
 
 // use MvcLite
-use MvcLite\MvcCore;
-use MvcLite\Util;
+use MvcLite\CCore;
+use MvcLite\CUtil;
+#use MvcSample\BaseCore;
 
 defined('_MVCLOGIN') 
 || define('_MVCLOGIN', '/login'); 
@@ -10,6 +11,10 @@ defined('_MVCLOGOUT')
 || define('_MVCLOGOUT', '/logout'); 
 defined('_MVCREGISTER') 
 || define('_MVCREGISTER', '/register'); 
+
+// DEBUG FLAG - Set to true to enable debug logging, false to disable
+defined('_DEBUG_ENABLED') 
+|| define('_DEBUG_ENABLED', true);
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -47,6 +52,7 @@ $routecfg = [
         'alias' => [
             'mya' => ['contacts', 'usefullinks'], 
             'users' => ["login", "logout", "register", "weblogin", "winlogin"],
+            'debug' => ['index', 'logfile', 'clear'],
         ]
     ],
 ];
@@ -68,7 +74,10 @@ $menucfg = [
                 ['title'=>'Home','path'=>'/'],
                 ['title' => 'Dashboard', 'path' => '/dashboard/index'],
             ],        
-            
+            'debug' => [
+                ['title'=>'Home','path'=>'/'],
+                ['title' => 'Debug', 'path' => '/debug/index'],
+            ],        
         ],
         'submenu' => [
             'front' => [
@@ -90,6 +99,10 @@ $menucfg = [
             'page' => [
                 ['title' => 'Pages 1','path' => '/pages/page1'],
                 ['title' => 'Pages 2','path' => '/pages/page2'],
+            ],
+            'debug' => [
+                ['title' => 'Debug Log Files','path' => '/debug/logfile'],
+                ['title' => 'Clear Debug','path' => '/debug/clear'],
             ],
             'daskboard' => [
                 ['title'=>'Home','path'=>'/'],
@@ -114,6 +127,11 @@ $controllerViewCfg = [
         ],        
         'dashboard' => [
             'index'=>'Dashboard List',
+        ],
+        'debug' => [
+            'index'=>'Debug Dashboard',
+            'logfile'=>'Debug Log Files',
+            'clear'=>'Clear Debug',
         ],
         'authors' => [
             'index'=>'Authors List',
@@ -144,8 +162,8 @@ if (file_exists(__DIR__  . '/local.php')) {
    $localcfg = require_once(__DIR__  . '/local.php.dist');
 }
 
-MvcCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg, $authCfg, $menucfg);
-//permDbg(MvcCore::$_cfg, "_cfg");  
+CCore::$_cfg = array_merge($routecfg, $controllerViewCfg, $localcfg, $authCfg, $menucfg);
+//permDbg(Ccore::$_cfg, "_cfg");  
 
 function pCStat($className) {
     $msg = "<>loaded";
@@ -156,17 +174,17 @@ function pCStat($className) {
 }
 
 function dbgt() {
-    return print Util::dTrace();
+    return print CUtil::dTrace();
 }
 
 function dbg($iVar, $iStr = "", $iFormat = "") {
-    return Util::debug($iVar, $iStr, $iFormat);
+    return CUtil::debug($iVar, $iStr, $iFormat);
 }
 
 function permDbg($iVar, $iStr = "", $iFormat = "") {
-    return Util::debug($iVar, $iStr, $iFormat);
+    return CUtil::debug($iVar, $iStr, $iFormat);
 }
 
 function pln($iVar, $iStr = "", $iFormat = "") {
-    print Util::debug($iVar, $iStr, $iFormat);
+    print CUtil::debug($iVar, $iStr, $iFormat);
 }

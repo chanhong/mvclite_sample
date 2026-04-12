@@ -1,4 +1,6 @@
 <?php
+use MvcLite\CUtil;
+use MvcLite\Ccore;
 
 class UserModel extends BaseModel {
 
@@ -18,7 +20,7 @@ class UserModel extends BaseModel {
 
     public function create($userInfo) {
         
-//        $this->ut->debug($userInfo);
+        $this->ut->debug($userInfo);
         extract($userInfo); // extract array into respective variables
         if (!empty($this->_dbt("dbrow",['where'=>"username='$username'"]))) {
             self::Add2SessVar("feedback", "Failed to create ".$userInfo['username'] . "!");
@@ -65,7 +67,7 @@ class UserModel extends BaseModel {
             return false;
 
         if (is_null($password))
-            $password = MVCAuth::generateStrongPassword();
+            $password = CAuth::generateStrongPassword();
 
         srand(time());
         $u = new User();

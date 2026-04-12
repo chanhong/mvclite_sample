@@ -16,12 +16,12 @@ use PdoLite\PdoLite;
 
 defined('_MVCLite') or die('Direct Access to this location is not allowed.');
 
-class MvcCore {
+class CCore {
 
     public static $_Err;
     public static $_cfg;
     public static $_action;
-    public $_profile;
+    public static $_profile;
 
     public static $_usrInfo;
 
@@ -70,12 +70,12 @@ class MvcCore {
     
     public function __construct() {
         
-        Helper::$_lineBreak = true;
-        $this->ut = new Util;
-        $this->h = new Helper;
+        CHelper::$_lineBreak = true;
+        $this->ut = new CUtil;
+        $this->h = new CHelper;
         $this->db = new PdoLite;  
-        $this->Auth = MVCAuth::getAuth('MvcLiteSALT');
-        $this->Error = MVCError::getError();
+        $this->Auth = CAuth::getAuth('MvcLiteSALT');
+        $this->Error = CError::getError();
         
         $this->get = $_GET;
         $this->post = $_POST;
@@ -88,6 +88,7 @@ class MvcCore {
 
     public static function redirect2Url($ret2URL = null) {
 
+    $ret2URL = "?";
         if (is_null($ret2URL))
             $ret2URL = $_SERVER['PHP_SELF'];
 
@@ -118,7 +119,7 @@ class MvcCore {
 
     public static function pln($iVar, $iStr = "", $iFormat = "br") {
     
-        print Util::debug($iVar, $iStr, $iFormat);
+        print CUtil::debug($iVar, $iStr, $iFormat);
     }     
 }
 

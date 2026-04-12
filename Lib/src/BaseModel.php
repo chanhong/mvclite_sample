@@ -5,8 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+#namespace MvcSample;
+namespace MvcLite;
 
-class BaseModel extends MvcModel {
+use MvcLite\CModel;
+use MvcLite\CUtil;
+
+class BaseModel extends CModel {
     
     public function __construct($tname, $id = null) {
         

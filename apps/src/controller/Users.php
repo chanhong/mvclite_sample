@@ -1,6 +1,11 @@
 <?php
-
-use MvcLite\MvcCore;
+//namespace MvcSample;
+//namespace MvcLite;
+use MvcLite\Ccore;
+use MvcLite\BaseController;
+use MvcLite\CUtil;
+use MvcLite\MvcRouter;
+use MvcLite\CAuth;
 
 class Users extends BaseController {
 
@@ -11,8 +16,8 @@ class Users extends BaseController {
         parent::__construct();
         $this->meTable = "users";         
         $this->model = new UserModel($this->meTable);
-//        $this->_view_data['cmenu'] = $this->h->getLiMenu(MvcCore::$_cfg['menu']['cmenu']['front']);        
-        $this->_view_data['submenu'] = $this->h->getLiMenu(MvcCore::$_cfg['menu']['submenu']['user']);               
+//        $this->_view_data['cmenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['cmenu']['front']);        
+        $this->_view_data['submenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['submenu']['user']);               
         
     }
 
@@ -63,7 +68,7 @@ class Users extends BaseController {
                 if (self::isAuthorized($winUser, $where, $this->meTable)) {
                     $_SESSION["loggedin"] = $winUser;                
                     self::Add2SessVar("feedback", "You has been login as [$username] $msg!");
-// after redirect, the   MvcAuth::myProfile() are gone, why?
+// after redirect, the   CAuth::myProfile() are gone, why?
                     self::redirect2Url($this->retUrl); // good login                           
                 } 
             }
@@ -83,8 +88,9 @@ class Users extends BaseController {
             $where = "username='$username' and password='".$hashed_password."' and is_confirmed = '1'"; 
             if ($userinfo = self::isAuthorized($password, $where, $this->meTable)) {
                 $_SESSION["loggedin"] = $username;                
+                $_SESSION["uinfo"] = $userinfo;                
                 self::Add2SessVar("feedback", "You has been login as [$username]!");
-                // after redirect, the   MvcAuth::myProfile() are gone, why?
+                // after redirect, the   CAuth::myProfile() are gone, why?
                 self::redirect2Url($this->retUrl); // good login                           
             } 
         }

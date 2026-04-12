@@ -2,7 +2,7 @@
 
 namespace MvcLite;
 
-class MvcAuth {
+class CAuth {
 
     const DOMAIN = "MVCLite";
     const ONEMONTH = 2592000;
@@ -26,7 +26,7 @@ class MvcAuth {
     
     public function __construct() {
         
-        $this->ut = new Util;
+        $this->ut = new CUtil;
         $this->nid = null;
         $this->loggedIn = false;
         $this->expiryDate = time() + self::ONEMONTH;
@@ -46,7 +46,7 @@ class MvcAuth {
                 $salt = md5(rand() . microtime());
             }
             self::$salt = $salt;
-            self::$me = new MVCAuth();
+            self::$me = new CAuth();
             self::$me->init();
         }
         return self::$me;
@@ -65,7 +65,7 @@ class MvcAuth {
      */ 
     public static function pln($iVar, $iStr = "", $iFormat = "br") {
     
-        print Util::debug($iVar, $iStr, $iFormat);
+        print CUtil::debug($iVar, $iStr, $iFormat);
     }
     
     public function winUser() {

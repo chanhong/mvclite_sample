@@ -1,5 +1,4 @@
 <?php
-
 class Authors extends BaseController {
 
     public function __construct() {
@@ -8,8 +7,8 @@ class Authors extends BaseController {
         $this->layout = "bootstrap";     
         $this->meTable = "authors";         
         $this->model = new AuthorModel($this->meTable);   
-        $this->_view_data['profile'] = MvcCore::$_usrInfo;            
-        $this->_view_data['submenu'] = $this->h->getLiMenu(MvcCore::$_cfg['menu']['submenu']['front']);
+        $this->_view_data['profile'] = Ccore::$_usrInfo;            
+        $this->_view_data['submenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['submenu']['front']);
     }
 
     public function start($args = false) {

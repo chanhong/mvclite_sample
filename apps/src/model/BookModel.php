@@ -1,5 +1,6 @@
 <?php
-
+use MvcLite\CUtil;
+use MvcLite\Ccore;
 
 class BookModel extends BaseModel {
 

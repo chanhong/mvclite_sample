@@ -1,4 +1,6 @@
 <?PHP
+//permDbg(Ccore::$_usrInfo,'_usrinfo');
+//permDbg($pageData["profile"],'profile');
 
 $usrQryUrl = $this->h->tap('/authors/index');
 if (empty($pageData['arr'])) return;

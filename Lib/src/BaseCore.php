@@ -5,8 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+#namespace MvcSample;
+namespace MvcLite;
 
-class BaseCore extends MvcCore {
+use MvcLite\Ccore;
+
+class BaseCore extends Ccore {
     
     public function __construct() {
         

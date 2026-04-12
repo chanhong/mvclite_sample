@@ -1,5 +1,4 @@
 <?php
-
 class Books extends BaseController {
 
     public function __construct() {
@@ -9,8 +8,8 @@ class Books extends BaseController {
         $this->meTable = "books";         
 
         $this->model = new BookModel($this->meTable);  
-        $this->_view_data['profile'] = MvcCore::$_usrInfo;            
-        $this->_view_data['submenu'] = $this->h->getLiMenu(MvcCore::$_cfg['menu']['submenu']['front']);
+        $this->_view_data['profile'] = Ccore::$_usrInfo;            
+        $this->_view_data['submenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['submenu']['front']);
     }
 
     public function start($args = false) {
