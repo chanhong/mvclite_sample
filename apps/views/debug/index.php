@@ -1,3 +1,6 @@
+<?php
+$this->_view_data['header_title'] = 'Debug Dashboard';
+?>
 <style>
     .debug-container {
     background: #f5f5f5;

@@ -1,5 +1,6 @@
 <?PHP
 use MvcLite\CCore;
+$this->_view_data['header_title'] = 'Authors';
 permDbg(Ccore::$_usrInfo,'_usrinfo');
 permDbg($pageData["profile"],'profile');
 
@@ -21,6 +22,7 @@ $recs = $pageData['arr'];
             <thead>
             <td>Name</td>
             <td>Biography</td>
+            <td>Action</td>
             </tr>
             </thead>
             <tbody>

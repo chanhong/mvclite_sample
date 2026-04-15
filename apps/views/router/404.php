@@ -1,4 +1,5 @@
 <?php 
+$this->_view_data['header_title'] = '404';
 ?>
 <div style="height:auto; min-height:100%; ">
     <div style="text-align: center; width:800px; margin-left: -400px; position:absolute; top: 10%; left:50%;">

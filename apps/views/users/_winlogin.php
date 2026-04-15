@@ -1,4 +1,5 @@
 <?php
+$this->_view_data['header_title'] = 'Win Login';
 ?>
 <div>
     <form action="<?php echo $this->h->tap("/users/_winlogin"); ?>" method="post">

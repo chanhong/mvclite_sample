@@ -1,5 +1,6 @@
 <?php
 use MvcLite\CCore;
+$this->_view_data['header_title'] = 'Books';
 permDbg(Ccore::$_usrInfo,'_usrinfo');
 permDbg($pageData["profile"],'profile');
 $usrQryUrl = $this->h->tap('/books/index');
@@ -27,6 +28,7 @@ $recs = $pageData['arr'];
             <td>Author ID</td>
             <td>Title</td>
             <td>ISBN</td>
+            <td>Action</td>
             </tr>
             </thead>
             <tbody>

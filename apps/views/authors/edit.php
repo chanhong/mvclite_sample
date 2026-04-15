@@ -1,4 +1,5 @@
 <?PHP
+$this->_view_data['header_title'] = 'Authors Edit';
 $rUrl = $this->h->tap('/authors/edit');
 //$this->requireAdmin($rUrl); // if not admin redirect to login and return here
 $rec = $pageData['arr'];

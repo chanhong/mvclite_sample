@@ -1,4 +1,5 @@
 <?PHP
+$this->_view_data['header_title'] = 'Users Edit';
 $rUrl = $this->h->tap('/users/edit');
 //$this->requireAdmin($rUrl); // if not admin redirect to login and return here
 $user = $pageData['arr'];

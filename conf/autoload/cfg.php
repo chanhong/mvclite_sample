@@ -78,7 +78,7 @@ CCore::$_cfg["auth"] =  [
 ];
 
 CCore::$_cfg["routes"] =  [       
-        '404' => "404",
+        '404' => "404", // internal 404?
         'page404' => "404", // routes/404.php
         'default_controller' => 'front',
         'alias' => [
@@ -111,7 +111,8 @@ CCore::$_cfg["menu"] =  [
                 ['title' => 'Books List', 'path' => '/books/index'],
                 ['title' => 'Authors List', 'path' => '/authors/index'],
                 ['title' => 'Users', 'path' => '/users/index'],
-                ['title' => 'dmsg', 'path' => '/debug/index'],
+                ['title' => 'Pages', 'path' => '/pages/index'],
+                ['title' => 'Debug', 'path' => '/debug/index'],
                 ['title' => 'Mya', 'path' => '/mya/index'],
                 ['title' => 'Plain', 'path' => '/plain/index'],
             ],
@@ -123,11 +124,10 @@ CCore::$_cfg["menu"] =  [
                 ['title' => 'Contacts', 'path' => '/mya/contacts'],
                 ['title' => 'Userful Links', 'path' => '/mya/usefullinks'],
             ],
-            'dmsg' => [
-                ['title' => 'dmsg', 'path' => '/debug/index'],
-                ['title' => 'View Logs', 'path' => '/debug/viewlogs'],
-                ['title' => 'Pages 2', 'path' => '/debug/page2'],
-            ],
+            'page' => [
+                ['title' => 'Page 1','path' => '/pages/page1'],
+                ['title' => 'Page 2','path' => '/pages/page2'],
+            ],            
             'debug' => [
                 ['title' => 'Debug Log Files','path' => '/debug/logfile'],
                 ['title' => 'Clear Debug','path' => '/debug/clear'],
@@ -174,8 +174,8 @@ CCore::$_cfg["controller"] =  [
             'about' => 'About Page',
         ],
         'pages' => [
-            'index' => 'dmsg',
-            'viewlogs' => 'View Logs',
+            'index' => 'Pages',
+            'page1' => 'Page 1',
             'page2' => 'Page 2',
         ],
  //   ]

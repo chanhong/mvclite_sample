@@ -1,4 +1,5 @@
 <?php
+$this->_view_data['header_title'] = 'Web Login';
 (!empty($this->post['username'])) ? $username = $this->post['username'] : $username = "";
 ?>
 <div>

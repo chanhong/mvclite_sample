@@ -1,4 +1,5 @@
 <?PHP
+$this->_view_data['header_title'] = 'Create User';
 $rUrl = $this->h->tap('/users/create');
 //$this->requireAdmin($rUrl); // if not admin redirect to login and return here
 $user = $pageData['arr'];

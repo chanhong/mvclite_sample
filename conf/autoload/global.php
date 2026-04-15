@@ -1,5 +1,4 @@
 <?php
-
 // use MvcLite
 use MvcLite\CCore;
 use MvcLite\CUtil;
