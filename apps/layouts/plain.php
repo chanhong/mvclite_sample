@@ -8,5 +8,6 @@
 </head>
 
 <body>
+          <?php echo $this->doBody(); ?>
 </body>
 </html>

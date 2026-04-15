@@ -1,10 +1,13 @@
 <?PHP
-//permDbg(Ccore::$_usrInfo,'_usrinfo');
-//permDbg($pageData["profile"],'profile');
+use MvcLite\CCore;
+permDbg(Ccore::$_usrInfo,'_usrinfo');
+permDbg($pageData["profile"],'profile');
 
 $usrQryUrl = $this->h->tap('/authors/index');
 if (empty($pageData['arr'])) return;
 $recs = $pageData['arr'];
+//pln(Ccore::$_usrInfo,'uin@authors');
+//pln($_SESSION,'s@authors');
 ?>
 <div>
     <div>

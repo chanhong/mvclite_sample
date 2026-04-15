@@ -131,14 +131,16 @@ h2 {
 .line-number {
     color: #666;
     margin-right: 10px;
-}
-</style>
-
+}    
+    </style>
+<?php
+$usrQryUrl = $this->h->tap('/debug/index');
+?>
 <div class="debug-container">
     <h2>📄 Debug Log File: <?php echo isset($pageData['filename']) && !empty($pageData['filename']) ? htmlspecialchars($pageData['filename']) : 'Available Log Files'; ?></h2>
     
     <div class="button-group">
-        <a href="?t=debug">Back to Dashboard</a>
+        <a href="?t=debug&a=index">Back to Debug</a>
     </div>
 
     <!-- Available Log Files Section -->
@@ -216,7 +218,7 @@ h2 {
         <div class="debug-header">Search Log File</div>
         
         <div class="search-box">
-            <form method="get" action="">
+            <form method="get" action="<?php echo $usrQryUrl; ?>">
                 <input type="hidden" name="t" value="debug" />
                 <input type="hidden" name="a" value="logfile" />
                 <input type="hidden" name="file" value="<?php echo isset($pageData['filename']) ? htmlspecialchars($pageData['filename']) : ''; ?>" />

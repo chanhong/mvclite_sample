@@ -1,5 +1,5 @@
 <?php
-
+namespace MvcLite;
 class Debug extends BaseController {
 
     public function __construct() {
@@ -16,10 +16,10 @@ class Debug extends BaseController {
         $debug_data = array();
         
         // Get current debug log
-        if (isset($_SESSION['debug'])) {
-            $debug_data['current_log'] = $_SESSION['debug'];
-            $debug_data['current_lines'] = count(explode("\n", $_SESSION['debug']));
-            $debug_data['current_size'] = strlen($_SESSION['debug']);
+        if (isset($_SESSION['dmsg'])) {
+            $debug_data['current_log'] = $_SESSION['dmsg'];
+            $debug_data['current_lines'] = count(explode("\n", $_SESSION['dmsg']));
+            $debug_data['current_size'] = strlen($_SESSION['dmsg']);
         } else {
             $debug_data['current_log'] = 'No debug data';
             $debug_data['current_lines'] = 0;
@@ -224,11 +224,11 @@ class Debug extends BaseController {
     }
 
     public function clear($args = false) {
-        $_SESSION['debug'] = '';
+        $_SESSION['dmsg'] = '';
         $_SESSION['debug_logs'] = array();
         $_SESSION['debug_resets'] = 0;
         
-        header('Location: ?t=debug');
+        header('Location: ?t=debug&a=index');
         exit;
     }
 }

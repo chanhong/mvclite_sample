@@ -1,5 +1,5 @@
 <?php
-
+namespace MvcLite;
 class Pages extends BaseController {
 
     public function __construct() {

@@ -1,6 +1,6 @@
 <?php
 
-
+use MvcLite\Router;
 // Determine our absolute document root
 // DOC_ROOT for SPF library
 session_start();
@@ -11,4 +11,3 @@ require_once DOCROOT . '/conf/bootstrap.php';
 
 // MVC entry point
 Router::start();
-?>

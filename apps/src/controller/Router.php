@@ -1,10 +1,11 @@
 <?php
+namespace MvcLite;
 #namespace MvcSample;
 
-/*
-use MvcSample\BaseCore;
-use MvcSample\BaseController;
-*/
+use MvcLite\CCore;
+//use MvcSample\BaseCore;
+//use BaseController;
+
 class Router extends BaseController {
 
     public function __construct() {

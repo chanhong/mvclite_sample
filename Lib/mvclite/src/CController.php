@@ -1,7 +1,8 @@
 <?php
 namespace MvcLite;
 
-class CController extends Ccore {
+class CController extends Ccore
+{
 
     public $layout;
     public $_appFolder;
@@ -14,54 +15,80 @@ class CController extends Ccore {
     public $layoutsPath;
 
 
-    public function __construct() {
+    public function __construct()
+    {
+        /*
+            CCore::$_cfg["folder"] =  [
+            'app' => 'apps',
+            'view' => 'views',
+            'widget' => 'widgets',
+            'vendor' => 'vendor',
+            'public' => 'public', 
+            'layout' => 'layouts',
+        ];
 
+        CCore::$_cfg["path"] =  [
+            'view' => CCore::$_cfg['folder']['app'] . DS.CCore::$_cfg['folder']['view'],
+            'layout' => CCore::$_cfg['folder']['app'] . DS.CCore::$_cfg['folder']['layout'],
+        ];
+                $this->layout = 'bootstrap'; //set default template file
+                $this->_appFolder = 'apps';
+                $this->_viewFolder = 'views';
+                $this->_widgetFolder = 'widgets';
+                $this->vendorFolder = "vendor";
+                $this->publicFolder = 'public';
+                $this->_layoutFolder = 'layouts';
+                $this->viewPath = $this->_appFolder . DS . $this->_viewFolder;
+                $this->layoutsPath = $this->_appFolder . DS . $this->_layoutFolder;
+
+        */
         parent::__construct();
-        $this->layout = 'bootstrap'; //set default template file
-        $this->_appFolder = 'apps';
-        $this->_viewFolder = 'views';
-        $this->_widgetFolder = 'widgets';
-        $this->vendorFolder = "vendor";
-        $this->publicFolder = 'public';
+        $this->layout = CCore::$_cfg["info"]['layout']; //set default template file
+        $this->_appFolder = CCore::$_cfg["folder"]['app'];
+        $this->_viewFolder = CCore::$_cfg["folder"]['view'];
+        $this->_widgetFolder = CCore::$_cfg["folder"]['widget'];
+        $this->vendorFolder = CCore::$_cfg["folder"]['vendor'];
+        $this->publicFolder = CCore::$_cfg["folder"]['public'];
+        $this->_layoutFolder = CCore::$_cfg["folder"]['layout'];
         $this->viewPath = $this->_appFolder . DS . $this->_viewFolder;
-        $this->_layoutFolder = 'layouts';
         $this->layoutsPath = $this->_appFolder . DS . $this->_layoutFolder;
-        $conn = $this->db->dbConnect(Ccore::$_cfg['db']['dsn'],Ccore::$_cfg['db']['username'],Ccore::$_cfg['db']['password']);        
-        
+
+        $conn = $this->db->dbConnect(Ccore::$_cfg['db']['dsn'], Ccore::$_cfg['db']['username'], Ccore::$_cfg['db']['password']);
+
     }
 
-    function winUser() {
+    function winUser()
+    {
         return $this->ut->winUser();
     }
 
-    function className($className) {
+    function className($className)
+    {
 
         return strtolower(get_class($className));
     }
 
     function Add2SessVar($iVar, $msg)
     {
-      if ($iVar != "" && $msg != "")
-      {
-        if ($_SESSION[$iVar] != null || $_SESSION[$iVar] != "")
-        {
-            $_SESSION[$iVar] .= " " . $msg;
+        if ($iVar != "" && $msg != "") {
+            if ($_SESSION[$iVar] != null || $_SESSION[$iVar] != "") {
+                $_SESSION[$iVar] .= " " . $msg;
+            } else {
+                $_SESSION[$iVar] = $msg;
+            }
         }
-        else
-        {
-            $_SESSION[$iVar] = $msg;
-        }
-      }
     }
 
-    function alertMsg($iStr, $color = "red") {
+    function alertMsg($iStr, $color = "red")
+    {
 
         if (!empty($iStr))
             $iStr = "<center>" . $this->h->bold($iStr, $color) . "</center>";
         return $iStr;
     }
 
-    function feedback($fb = "feedback", $color = "") {
+    function feedback($fb = "feedback", $color = "")
+    {
 
         $feedback = $this->ut->getSafeVar($_SESSION, $fb, "raw");
         if (!empty($feedback))
@@ -70,27 +97,33 @@ class CController extends Ccore {
     }
 
 
-    public function requireUser($rUrl = "") {
+    public function requireUser($rUrl = "")
+    {
 
         if (!$this->Auth->loggedIn())
             $this->sendToLoginPage($rUrl);
     }
 
-    public function requireAdmin($rUrl = "") {
-        
+    public function requireAdmin($rUrl = "")
+    {
+
         if (!$this->Auth->loggedIn() || !$this->isLevel("admin"))
             $this->sendToLoginPage($rUrl);
     }
 
-    public function isLevel($type) {
+    public function isLevel($type)
+    {
 
-        return (CAuth::$_profile['level'] === $type);
+        //    return (CAuth::$_profile['level'] === $type);
+
+        return (CCore::$_profile['level'] === $type);
     }
 
-    public function sendToLoginPage($rUrl = "") {
-        
+    public function sendToLoginPage($rUrl = "")
+    {
+
         $url = self::$loginUrl;
-//        $full_url = urlencode($rUrl); // must do this or missing & qs
+        //        $full_url = urlencode($rUrl); // must do this or missing & qs
         $full_url = $rUrl; // must do this or missing & qs
         if (strpos($full_url, 'logout') === false) {
             $url .= '&r=' . $full_url;
@@ -99,24 +132,27 @@ class CController extends Ccore {
         $this->redirect2Url($url);
     }
 
-    public static function xqsValue() {
+    public static function xqsValue()
+    {
         return CUtil::qsValue();
     }
 
 
-    public function setViewData4Header() {
-        
+    public function setViewData4Header()
+    {
+
         $this->_view_data['pagetitle'] = $this->pageTitle;
         $this->_view_data['meta'] = $this->meta;
         $this->_view_data['styleless'] = $this->styleless;
         $this->_view_data['stylesheets'] = $this->stylesheets;
         $this->_view_data['javascripts'] = $this->javascripts;
-//        permDbg($this->_view_data, 'vd');        
+        //        permDbg($this->_view_data, 'vd');        
 
     }
 
-    function captureContent($fspec) {
-        
+    function captureContent($fspec)
+    {
+
         if (!file_exists($fspec))
             return;
 
@@ -129,7 +165,8 @@ class CController extends Ccore {
     }
 
     // does not seem to do anything useful
-    function captureBuffer($buff) {
+    function captureBuffer($buff)
+    {
 
         (!empty($this->_view_data)) ? $pageData = $this->_view_data : $pageData = ""; // in view $pageData['meta']
         ob_start();
@@ -139,62 +176,78 @@ class CController extends Ccore {
         return trim($contents);
     }
 
-    public function isLayout($layout = "") {
+    public function isLayout($layout = "")
+    {
 
         (empty($layout)) ? $oLayout = $this->layout : $oLayout = $layout;
         $layoutFile = DOCROOT . DS . $this->layoutsPath . DS . $oLayout . '.' . $this->view_ext;
-//                    print_r($layoutFile);
+        //                    print_r($layoutFile);
         (file_exists($layoutFile)) ? $ret = $layoutFile : $ret = "";
         return $ret;
     }
 
-    public function setViewData($class) {
-        
-        if (empty($class)) 
+    public static function is404()
+    {
+        $ret = "";
+        $vFile = DOCROOT . DS . CCore::$_cfg['path']['view'] . DS . CCore::$_cfg['routes']['404'] . CCore::$_cfg['info']['viewext'];
+        print_r($vFile);
+        (file_exists($vFile)) ? $ret = $vFile : $ret = "";
+        return $ret;
+    }
+
+    public function setViewData($class)
+    {
+
+        if (empty($class))
             return;
 
         $class = strtolower($class);
 
-//            echo "<br />class: ".$class;       
+        //            echo "<br />class: ".$class;       
         $this->setViewData4Header();
         $this->_view_data['top'] = $this->renderWidget('top', $class);
         $this->_view_data['header_bef'] = $this->renderWidget('header_bef', $class);
         $this->_view_data['header_aft'] = $this->renderWidget('header_aft', $class);
         $this->_view_data['body_bef'] = $this->renderWidget('body_bef', $class);
         $this->_view_data['body_lft'] = $this->renderWidget('body_lft', $class);
-// _body (content and body) can't be override by the class
+        // _body (content and body) can't be override by the class
         $this->_view_data['footer_bef'] = $this->renderWidget('footer_bef', $class);
         $this->_view_data['footer_aft'] = $this->renderWidget('footer_aft', $class);
         $this->_view_data['loadjs_bef'] = $this->renderWidget('loadjs_bef', $class);
         $this->_view_data['loadjs_aft'] = $this->renderWidget('loadjs_aft', $class);
     }
 
-    public function renderWidget($view, $class = "") {
+    public function renderWidget($view, $class = "")
+    {
 
         $fileName = $view . '.' . $this->view_ext;
         // class widgets override widgets from the layouts folder
-        $cvFile = DOCROOT . DS . $this->viewPath .DS . $class .DS.$this->_widgetFolder. DS . $fileName;
-        (!empty($class) and ( file_exists($cvFile))) 
-        ? $vFile = $cvFile 
-        : $vFile = DOCROOT . DS . $this->layoutsPath .DS .$this->_widgetFolder . DS . $fileName;
-//        permDbg($vFile, 'widget');
+        $cvFile = DOCROOT . DS . $this->viewPath . DS . $class . DS . $this->_widgetFolder . DS . $fileName;
+        (!empty($class) and (file_exists($cvFile)))
+            ? $vFile = $cvFile
+            : $vFile = DOCROOT . DS . $this->layoutsPath . DS . $this->_widgetFolder . DS . $fileName;
+        permDbg($vFile, 'widget');
         (file_exists($vFile)) ? $return = $this->captureContent($vFile) : $return = "";
         return $return;
     }
 
-    public function isAppView($view, $class = "") {
+    public function isAppView($view, $class = "")
+    {
 
         $fileName = $view . '.' . $this->view_ext;
         // if not the full path then use class
-        (empty($class)) ?
-                        $viewClass = $this->_class_path : $viewClass = $class; 
+        (empty($class))
+            ? $viewClass = $this->_class_path : $viewClass = $class;
         $fview = $viewClass . DS . $fileName;
-        $vFile = strtolower(DOCROOT . DS . $this->viewPath . DS. $fview);
+        $vFile = strtolower(DOCROOT . DS . $this->viewPath . DS . $fview);
         (file_exists($vFile)) ? $ret = $vFile : $ret = "";
         return $ret;
     }
 
-    public function renderAppView($view) {
+
+
+    public function renderAppView($view)
+    {
 
         $buff = "";
         $vFile = $this->isAppView($view);
@@ -202,20 +255,12 @@ class CController extends Ccore {
             $buff = $this->captureContent($vFile);
         } elseif (!empty($view)) {
             $buff = $this->captureBuffer($view);
-        } 
+        }
         return $buff;
     }
-    function _notFound($page="Page") {
 
-        if (!is_string($page)) {
-            print $this->ut->debug(__METHOD__);
-            $page = "Unknown: ".print_r($page,true);
-        }
-        return '<p /><div align="center"><h1>Internal: '.$page. ' is not found!</h1>
-        <p />create views\router\notfound.html will avoid this internal page</div>';
-    } 
-
-    function add2HeaderArrays($iType = "css", $iStr = "") {
+    function add2HeaderArrays($iType = "css", $iStr = "")
+    {
         switch (strtolower($iType)) {
             case "js":
                 array_push($this->javascripts, $iStr); // inject css
@@ -225,7 +270,7 @@ class CController extends Ccore {
                 array_push($this->stylesheets, $iStr); // inject css
                 break;
             case "less":
-                array_push($this->cssLess, $iStr); // inject less
+                array_push($this->styleless, $iStr); // inject less
                 break;
             case "meta":
                 array_push($this->meta, $iStr); // set meta
@@ -236,8 +281,9 @@ class CController extends Ccore {
         }
     }
 
-    function getAjax($iType, $format = "") {
-        
+    function getAjax($iType, $format = "")
+    {
+
         $term = $this->ut->getSafeVar($_GET, 'term');
         $aType = strtolower($iType);
 
@@ -259,49 +305,58 @@ class CController extends Ccore {
         return $retArray;
     }
 
-    public static function isMyAction($iClassName, $action) {
+    public static function isMyAction($iClassName, $action)
+    {
 
-        if  (!empty($iClassName) and !empty($action)) {
+        if (!empty($iClassName) and !empty($action)) {
             return CUtil::methodNotParent($iClassName, $action);
         }
     }
 
-    public function doAction($args = false, $iClassName=self::class) {
+    #        $shortName = strtolower(self::shortClass($iClassName)); // "front"
+    public function doAction($args = false, $iClassName = self::class)
+    {
 
         $ret = "";
         $app = strtolower($args['t']);
         $action = strtolower($args['a']);
-        $ctl = new $iClassName;  
+        //        $shortName = strtolower(self::shortClass($iClassName)); // for comparison only
+        $shortName = strtolower((new \ReflectionClass($iClassName))->getShortName()); // "ClassName" change get shortname to work in php 8.5
 
-        // if view or method of the same controller show it.
-        if ($app == strtolower($iClassName)) {
-            // do action
+        $ctl = new $iClassName;                           // use FQN to instantiate
+
+        if ($app == $shortName) {  // compare using short name
             if ((self::isMyAction($iClassName, $action) == true) and method_exists($ctl, $action)) {
                 $ret = $ctl->$action($args);
-            // do view
             } elseif (!empty($action) and $ctl->isAppView($action, $app)) {
-                self::doView($ctl, $action);   
+                self::doView($ctl, $action);
             }
+
         }
         return $ret;
     }
 
-    public static function isRoutable($className, $routerClassName) {
-
-        if  (!empty($routerClassName) 
-            and !empty($className) 
+    public static function isRoutable($className, $routerClassName)
+    {
+        $ret = false;
+        if (
+            !empty($routerClassName)
+            and !empty($className)
             and self::isController($className)
             and strtolower($className) <> strtolower($routerClassName)
-            and class_exists($className))
-        {
-            return true;
+            and class_exists($className)
+        ) {
+            $ret = true;
         }
+        return $ret;
     }
 
-    public static function isController($className) {
+    public static function isController($className)
+    {
 
-    //    pln(MvcCore::$_cfg,'cfg');
-        if  (!empty($className) 
+        //    pln(MvcCore::$_cfg,'cfg');
+        if (
+            !empty($className)
             and !empty(Ccore::$_cfg['controllers'])
             and array_search(strtolower($className), array_map('strtolower', Ccore::$_cfg['controllers']))
         ) {
@@ -309,49 +364,65 @@ class CController extends Ccore {
         }
     }
 
-    public static function doRouter($routes, $iClassName=self::class) {
- 
-        $args = CUtil::parseQs($routes, $iClassName);
+    public static function doRouter($routes, $iClassName = self::class) // always MvcLite\Router
+    {
+        $shortName = strtolower((new \ReflectionClass($iClassName))->getShortName()); // "ClassName" change get shortname to work in php 8.5
+        $args = CUtil::parseQs($routes, $shortName);
+        //        print "cn: $iClassName sn: $shortName rt: " . print_r($routes, true) . ", args: " . print_r($args, true); // already got 404?? redirect?
         $className = $args['t'];
         // safe current action/view to be render by doBodyContent()
         self::$_action = $action = $args['a'];
         $rCtl = CUtil::getClass($iClassName);
-        if (strtolower($args['t']) <> strtolower($iClassName) and class_exists($className)){
-//        if (self::isRoutable($className, $iClassName)) {
-            // if not router, make sure a valid action or view of a controller
-            $ctl = CUtil::getClass($className);
-            if (!empty($ctl)
-                and (method_exists($ctl, $action) or $ctl->isAppView($action, $className))) {
-                $ctl->start($args);
-            } else {
-                // good controller but bad action
-                self::redirect2Url("?".Ccore::$_cfg['page404']);
-            }
-        // if router has action or view show it (rare)    
-        } elseif (!empty($action) 
-            and $rCtl->isAppView($action, $iClassName) 
-            and ($className == strtolower($iClassName))) 
-        {
-            self::doView($rCtl, $action);
-        // if not a valid controller and router page404 exist
-        } elseif ($rCtl->isAppView(Ccore::$_cfg['page404'], $iClassName)) {
-            self::redirect2Url("?".Ccore::$_cfg['page404']);
-        } else {
-            // all else fail, use internal notfound
-            echo $rCtl->_notFound($action);            
+        switch ($args) {
+            // WORK, good t= & a=
+            case (strtolower($args['t']) <> strtolower($shortName)
+            and class_exists($className)):
+                // if not router, make sure a valid action or view of a controller
+                $ctl = CUtil::getClass($className);
+                if (
+                    !empty($ctl)
+                    and (method_exists($ctl, $action) or $ctl->isAppView($action, $className))
+                ) {
+                    CUtil::debug("rt: $className-$action");
+                    $ctl->start($args); // WORK good t & good a
+                } 
+                // WORK, router? good t= but bad a=, MUST redirect multiple place to avoid mofified header warning
+                else {
+//                    print " good t= bad a= cn: $className a: $action" . ", args: " . print_r($args, true);
+                    CUtil::debug("Custom 404: $className-$action");
+                    self::redirect2Url("?" . Ccore::$_cfg['routes']['page404']);
+                }
+                break;
+            // WORK, router? BAD t=,  good action, reditrect?   
+            case (!empty($action)
+            and $rCtl->isAppView($action, $shortName)
+            and ($className == strtolower($shortName))):
+                CUtil::debug("BAD route: $className-$action");
+                self::doView($rCtl, $action); // use route, need this to avoid loop and show 404            
+                break;
+            // WORK-unified 404, bad t= and/ or a=, else fail, use internal 404
+            default:
+                if ($rCtl->isAppView(Ccore::$_cfg['routes']['page404'], $shortName)) {
+                    CUtil::debug("Custom 404: $className-$action");
+                    self::redirect2Url("?" . Ccore::$_cfg['routes']['page404']); // WORK, bad t, good a and router page404 exist
+                } else {
+                    CUtil::debug("Internal 404: $className-$action");
+                    gI404("$className-$action"); // internal 404
+                }
         }
-    }  
+    }
 
-    public static function doView($ctl, $action) {
+    public static function doView($ctl, $action)
+    {
 
-        if (empty($ctl->_view_data['title'] )) {
-            $ctl->_view_data['title'] = $action;             
+        if (empty($ctl->_view_data['title'])) {
+            $ctl->_view_data['title'] = $action;
         }
-        if (empty($ctl->_view_data['pagetitle'] )) {
+        if (empty($ctl->_view_data['pagetitle'])) {
             $ctl->add2HeaderArrays("pagetitle", $action);
         }
         $ctl->setViewData($ctl->_class_path);
-        
+
         $buff = "";
         // render content before the layout
         $vFile = $ctl->isLayout($ctl->layout);
@@ -360,16 +431,18 @@ class CController extends Ccore {
             $ctl->setViewData4Header();
             // render content with layout
             $buff = $ctl->captureContent($vFile);
-        } 
+            //            echo $buff;
+        }
         echo $buff;
     }
 
-    public function doBodyNoLayout() {
+    public function doBodyNoLayout()
+    {
 
         // content from the current action/view
         return $this->renderAppView(self::$_action);
     }
 
 
-    
+
 }

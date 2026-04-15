@@ -101,13 +101,10 @@ class CCore {
 
     public static function redirect2Url($ret2URL = null)
     {
-    	$ret2URL="?";
-
         if (is_null($ret2URL))
             $ret2URL = $_SERVER['PHP_SELF'];
-
-//        self::pln($ret2URL, 'ret2URL');
-        header("Location: $ret2URL");
+        header('Location: '.$ret2URL);
+        exit;
     }
 
     public function getUser($usrname, $meTable) {

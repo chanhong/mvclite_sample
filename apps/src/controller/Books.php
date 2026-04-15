@@ -1,4 +1,5 @@
 <?php
+namespace MvcLite;
 class Books extends BaseController {
 
     public function __construct() {

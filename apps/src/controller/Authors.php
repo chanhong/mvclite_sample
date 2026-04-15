@@ -1,4 +1,5 @@
 <?php
+namespace MvcLite;
 class Authors extends BaseController {
 
     public function __construct() {

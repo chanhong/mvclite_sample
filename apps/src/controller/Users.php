@@ -1,6 +1,6 @@
 <?php
 //namespace MvcSample;
-//namespace MvcLite;
+namespace MvcLite;
 use MvcLite\Ccore;
 use MvcLite\BaseController;
 use MvcLite\CUtil;

@@ -1,10 +1,12 @@
 <?php
-//permDbg(Ccore::$_usrInfo,'_usrinfo');
-//permDbg($pageData["profile"],'profile');
+use MvcLite\CCore;
+permDbg(Ccore::$_usrInfo,'_usrinfo');
+permDbg($pageData["profile"],'profile');
 $usrQryUrl = $this->h->tap('/books/index');
 if (empty($pageData['arr'])) return;
 $recs = $pageData['arr'];
-
+//pln(Ccore::$_usrInfo,'uin@books');
+//pln($_SESSION,'s@books');
 ?>
   <script type="text/javascript">
   $( function() {

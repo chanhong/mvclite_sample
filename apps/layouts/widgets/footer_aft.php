@@ -7,18 +7,18 @@ code;
 echo $buff;
 
 // Display debug messages if they exist
-if (!empty($_SESSION['debug']) || !empty($_SESSION['debug_logs'])) {
+if (!empty($_SESSION['dmsg']) || !empty($_SESSION['debug_logs'])) {
     echo '<hr style="margin-top: 30px; border-top: 2px solid #ccc;">';
     echo '<div style="background-color: #f5f5f5; padding: 15px; margin-top: 20px; font-size: 11px; font-family: monospace; border: 1px solid #ddd;">';
     
     // Current Debug Messages
     echo '<div style="margin-bottom: 20px;">';
     echo '<strong style="font-size: 13px; color: #333;">📋 CURRENT DEBUG LOG (On-Screen):</strong><br>';
-    if (!empty($_SESSION['debug'])) {
+    if (!empty($_SESSION['dmsg'])) {
         echo '<div style="max-height: 250px; overflow-y: auto; background-color: white; padding: 10px; border: 1px solid #ccc; margin-top: 5px;">';
-        echo nl2br(htmlspecialchars($_SESSION['debug'], ENT_QUOTES, 'UTF-8'));
+        echo nl2br(htmlspecialchars($_SESSION['dmsg'], ENT_QUOTES, 'UTF-8'));
         echo '</div>';
-        echo '<br><small style="color: #666;">Lines: ' . count(explode("\n", $_SESSION['debug'])) . ' | Size: ' . round(strlen($_SESSION['debug']) / 1024, 2) . ' KB</small>';
+        echo '<br><small style="color: #666;">Lines: ' . count(explode("\n", $_SESSION['dmsg'])) . ' | Size: ' . round(strlen($_SESSION['dmsg']) / 1024, 2) . ' KB</small>';
     } else {
         echo '<em style="color: #999;">No debug messages yet</em>';
     }

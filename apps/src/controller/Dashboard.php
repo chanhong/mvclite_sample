@@ -1,6 +1,6 @@
 <?php
 //namespace MvcSample;
-
+namespace MvcLite;
 class Dashboard extends BaseController {
 
     public function __construct() {

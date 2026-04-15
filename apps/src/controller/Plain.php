@@ -1,5 +1,5 @@
 <?php
-
+namespace MvcLite;
 class Plain extends BaseController {
 
     public function __construct() {

@@ -1,8 +1,11 @@
 <?PHP
+use MvcLite\CCore;
 $usrQryUrl = $this->h->tap('/users/index');
 //$this->requireAdmin($usrQryUrl); // if not admin redirect to login and return here
 if (empty($pageData['arr'])) return;
 $users = $pageData['arr'];
+//pln(Ccore::$_usrInfo,'uin@user');
+//pln($_SESSION,'s@user');
 ?>
 <div>
     <div>

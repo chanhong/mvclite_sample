@@ -50,7 +50,7 @@ class BaseController extends CController {
     public function doBody() {
 
         $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
-
+//print "dobody";
         permDbg(Ccore::$_usrInfo,'ubody');
 //        permDbg(Ccore::$_cfg,'cfg');
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");

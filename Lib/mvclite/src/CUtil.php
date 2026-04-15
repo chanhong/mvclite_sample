@@ -17,6 +17,7 @@ class CUtil {
 
     public static function debug($iVar, $iStr = "", $iFormat = "") {
         // Check if debug is enabled via _DEBUG_ENABLED flag
+        
         if (!defined('_DEBUG_ENABLED') || !_DEBUG_ENABLED) {
             return null; // Debug disabled, skip all logging
         }
@@ -53,13 +54,13 @@ class CUtil {
         $screenFullLines = 20; // Reset after ~20 lines (typical screen height)
         $maxScreenSize = 25600; // ~25KB per screen for on-screen display
         
-        if (empty($_SESSION['debug'])) {
-            $_SESSION['debug'] = $ret;
+        if (empty($_SESSION['dmsg'])) {
+            $_SESSION['dmsg'] = $ret;
             $_SESSION['debug_resets'] = 0;
             $_SESSION['debug_logs'] = [];
         } else {
-            $currentSize = strlen($_SESSION['debug']);
-            $lineCount = substr_count($_SESSION['debug'], "\n");
+            $currentSize = strlen($_SESSION['dmsg']);
+            $lineCount = substr_count($_SESSION['dmsg'], "\n");
             
             // Reset when approaching screen-full
             if ($currentSize >= $maxScreenSize || $lineCount >= $screenFullLines) {
@@ -80,10 +81,10 @@ class CUtil {
                 }
                 
                 // Reset on-screen debug
-                $_SESSION['debug'] = "[SCREEN RESET - " . (int)$_SESSION['debug_resets'] + 1 . " | " . $lineCount . " lines logged]\n" . $ret;
+                $_SESSION['dmsg'] = "[SCREEN RESET - " . (int)$_SESSION['debug_resets'] + 1 . " | " . $lineCount . " lines logged]\n" . $ret;
                 $_SESSION['debug_resets'] = (int)$_SESSION['debug_resets'] + 1;
             } else {
-                $_SESSION['debug'] .= $ret;
+                $_SESSION['dmsg'] .= $ret;
             }
         }
         return $ret;
@@ -129,7 +130,7 @@ class CUtil {
         return $return;
     }
 
-    function rootSite() {
+      public static   function rootSite() {
 
         //    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         //    $dirname = preg_replace('/\\\+/', '/', dirname(realpath($uri)));
@@ -139,7 +140,7 @@ class CUtil {
         return $dirname;
     }
 
-    function siteURL() {
+        public static function siteURL() {
 
         $protocol = "http://";
         if (!empty($_SERVER['HTTPS']))
@@ -148,7 +149,7 @@ class CUtil {
         return $protocol . $_SERVER['SERVER_NAME'] . $port;
     }
 
-    function selfURL() {
+    public static function selfURL() {
 
         return self::siteURL() . self::rootSite();
     }
@@ -647,7 +648,22 @@ class CUtil {
         return $luArr;
     } 
     
-    public static function methodNotParent($class_name, $method_name) {   
+    public static function methodNotParent($class_name, $method_name)
+    {
+        $ret = false;
+        $class = new \ReflectionClass($class_name);
+        if ($class->hasMethod($method_name)) {
+            $m = $class->getMethod($method_name);
+            // Compare short names only
+            $declaredIn  = (new \ReflectionClass($m->class))->getShortName(); // Get short name of the class where the method is declared
+            $targetClass = (new \ReflectionClass($class_name))->getShortName(); // Get short name of the target class
+            if (strtolower($declaredIn) == strtolower($targetClass)) {
+                $ret = true;
+            }
+        }
+        return $ret;
+    }    
+    public static function not_ns_methodNotParent($class_name, $method_name) {   
 
         $ret = false;
         $class = new \ReflectionClass($class_name);
@@ -668,13 +684,13 @@ class CUtil {
 
     public static function parseQs($routes, $className=self::class) {
 
-        $qsArr = CUtil::qsValue();
-//        CUtil::debug($qsArr, __METHOD__.':qs','p');  
-//        CUtil::debug($className,'class');      
+        $qsArr = CUtil::qsValue(); // current qs ex: t=front&a=index, bad qs and got 404 before got here
+//        print CUtil::debug($qsArr, __METHOD__.':qs','p');  
+//        print CUtil::debug($className,'class');      
         $args = $qsArr;
         if (!empty($args['t']) and $luArr = CUtil::aliasLookup($args['t'], $routes['alias'] )) {  
             $args = $luArr;
-//            CUtil::debug($args, ':aft-alias','p');  
+//            print CUtil::debug($args, ':aft-alias');  
         }
         // if not a full QS then patch it up with either default controller or this class
         $defCntl = strtolower($routes['default_controller']);
@@ -714,6 +730,11 @@ class CUtil {
         return $oArray; 
     } 
 
+    protected static function shortClass(string $fqcn): string
+    {
+        return substr(strrchr($fqcn, '\\'), 1) ?: $fqcn;
+    }
+   
     public static function getClass($className) { 
 
         if (class_exists($className)) { 

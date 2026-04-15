@@ -1,5 +1,5 @@
 <style>
-.debug-container {
+    .debug-container {
     background: #f5f5f5;
     padding: 20px;
     font-family: monospace;
@@ -161,13 +161,24 @@ h2 {
     color: #333;
     font-size: 18px;
 }
-</style>
 
+
+</style>
+<?php
+$usrQryUrl = $this->h->tap('/debug/index');
+?>
 <div class="debug-container">
     <h2>🔍 Debug Dashboard</h2>
-    
+            <div class="search-box">
+            <form method="get" action=""</form>
+    <input type="hidden" name="t" value="debug" />
+    <input type="hidden" name="a" value="index" />
+                <input type="text" name="search" placeholder="Search current log..." value="<?php echo htmlspecialchars($pageData['search']); ?>" />
+                <button type="submit">Search</button>
+            </form>
+        </div>
     <div class="button-group">
-        <a href="?t=debug">Refresh</a>
+        <a href="?t=debug&a=index">Refresh</a>
         <a href="?t=debug&a=clear" class="btn-danger" onclick="return confirm('Clear all debug data?');">Clear All</a>
     </div>
 
@@ -194,17 +205,15 @@ h2 {
         </div>
     </div>
 
+
+                <!-- input type="hidden" name="t" value="<?php echo $usrQryUrl; ?>" / -->
     <!-- Current Debug Log -->
     <div class="debug-section">
         <div class="debug-header">Current Debug Log (In Memory)</div>
         
-        <div class="search-box">
-            <form method="get" action="">
-                <input type="hidden" name="t" value="debug" />
-                <input type="text" name="search" placeholder="Search current log..." value="<?php echo htmlspecialchars($pageData['search']); ?>" />
-                <button type="submit">Search</button>
-            </form>
-        </div>
+
+
+
 
         <?php if (!empty($pageData['search']) && isset($pageData['filtered_log'])): ?>
             <div class="matched-count">
