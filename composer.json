@@ -19,8 +19,14 @@
     },
     "autoload": {
         "psr-4": {
+            "MvcLite\\": "lib/mvclite/src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },    
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
@@ -29,5 +35,8 @@
     "scripts": {
         "post-update-cmd": [
         ]
-    }     
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.1"
+    }
 }

@@ -6,3 +6,4 @@
 /apps/src/controller/Mya.php
 /vendor/
 db/logs/
+.phpunit.result.cache
