@@ -1,7 +1,9 @@
 /* override the default bootstrip code */
 html,
 body {
-  height: 90%;
+  min-height: 60%;
+  height: auto;
+/*  height: 90%; */
   /* allow space for the footer */
   /* The html and body elements cannot have any padding or margin. why? */
 }

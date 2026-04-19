@@ -10,6 +10,8 @@ class CCoreTest extends TestCase {
 
     protected function setUp(): void {
         $container = new CContainer();
+        $container->singleton('cfg',     fn() => new \MvcLite\CConfig());
+        $container->singleton('stg',     fn() => new \MvcLite\CSetting());
         $container->singleton('util',   fn() => new \MvcLite\CUtil());
         $container->singleton('helper', fn() => new \MvcLite\CHelper());
         $container->singleton('auth',   fn() => \MvcLite\CAuth::getAuth('MvcLiteSALT'));

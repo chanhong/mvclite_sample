@@ -6,9 +6,8 @@ class Dashboard extends BaseController {
     public function __construct() {
         parent::__construct();
         $this->layout = "dashboard";
-        $this->_view_data['cmenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['cmenu']['daskboard']);        
-        $this->_view_data['submenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['submenu']['daskboard']);
-              
+        $this->_view_data['cmenu'] = $this->h->getLiMenu($this->cfg->get('menu.cmenu.dashboard'));        
+        $this->_view_data['submenu'] = $this->h->getLiMenu($this->cfg->get('menu.submenu.dashboard'));
     }
 
     public function start($args = false) {

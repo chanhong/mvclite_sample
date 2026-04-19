@@ -4,6 +4,7 @@
 <title><?php echo @$pageData['header_title']; ?></title>
   <meta content="text/html; charset=windows-1252" http-equiv="Content-Type">
   <?php
+  use MvcLite\CConfig;
       echo $this->renderWidget('header_bef');    
     echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
     echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
@@ -38,7 +39,7 @@
     <div class="navbar navbar-expand-sm" style="background-color: #E8EAED;">
       <ul class="navbar-nav mr-auto text-center">
       <?php
-      echo $this->h->getLiMenu(Ccore::$_cfg['menu']['main']) ."=>&nbsp;&nbsp;".@$pageData["cmenu"];
+        echo $this->h->getLiMenu($this->cfg->get('menu.main'))."=>&nbsp;&nbsp;".@$pageData["cmenu"];
       ?> 
       </ul>
     </div>
@@ -70,7 +71,8 @@
     </div>
     <div class="footer">
     <?php
-      echo $this->renderWidget('footer_aft');    
+      echo $this->renderWidget('footer_aft');  
+          echo $this->renderWidget('footer_dbg');           
       ?>      
     </div>
   </div>

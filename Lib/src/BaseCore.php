@@ -8,9 +8,9 @@ namespace MvcLite;
 #namespace MvcSample;
 //namespace MvcLite;
 
-use MvcLite\Ccore;
+use MvcLite\CCore;
 
-class BaseCore extends Ccore {
+class BaseCore extends CCore {
     
     public function __construct() {
         

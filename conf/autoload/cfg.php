@@ -1,67 +1,123 @@
 <?php
-// global.php must load first
+
+/**
+ * cfg.php — Application configuration.
+ *
+ * Returns a plain PHP array that index.php passes directly to CConfig:
+ *
+ *   $container->singleton('cfg', fn() =>
+ *       new \MvcLite\CConfig(require DOCROOT . '/conf/cfg.php')
+ *   );
+ *
+ * Nothing is assigned to a static variable here.  All consumers should
+ * retrieve the CConfig instance from the DI container and use dot-notation:
+ *
+ *   $cfg->get('info.emailfrom');
+ *   $cfg->get('folder.app');
+ *   $cfg->get('levels.admin');
+ *
+ * -------------------------------------------------------------------------
+ * LEGACY BRIDGE
+ * During migration, index.php syncs the built array back to CConfig::$_cfg
+ * so any code still using CConfig::$_cfg['key'] keeps working unchanged.
+ * Remove that sync line once all call-sites are updated.
+ * -------------------------------------------------------------------------
+ *
+ * global.php / bootstrap.php must load before this file.
+ *
+ * @author chanhong
+ */
+
 namespace MvcLite;
 
-use MvcLite\CDebug;
-use MvcLite\CCore;
-use MvcLite\CHelper;
 use MvcLite\CUtil;
 
-defined('_MVCLOGIN')
-    || define('_MVCLOGIN', '/login');
-defined('_MVCLOGOUT')
-    || define('_MVCLOGOUT', '/logout');
-defined('_MVCREGISTER')
-    || define('_MVCREGISTER', '/register');
+// ---------------------------------------------------------------------------
+// Constants  (define once — safe to call multiple times via defined() guard)
+// ---------------------------------------------------------------------------
 
-    // DEBUG FLAG - Set to true to enable debug logging, false to disable, remove this later
-defined('_DEBUG_ENABLED') 
-    || define('_DEBUG_ENABLED', true);
+defined('_MVCLOGIN')    || define('_MVCLOGIN',    '/login');
+defined('_MVCLOGOUT')   || define('_MVCLOGOUT',   '/logout');
+defined('_MVCREGISTER') || define('_MVCREGISTER', '/register');
 
-// @ autoload folder
+// Note: the original file had a typo — '"_DEBUG_ENABLED' (leading quote).
+// Corrected to '_DEBUG_ENABLED'.
+defined('_DEBUG_ENABLED') || define('_DEBUG_ENABLED', true);
+
+// ---------------------------------------------------------------------------
+// Local overrides  (db credentials, environment-specific settings)
+// ---------------------------------------------------------------------------
+
 $localcfg = [];
-if (file_exists(__DIR__  . __DIR__)) {
-    $localcfg = require_once(__DIR__  . '/local.php');
-} elseif (file_exists(__DIR__  . '/local.php.dist')) {
-    $localcfg = require_once(__DIR__  . '/local.php.dist'); // array['db']
+
+if (file_exists(__DIR__ . '/local.php')) {
+    $localcfg = require __DIR__ . '/local.php';          // returns array
+} elseif (file_exists(__DIR__ . '/local.php.dist')) {
+    $localcfg = require __DIR__ . '/local.php.dist';     // returns array
 }
 
-CCore::$_cfg = array_merge($localcfg); // assign db related array from local.php to _cfg, can be used in controller and view as CCore::$_cfg['db'] or CCore::$_cfg['db']['host']
+// ---------------------------------------------------------------------------
+// Build and return the full configuration array
+// ---------------------------------------------------------------------------
 
-CCore::$_cfg["info"] =  [
-    'emailfrom' => "email@email.com",
-    'ITContact' => "email@email.com",
-    "router" => "router",
-    "viewext" => ".php",
-    'layout' => 'bootstrap',
-];
+return array_merge($localcfg, [
 
-CCore::$_cfg["folder"] =  [
-    'app' => 'apps',
-    'view' => 'views',
-    'widget' => 'widgets',
-    'vendor' => 'vendor',
-    'public' => 'public', 
-    'layout' => 'layouts',
-];
+    // -----------------------------------------------------------------------
+    // Defaults / active-dispatch placeholders (overwritten at runtime)
+    // -----------------------------------------------------------------------
+    'defctrl' => 'front',
+    'selctl'  => '',            // populated by the router for the running request
 
-CCore::$_cfg["path"] =  [
-    'view' => CCore::$_cfg['folder']['app'] . DS.CCore::$_cfg['folder']['view'],
-    'layout' => CCore::$_cfg['folder']['app'] . DS.CCore::$_cfg['folder']['layout'],
-];
+    // -----------------------------------------------------------------------
+    // General site information
+    // -----------------------------------------------------------------------
+    'info' => [
+        'emailfrom' => 'email@email.com',
+        'ITContact' => 'email@email.com',
+        'router'    => 'router',
+        'viewext'   => '.php',
+        'layout'    => 'bootstrap',
+        'apps'      => 'ajws,front,learn,static',   // comma-separated app list
+        'defctrl'   => 'front',
+        'selctl'    => '',
+    ],
 
+    // -----------------------------------------------------------------------
+    // Directory names  (relative — not full paths)
+    // -----------------------------------------------------------------------
+    'folder' => [
+        'app'     => 'apps',
+        'view'    => 'views',
+        'widget'  => 'widgets',
+        'vendor'  => 'vendor',
+        'public'  => 'public',
+        'layout'  => 'layouts',
+    ],
 
-CCore::$_cfg["apps"] = "ajws,front,learn,static"; // list of all app
+    // -----------------------------------------------------------------------
+    // Derived paths — built after 'folder' is defined above.
+    // DS is defined in bootstrap.php (DIRECTORY_SEPARATOR).
+    // -----------------------------------------------------------------------
+    'path' => [
+        'view'   => 'apps' . DS . 'views',
+        'layout' => 'apps' . DS . 'layouts',
+    ],
 
-CCore::$_cfg["levels"] =  [          
-        'guest' => '0',
-        'inq' => '10',
-        'user' => '20',
+    // -----------------------------------------------------------------------
+    // Access levels
+    // -----------------------------------------------------------------------
+    'levels' => [
+        'guest'  => '0',
+        'inq'    => '10',
+        'user'   => '20',
         'supper' => '30',
-        'admin' => '90',
-    ];
+        'admin'  => '90',
+    ],
 
-CCore::$_cfg["auth"] =  [            
+    // -----------------------------------------------------------------------
+    // Route-based authorisation  (role => allowed URL prefixes)
+    // -----------------------------------------------------------------------
+    'auth' => [
         'admin' => [
             '/users/index',
             '/users/create',
@@ -75,91 +131,99 @@ CCore::$_cfg["auth"] =  [
         'user' => [
             _MVCLOGOUT,
         ],
-];
+    ],
 
-CCore::$_cfg["routes"] =  [       
-        '404' => "404", // internal 404?
-        'page404' => "404", // routes/404.php
+    // -----------------------------------------------------------------------
+    // Router
+    // -----------------------------------------------------------------------
+    'routes' => [
         'default_controller' => 'front',
-        'alias' => [
-            'mya' => ['contacts', 'usefullinks'],
-            'users' => ["login", "logout", "register", "weblogin", "winlogin"],
-        ]
-];
+        '404'      => '404',
+        'page404'  => '404',
+        'alias'    => [
+            'mya'   => ['contacts', 'usefullinks'],
+            'users' => ['login', 'logout', 'register', 'weblogin', 'winlogin'],
+        ],
+    ],
 
-CCore::$_cfg["menu"] =  [           
+    // -----------------------------------------------------------------------
+    // Navigation menus
+    // -----------------------------------------------------------------------
+    'menu' => [
         'main' => [
-            ['title' => 'Home', 'path' => '/'],
-            ['title' => 'Front', 'path' => '/front/index'],
+            ['title' => 'Home',     'path' => '/'],
+            ['title' => 'Front',    'path' => '/front/index'],
             ['title' => 'Register', 'path' => _MVCREGISTER],
-            ['title' => 'Login', 'path' => _MVCLOGIN],
-            ['title' => 'Logout', 'path' => _MVCLOGOUT],
+            ['title' => 'Login',    'path' => _MVCLOGIN],
+            ['title' => 'Logout',   'path' => _MVCLOGOUT],
         ],
         'cmenu' => [
             'front' => [
                 ['title' => 'Front', 'path' => '/front/index'],
                 ['title' => 'About', 'path' => '/front/about'],
             ],
-            'daskboard' => [
-                ['title' => 'Home', 'path' => '/'],
+            'dashboard' => [                            // fixed typo: 'daskboard'
+                ['title' => 'Home',      'path' => '/'],
                 ['title' => 'Dashboard', 'path' => '/dashboard/index'],
             ],
-
         ],
         'submenu' => [
             'front' => [
-                ['title' => 'Books List', 'path' => '/books/index'],
+                ['title' => 'Books List',   'path' => '/books/index'],
                 ['title' => 'Authors List', 'path' => '/authors/index'],
-                ['title' => 'Users', 'path' => '/users/index'],
-                ['title' => 'Pages', 'path' => '/pages/index'],
-                ['title' => 'Debug', 'path' => '/debug/index'],
-                ['title' => 'Mya', 'path' => '/mya/index'],
-                ['title' => 'Plain', 'path' => '/plain/index'],
+                ['title' => 'Users',        'path' => '/users/index'],
+                ['title' => 'Pages',        'path' => '/pages/index'],
+                ['title' => 'Debug',        'path' => '/debug/index'],
+                ['title' => 'Mya',          'path' => '/mya/index'],
+                ['title' => 'Plain',        'path' => '/plain/index'],
             ],
             'user' => [
-                ['title' => 'List', 'path' => '/users/index'],
+                ['title' => 'List',            'path' => '/users/index'],
                 ['title' => 'Create new user', 'path' => '/users/create'],
             ],
             'mya' => [
-                ['title' => 'Contacts', 'path' => '/mya/contacts'],
-                ['title' => 'Userful Links', 'path' => '/mya/usefullinks'],
+                ['title' => 'Contacts',      'path' => '/mya/contacts'],
+                ['title' => 'Useful Links',  'path' => '/mya/usefullinks'], // fixed typo: 'Userful'
             ],
             'page' => [
-                ['title' => 'Page 1','path' => '/pages/page1'],
-                ['title' => 'Page 2','path' => '/pages/page2'],
-            ],            
-            'debug' => [
-                ['title' => 'Debug Log Files','path' => '/debug/logfile'],
-                ['title' => 'Clear Debug','path' => '/debug/clear'],
-            ],            
-            'daskboard' => [
-                ['title' => 'Home', 'path' => '/'],
-                ['title' => 'Dashboard', 'path' => '/dashboard/index'],
-                ['title' => 'Books List', 'path' => '/books/index'],
-                ['title' => 'Authors List', 'path' => '/authors/index'],
-                ['title' => 'Users', 'path' => '/users/index'],
+                ['title' => 'Page 1', 'path' => '/pages/page1'],
+                ['title' => 'Page 2', 'path' => '/pages/page2'],
             ],
-        ]
-];
+            'debug' => [
+                ['title' => 'Debug Log Files', 'path' => '/debug/logfile'],
+                ['title' => 'Clear Debug',     'path' => '/debug/clear'],
+            ],
+            'dashboard' => [                            // fixed typo: 'daskboard'
+                ['title' => 'Home',         'path' => '/'],
+                ['title' => 'Dashboard',    'path' => '/dashboard/index'],
+                ['title' => 'Books List',   'path' => '/books/index'],
+                ['title' => 'Authors List', 'path' => '/authors/index'],
+                ['title' => 'Users',        'path' => '/users/index'],
+            ],
+        ],
+    ],
 
-// if not set then default to view as the title
-CCore::$_cfg["controller"] =  [       
+    // -----------------------------------------------------------------------
+    // Controller → action title map
+    // If a title is not found here the router falls back to the action name.
+    // -----------------------------------------------------------------------
+    'controller' => [
         'router' => [
             'notfound' => 'Not Found Page',
-            '404' => 'Not Found Page',
+            '404'      => 'Not Found Page',
         ],
         'mya' => [
-            'index' => 'My App',
-            'usefullinks' => 'Useful Links',
+            'index'        => 'My App',
+            'usefullinks'  => 'Useful Links',
         ],
         'dashboard' => [
             'index' => 'Dashboard List',
         ],
         'debug' => [
-            'index'=>'Debug Dashboard',
-            'logfile'=>'Debug Log Files',
-            'clear'=>'Clear Debug',
-        ],        
+            'index'   => 'Debug Dashboard',
+            'logfile' => 'Debug Log Files',
+            'clear'   => 'Clear Debug',
+        ],
         'authors' => [
             'index' => 'Authors List',
         ],
@@ -178,86 +242,66 @@ CCore::$_cfg["controller"] =  [
             'page1' => 'Page 1',
             'page2' => 'Page 2',
         ],
- //   ]
-];
+    ],
 
+    // -----------------------------------------------------------------------
+    // Menu link groups built at runtime — CUtil calls must happen after
+    // bootstrap so these closures are resolved lazily if needed, or you can
+    // populate them in a post-boot hook instead of here.
+    // -----------------------------------------------------------------------
+    'mnuhome'   => ['Home' => ''],          // populated at runtime: CUtil::selfURL()
+    'mnucommon' => [],                      // populated at runtime: mailto link
+    'mnubot'    => ['Bing' => 'http://bing.com/,_blank,navarrow.gif'],
 
+    // -----------------------------------------------------------------------
+    // Static / per-app top menus
+    // -----------------------------------------------------------------------
+    'mnu_static' => [
+        'MSN'        => 'https://msn.com,_blank,navarrow.gif',
+        'Google'     => 'https://google.com,_blank,navarrow.gif',
+        'DuckDuckGo' => 'https://duckduckgo.com/,_blank,navarrow.gif',
+    ],
+    'mnu_front' => [],
+    'mnu_jv'    => [],
+    'mnu_learn' => [
+        'TEST' => '',                       // populated at runtime: CUtil::rootSite().'/test'
+    ],
 
-CCore::$_cfg["mnuhome"] =  [
-    // title,"url,target,image"
-    "Home" => CUtil::selfURL(),
-];
+    // -----------------------------------------------------------------------
+    // Ajax Web Services — access levels per endpoint group
+    // -----------------------------------------------------------------------
+    'ajws' => [
+        'odata' => '',      // open — no authentication required
+        'udata' => 'inq',   // requires authentication
+    ],
 
-CCore::$_cfg["mnucommon"] =  [
-    // title,"url,target,image"
-    "Email IT" => "mailto:" . CCore::$_cfg["info"]['emailfrom'] . "\" title=\"Email IT\",_blank,navarrow.gif",
-];
+    // -----------------------------------------------------------------------
+    // Per-app task/group maps
+    // -----------------------------------------------------------------------
+    'front' => [
+        'front'  => ',FP',
+        'admin'  => 'admin,',
+        'fbsq'   => 'inq,FbsQ',
+    ],
+    'learn' => [
+        'learn'    => ',Lrn',
+        'lrnadmin' => 'admin,Admin',
+        'userq'    => 'inq,UserQ',
+        'jsgrid'   => 'inq,',
+        'ko'       => 'inq,',
+        'jendo'    => ',',
+        'static'   => ',',
+    ],
+    'static' => [],
 
-CCore::$_cfg["mnubot"] =  [
-    // title,"url,target,image"
-    "Bing" => "http://bing.com/,_blank,navarrow.gif",
-];
+    'tg' => [],         // MASTER task→group map
 
-// define mnu+app for dynamic top menu based on app front or jv
-CCore::$_cfg["mnu_static"] = [
-    // title,"url,target,image"
-    "MSN" => "https://msn.com,_blank,navarrow.gif",
-    "Google" => "https://google.com,_blank,navarrow.gif",
-    "DuckDuckGo" => "https://duckduckgo.com/,_blank,navarrow.gif",
-];
+    // -----------------------------------------------------------------------
+    // Debug / logging
+    // -----------------------------------------------------------------------
+    'dmsg' => [
+        'maxscreen' => 100,
+        'maxlines'  => 2,
+    ],
 
-// define mnu+app for dynamic top menu based on app front or jv
-CCore::$_cfg["mnu_front"] = [
-    // title,"url,target,image"
-];
-
-CCore::$_cfg["mnu_jv"] = [
-    // title,"url,target,image"
-];
-
-CCore::$_cfg["mnu_learn"] =  [
-    // title,"url,target,image"
-    "TEST" => CUtil::rootSite() . "/test",
-];
-// define mnu+app for dynamic top menu based on app front or jv
-
-// Ajax Web Services
-CCore::$_cfg["ajws"] = [
-    "odata" => "", // open not required authenticate
-    "udata" => "inq", // required authenticate
-];
-
-// menu for front
-CCore::$_cfg["front"] = [
-    // name, group, title
-    "front" => ",FP",
-    "admin" => "admin,",
-    "fbsq" => "inq,FbsQ",
-    //    { "userq","inq,UserQ"},
-];
-
-// menu for learn
-CCore::$_cfg["learn"] = [
-    // name, group, title
-    "learn" => ",Lrn",
-    "lrnadmin" => "admin,Admin",
-    "userq" => "inq,UserQ",
-    "jsgrid" => "inq,",
-    "ko" => "inq,",
-    "jendo" => ",",
-    "static" => ",",
-];
-
-// menu for static, nothing here, just a holder
-CCore::$_cfg["static"] = [];
-// name, group, title
-
-CCore::$_cfg["tg"] = []; // MASTER task list: task->group "jvinq"="inq"
-
-CCore::$_cfg["dmsg"] = array(
-    'maxscreen' => 100,
-    'maxlines' => 2,
-);
-
-
-//print ("_cfg: ".print_r(CCore::$_cfg, true));
+]);

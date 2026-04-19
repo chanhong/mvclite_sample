@@ -3,11 +3,12 @@
 use PhpLoaderLite\NsClassLoader;
 
 // small set of functions to bootstrap 
-defined('_MVCDEBUG') 
-    || define('_MVCDEBUG', true); // false when in production
+
 defined('DS') 
     || define('DS', DIRECTORY_SEPARATOR);
-
+defined('_MVCDEBUG') 
+    || define('_MVCDEBUG', true); // false when in production
+    
 define('APPSROOT', 'apps');
 defined('LIBROOT') 
     || define('LIBROOT', DOCROOT .DS. 'Lib');

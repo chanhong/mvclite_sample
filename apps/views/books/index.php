@@ -1,12 +1,12 @@
 <?php
 use MvcLite\CCore;
 $this->_view_data['header_title'] = 'Books';
-permDbg(Ccore::$_usrInfo,'_usrinfo');
+permDbg(CSetting::$_usrInfo,'_usrinfo');
 permDbg($pageData["profile"],'profile');
 $usrQryUrl = $this->h->tap('/books/index');
 if (empty($pageData['arr'])) return;
 $recs = $pageData['arr'];
-//pln(Ccore::$_usrInfo,'uin@books');
+//pln(CSetting::$_usrInfo,'uin@books');
 //pln($_SESSION,'s@books');
 ?>
   <script type="text/javascript">

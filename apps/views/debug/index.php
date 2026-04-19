@@ -1,5 +1,5 @@
 <?php
-  echo $this->h->css(CString::FixBackSlash($this->viewPath).'/'.basename(__DIR__).'/css/debug.css');
+  echo $this->h->css(CString::FixBackSlash($this->cfg->path['view']).'/'.basename(__DIR__).'/css/debug.css');
 $this->_view_data['header_title'] = 'Debug Dashboard';
 $usrQryUrl = $this->h->tap('/debug/index');
 ?>

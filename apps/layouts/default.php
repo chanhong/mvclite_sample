@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <?php
+  use MvcLite\CConfig;
     echo @$pageData['header_bef']; 
     echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
     echo $this->h->css($this->publicFolder . '/' .'css/bootstrap-custom.css');
@@ -22,7 +23,7 @@
     <div class="navbar navbar-expand-sm" style="background-color: #E8EAED;">
       <ul class="navbar-nav mr-auto text-center">
       <?php
-      echo $this->h->getLiMenu(Ccore::$_cfg['menu']['main']) ."=>&nbsp;&nbsp;".@$pageData["cmenu"];
+        echo $this->h->getLiMenu($this->cfg->get('menu.main'))."=>&nbsp;&nbsp;".@$pageData["cmenu"];
       ?>
       </ul>
     </div>    
@@ -41,7 +42,10 @@
       ?> 
       </ul>
       </div>
+      <div class="main-body">
       <?php echo $this->doBody(); ?>
+
+      </div>
     </div>
   <footer class="footer">
     <div class="container">
@@ -54,7 +58,8 @@
       </div>
       <p />
       <?php 
-          echo $this->renderWidget('footer_aft');          
+          echo $this->renderWidget('footer_aft');      
+          echo $this->renderWidget('footer_dbg');                 
       ?>
     </div>
   </footer>

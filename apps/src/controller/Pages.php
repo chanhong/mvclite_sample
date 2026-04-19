@@ -5,8 +5,8 @@ class Pages extends BaseController {
     public function __construct() {
         
         parent::__construct();
-//        $this->_view_data['cmenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['cmenu']['front']);        
-        $this->_view_data['submenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['submenu']['page']);
+//        $this->_view_data['cmenu'] = $this->h->getLiMenu($this->cfg->get('menu.cmenu.front'));        
+        $this->_view_data['submenu'] = $this->h->getLiMenu($this->cfg->get('menu.submenu.page'));
     }
 
     public function start($args = false) {

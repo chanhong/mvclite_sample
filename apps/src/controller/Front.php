@@ -7,9 +7,9 @@ class Front extends BaseController {
         
         parent::__construct();
         $this->layout = "bootstrap";        
-        $this->_view_data['profile'] = Ccore::$_usrInfo;            
-        $this->_view_data['cmenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['cmenu']['front']);        
-        $this->_view_data['submenu'] = $this->h->getLiMenu(Ccore::$_cfg['menu']['submenu']['front']);
+        $this->_view_data['profile'] = CSetting::$_usrInfo;  
+        $this->_view_data['cmenu'] = $this->h->getLiMenu($this->cfg->get('menu.cmenu.front'));        
+        $this->_view_data['submenu'] = $this->h->getLiMenu($this->cfg->get('menu.submenu.front'));
     }
 
     public function start($args = false) {

@@ -14,9 +14,9 @@
     padding-right: 13px;
   }
 
-.mainbody {
+.mainbody { /* page body*/
   background-image: url('../../img/background.png');
-  /* must batch #footer width if use fixed bottom */
+  /* must match #footer width if use fixed bottom */
   width: 98%;
   background: none repeat scroll 0 0 transparent;
   margin-left: auto;
@@ -35,9 +35,11 @@
   max-width: 100%;
 }
 
-.main-body {
-  text-align: center;
-  max-width: 90%;
+.main-body { /* content body */
+ min-height: 50%;
+  height: auto;  
+/*  text-align: center; */
+  max-width: 100%;
 }
 
 #topHeader {

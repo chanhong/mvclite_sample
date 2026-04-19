@@ -1,13 +1,16 @@
 <?PHP
 use MvcLite\CCore;
+use mvclite\CSetting;
+
 $this->_view_data['header_title'] = 'Authors';
-permDbg(Ccore::$_usrInfo,'_usrinfo');
-permDbg($pageData["profile"],'profile');
+pln($this->stg->get('_usrInfo'),'_usrinfo');
+pln(CSetting::$_usrInfo,'_usrinfo');
+pln($pageData["profile"],'profile');
 
 $usrQryUrl = $this->h->tap('/authors/index');
 if (empty($pageData['arr'])) return;
 $recs = $pageData['arr'];
-//pln(Ccore::$_usrInfo,'uin@authors');
+//pln(CSetting::$_usrInfo,'uin@authors');
 //pln($_SESSION,'s@authors');
 ?>
 <div>

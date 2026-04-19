@@ -1,11 +1,4 @@
 <?php
-$buff = <<<code
-<footer>      
-    <p class="pull-right">Questions, comments and suggestions for this site are welcome.</p>
-</footer>
-code;
-echo $buff;
-/*
 // Display debug messages if they exist
 if (!empty($_SESSION['dmsg']) || !empty($_SESSION['debug_logs'])) {
     echo '<hr style="margin-top: 30px; border-top: 2px solid #ccc;">';
@@ -74,4 +67,3 @@ if (!empty($_SESSION['dmsg']) || !empty($_SESSION['debug_logs'])) {
     
     echo '</div>';
 }
-    */

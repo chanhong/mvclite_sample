@@ -38,10 +38,10 @@ class BaseController extends CController {
         $isGood=false;
         if (!empty($_SESSION['uinfo']['username']) && $_SESSION['uinfo']['level']=="admin")
         {
-            permDbg(Ccore::$_usrInfo,"Y:");
+            permDbg(CSetting::$_usrInfo,"Y:");
             $isGood = true;
         } else{
-            permDbg(Ccore::$_usrInfo,"N:");
+            permDbg(CSetting::$_usrInfo,"N:");
             permDbg($_SESSION,"N:");
         }
         return $isGood;
@@ -50,11 +50,10 @@ class BaseController extends CController {
     public function doBody() {
 
         $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
-//print "dobody";
-        permDbg(Ccore::$_usrInfo,'ubody');
-//        permDbg(Ccore::$_cfg,'cfg');
+        pln(CSetting::$_usrInfo,'ubody');
+         pln($this->cfg->getAll()); //DI??
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
-        $ui = $this->ut->getSafeVar(Ccore::$_usrInfo, "debug");
+        $ui = $this->ut->getSafeVar(CSetting::$_usrInfo, "debug");
         (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";
 
         $feedback = $this->feedback("feedback", "DarkGreen");
