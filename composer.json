@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MvcLite\\": "lib/mvclite/src/",
+            "MvcLite\\": "lib/mvclite/src/"
         }
     },
     "autoload-dev": {
