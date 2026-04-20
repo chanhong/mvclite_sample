@@ -47,20 +47,23 @@ $cfgArray = require DOCROOT . '/conf/autoload/cfg.php';
 
 $container = new \MvcLite\CContainer();
 
+// must be here
+$container->singleton('cfg',   fn() => new \MvcLite\CConfig($cfgArray));
+// --- Auth / error (use factory methods, not plain new) ---
+$container->singleton('auth',  fn() => \MvcLite\CAuth::getAuth('MvcLiteSALT'));
+$container->singleton('error', fn() => \MvcLite\CError::getError());
+
+// optional due to CCore::resolve auto wired DI but could end up with muliple instances
 // --- Infrastructure / external ---
 $container->singleton('db',    fn() => new \PdoLite\PdoLite());
 
 // --- Config & settings (need constructor arguments) ---
-$container->singleton('cfg',   fn() => new \MvcLite\CConfig($cfgArray));
 $container->singleton('stg',   fn() => new \MvcLite\CSetting());
 
 // --- Utilities (auto-wireable, but registered explicitly for clarity) ---
 $container->singleton('util',   fn() => new \MvcLite\CUtil());
 $container->singleton('helper', fn() => new \MvcLite\CHelper());
-
-// --- Auth / error (use factory methods, not plain new) ---
-$container->singleton('auth',  fn() => \MvcLite\CAuth::getAuth('MvcLiteSALT'));
-$container->singleton('error', fn() => \MvcLite\CError::getError());
+// optional due to CCore::resolve auto wired DI but could end up with muliple instances
 
 // ---------------------------------------------------------------------------
 // 4. Make the container globally available to CCore, then start routing
