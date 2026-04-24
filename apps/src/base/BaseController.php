@@ -50,8 +50,8 @@ class BaseController extends CController {
     public function doBody() {
 
         $youare = $dmsg = $alertMsg = $feedback = $buff = $ui = $uf = "";
-        pln(CSetting::$_usrInfo,'ubody');
-         pln($this->cfg->getAll()); //DI??
+//        pln(CSetting::$_usrInfo,'ubody');
+//         pln($this->cfg->getAll()); //DI??
         $dmsg = $this->ut->getSafeVar($_SESSION, "debug");
         $ui = $this->ut->getSafeVar(CSetting::$_usrInfo, "debug");
         (!empty($dmsg)) ? $dmsg = "<center>" . $dmsg . "</center>" : $dmsg = "";

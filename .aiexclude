@@ -1,0 +1,8 @@
+# Ignore large third-party JavaScript libraries
+public/js/less-1.5.1.js
+
+# Ignore debug logs generated in the db/logs directory
+db/logs/
+
+# Ignore the composer binary
+composer.phar

@@ -6,18 +6,12 @@ use MvcLite\CSetting;
 $this->_view_data['header_title'] = 'Front';
 
 $uname = $this->ut->getSafeVar($_SESSION, "loggedin", "raw");
-CSetting::$_usrInfo = $this->getUser($uname,"users");
-pln(CSetting::$_usrInfo,'Suin@front');
-pln($this->stg->get('_usrInfo'),'uin@front');
+$usrn = $this->getUser($uname,"users"); // query users table
+$this->stg->set('_usrInfo', $usrn);  // ← correct
+$this->stg->set('uinfo', $usrn);  // ← correct,  use uinfo going forward, _usrInfo old
+pln($this->stg->get('uinfo'),'suin@front');  // CCore::pln only after loggedin
 //pln($_SESSION,'s@front');
-/*
-self::$_usrInfo = $this->getUser($uname,"users");
-self::$_cfg["uinfo"]= self::$_usrInfo;
-$this->_profile = self::$_usrInfo;
-pln($this->_profile,'prf@front');
-pln(self::$_cfg["uinfo"],'ucfg');
-pln($_SESSION,'s@front');
-*/
+//pln($this->_profile,'prf@front');
 ?>
 This is front
 

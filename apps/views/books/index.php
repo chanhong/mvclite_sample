@@ -1,13 +1,13 @@
 <?php
 use MvcLite\CCore;
 $this->_view_data['header_title'] = 'Books';
-permDbg(CSetting::$_usrInfo,'_usrinfo');
-permDbg($pageData["profile"],'profile');
+//permDbg(CSetting::$_usrInfo,'_usrinfo');
+//permDbg($pageData["profile"],'profile');
+//pln(CSetting::$_usrInfo,'uin@books');
+//pln($_SESSION,'s@books');
 $usrQryUrl = $this->h->tap('/books/index');
 if (empty($pageData['arr'])) return;
 $recs = $pageData['arr'];
-//pln(CSetting::$_usrInfo,'uin@books');
-//pln($_SESSION,'s@books');
 ?>
   <script type="text/javascript">
   $( function() {

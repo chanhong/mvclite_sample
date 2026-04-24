@@ -22,7 +22,8 @@ class Users extends BaseController {
 
     public function start($args = false) {
 //var_dump(spl_object_id($this->db)); //int(16)
-        $ret = self::doAction($args, self::class);
+        $ret = $this->doAction($args, static::class);  // static resolve to calling class name      
+
     }
 
     public function index($args = false) {

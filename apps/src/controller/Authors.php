@@ -15,8 +15,11 @@ class Authors extends BaseController {
     }
 
     public function start($args = false) {
-
-        $ret = self::doAction($args, self::class);
+        /*
+        self::selfVsStatic(); // old static to object self:: (always CController) static::class (whoever call such as Authors)
+        self::selfVsStatic($this::class,"authors"); // old static to object self:: (always CController) static::class (whoever call such as Authors)
+*/
+        $ret = $this->doAction($args, static::class);  // static resolve to calling class name      
     }
 
     public function index($args = false) {

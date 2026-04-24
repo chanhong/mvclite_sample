@@ -40,8 +40,6 @@ defined('_MVCLOGIN')    || define('_MVCLOGIN',    '/login');
 defined('_MVCLOGOUT')   || define('_MVCLOGOUT',   '/logout');
 defined('_MVCREGISTER') || define('_MVCREGISTER', '/register');
 
-// Note: the original file had a typo — '"_DEBUG_ENABLED' (leading quote).
-// Corrected to '_DEBUG_ENABLED'.
 defined('_DEBUG_ENABLED') || define('_DEBUG_ENABLED', true);
 
 // ---------------------------------------------------------------------------
@@ -153,6 +151,8 @@ return array_merge($localcfg, [
         'main' => [
             ['title' => 'Home',     'path' => '/'],
             ['title' => 'Front',    'path' => '/front/index'],
+            ['title' => 'Static',    'path' => '/static/index'],
+            ['title' => 'Learn',    'path' => '/learn/index'],
             ['title' => 'Register', 'path' => _MVCREGISTER],
             ['title' => 'Login',    'path' => _MVCLOGIN],
             ['title' => 'Logout',   'path' => _MVCLOGOUT],
@@ -200,9 +200,33 @@ return array_merge($localcfg, [
                 ['title' => 'Authors List', 'path' => '/authors/index'],
                 ['title' => 'Users',        'path' => '/users/index'],
             ],
+            'learn' => [     
+                ['title' => 'Home',         'path' => '/'],
+            ],
+            'static' => [    
+                ['title' => 'Home',         'path' => '/'],
+            ],
         ],
     ],
+/*
+      // menu for learn
+  CCore._cfg["learn"] = new NameValueCollection {
+    // name, group, title
+    { "learn",",Lrn"},
+    { "lrnadmin","admin,Admin"},
+    { "userq","inq,UserQ"},
+    { "jsgrid","inq,"},
+    { "ko","inq,"},
+    { "jendo",","},
+    { "static",","},
+  };
+    // menu for static, nothing here, just a holder
+  CCore._cfg["static"] = new NameValueCollection
+  {
+    // name, group, title
+  };
 
+*/
     // -----------------------------------------------------------------------
     // Controller → action title map
     // If a title is not found here the router falls back to the action name.

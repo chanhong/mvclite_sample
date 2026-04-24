@@ -35,6 +35,11 @@ $cfgArray = require DOCROOT . '/conf/autoload/cfg.php';
 
 \MvcLite\CConfig::$_cfg = $cfgArray;
 
+// debug — remove after testing
+/*
+var_dump(\PhpLoaderLite\NsClassLoader::$classFolders);
+pln(class_exists('CFront') ? 'yes' : 'no', 'manual class_exists CFront');
+*/
 // ---------------------------------------------------------------------------
 // 3. Build the DI container
 //
@@ -47,6 +52,10 @@ $cfgArray = require DOCROOT . '/conf/autoload/cfg.php';
 
 $container = new \MvcLite\CContainer();
 
+/*
+Key styleUse for'cfg', 'db', 'auth'manually registered singletons
+'MvcLite\CFront'auto-wired classes
+*/
 // must be here
 $container->singleton('cfg',   fn() => new \MvcLite\CConfig($cfgArray));
 // --- Auth / error (use factory methods, not plain new) ---
@@ -71,4 +80,9 @@ $container->singleton('helper', fn() => new \MvcLite\CHelper());
 
 \MvcLite\CCore::setContainer($container);
 
-Router::start();
+//pCStat('CFront');
+// autowire test — remove after testing
+//$front = $container->make(\MvcLite\CFront::class);
+//pln(get_class($front), 'autowire test');
+
+(new Router())->start(); // DI: was Router::start()
