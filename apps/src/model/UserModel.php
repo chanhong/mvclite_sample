@@ -3,67 +3,77 @@ namespace MvcLite;
 use MvcLite\CUtil;
 use MvcLite\Ccore;
 
-class UserModel extends BaseModel {
+class UserModel extends BaseModel
+{
 
-    public function __construct($tname, $id = null) {
-        
-        parent::__construct($tname, $id = null); 
+    public function __construct($tname, $id = null)
+    {
+
+        parent::__construct($tname, $id = null);
     }
 
-    public function delete($id) {
-        
+    public function delete($id)
+    {
+
         if (ctype_digit($id)) {
             $where = "id ='$id'";
             self::Add2SessVar("feedback", "Deleted " . $id);
-            $this->_dbt("delete",['where'=>$where]);
+            $this->_dbt("delete", ['where' => $where]);
         }
     }
 
-    public function create($userInfo) {
-        
+    public function create($userInfo)
+    {
+// migrated away from md5
+
         $this->ut->debug($userInfo);
         extract($userInfo); // extract array into respective variables
-        if (!empty($this->_dbt("dbrow",['where'=>"username='$username'"]))) {
-            self::Add2SessVar("feedback", "Failed to create ".$userInfo['username'] . "!");
+        if (!empty($this->_dbt("dbrow", ['where' => "username='$username'"]))) {
+            self::Add2SessVar("feedback", "Failed to create " . $userInfo['username'] . "!");
             return false;
-        }; 
+        }
+        ;
 
         if (is_null($password))
             $password = $this->Auth->generateStrongPassword();
 
         srand(time());
         (!empty($level)) ? $nlevel = $level : $nlevel = "user";
-        
+
         $nextjvid = $this->_dbt("getnextid", "id");
         $userInfo["id"] = $nextjvid;
         $userInfo["level"] = $nlevel;
         $userInfo["nid"] = $this->Auth->newNid();
-        $userInfo["password"] = $this->Auth->md5Hash($password, $userInfo["nid"]);
-        $this->_dbt("insert",['fl'=>$userInfo]);
+        //        $userInfo["password"] = $this->Auth->md5Hash($password, $userInfo["nid"]);
+        $userInfo["password"] = password_hash($password, PASSWORD_DEFAULT);
+        $this->_dbt("insert", ['fl' => $userInfo]);
         self::Add2SessVar("feedback", $userInfo['username'] . " has been created!");
         return $nextjvid;
     }
 
-    public function edit($userInfo) {
-        
-        permDbg($userInfo,'userInfo in model');
+    public function edit($userInfo)
+    {
+// migrated away from md5
+        permDbg($userInfo, 'userInfo in model');
         extract($userInfo); // extract array into respective variables
         // Leave the password alone if it's not set
         if (!empty($password)) {
             // new password with nid as salt
-            $password = $this->Auth->md5Hash($password, $nid);
-            $sqlUpdList = ['username'=>$username, 'level'=>$level, 'password'=>$password, 'is_confirmed'=>$is_confirmed];
+//            $password = $this->Auth->md5Hash($password, $nid);
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            $sqlUpdList = ['username' => $username, 'level' => $level, 'password' => $password, 'is_confirmed' => $is_confirmed];
         } else {
-            $sqlUpdList = ['username'=>$username, 'level'=>$level, 'is_confirmed'=>$is_confirmed];
+            $sqlUpdList = ['username' => $username, 'level' => $level, 'is_confirmed' => $is_confirmed];
         }
-        $this->_dbt("update",['fl'=>$sqlUpdList, 'where'=>"id='$id'"]);
+        $this->_dbt("update", ['fl' => $sqlUpdList, 'where' => "id='$id'"]);
     }
-    
-// custom version of create, need to look further and compare
-    public static function createNewUser($username, $password = null) {
-        
-        $user_exists = $this->_dbt("dbrow",['where'=>"username ='$username'"]);
-        
+
+    // custom version of create, need to look further and compare
+    public static function createNewUser($username, $password = null)
+    {
+
+        $user_exists = $this->_dbt("dbrow", ['where' => "username ='$username'"]);
+
         if ($user_exists > 0)
             return false;
 
@@ -80,8 +90,9 @@ class UserModel extends BaseModel {
     }
 
 
-    public function changeCurrentUsername($new_username) {
-       
+    public function changeCurrentUsername($new_username)
+    {
+
         srand(time());
         $this->user->nid = Auth::newNid();
         $this->nid = $this->user->nid;
@@ -91,8 +102,9 @@ class UserModel extends BaseModel {
         $this->generateBCCookies();
     }
 
-    public function changeCurrentPassword($new_password) {
-        
+    public function changeCurrentPassword($new_password)
+    {
+
         srand(time());
         $this->user->nid = self::newNid();
         $this->user->password = $this->Auth->md5Hash($new_password, $this->user->nid);
@@ -101,7 +113,8 @@ class UserModel extends BaseModel {
         $this->generateBCCookies();
     }
 
-    public static function changeUsername($id_or_username, $new_username) {
+    public static function changeUsername($id_or_username, $new_username)
+    {
         if (ctype_digit($id_or_username))
             $u = new User($id_or_username);
         else {
@@ -115,7 +128,8 @@ class UserModel extends BaseModel {
         }
     }
 
-    public static function changePassword($id_or_username, $new_password) {
+    public static function changePassword($id_or_username, $new_password)
+    {
         if (ctype_digit($id_or_username))
             $u = new User($id_or_username);
         else {
@@ -129,15 +143,23 @@ class UserModel extends BaseModel {
             $u->update();
         }
     }
-    public function isUserExist($username) {
+    public function isUserExist($username)
+    {
 
-        permDbg($username, "usrname");    
+        permDbg($username, "usrname");
         $user_exists = null;
         if (!empty($username)) {
-            $user_exists = $this->_dbt("dbrow",['where'=>"username ='$username'"]);
-            permDbg($user_exists, "usr");    
-        } 
+            $user_exists = $this->_dbt("dbrow", ['where' => "username ='$username'"]);
+            permDbg($user_exists, "usr");
+        }
         return $user_exists;
     }
 
+    public function updatePassword($userId, $newHashedPassword)
+    {
+        $this->_dbt("update", [
+            'fl' => ['password' => $newHashedPassword],
+            'where' => "id='$userId'"
+        ]);
+    }
 }
