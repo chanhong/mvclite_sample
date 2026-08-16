@@ -2,7 +2,9 @@
 <html>
 
 <head>
-<?php
+    <link rel="stylesheet" type="text/css" media="screen" href="/public/css/screen.css" />
+<?php     include_once("widgets/hdrcdncssjs.php");    
+    include_once("widgets/hdrcss.php"); 
 
 ?>
 </head>

@@ -1,0 +1,59 @@
+﻿<script type="text/javascript">
+  $().ready(function () {
+    var template = jQuery.validator.format($("#template").val());
+    function addRow() {
+      $(template(i--)).appendTo("#jvMailto tbody");         // dynamic append to this table id jvMailto WORKING!!!
+    }
+    var i = 999;
+    // start with one row
+    addRow();
+    // add more rows on click
+    $("#add").click(addRow);
+  });
+</script>
+<style type="text/css">
+  form.cmxform {
+    width: 50em;
+  }
+</style>
+
+<textarea style="display:none" id="template">
+<tr class="jvtable">
+<script type="text/javascript">
+  $(function () {
+    $("#full_email-{0}").autocomplete({
+      source: "/ejvnetdev/?t=odata&a=_ldapuw&c=emailuw",
+      minLength: 2,
+      select: function (event, ui) {
+        $("#person-{0}").val(ui.item.cn);
+        $("#box_num-{0}").val(ui.item.mailstop);
+      }
+    });
+    $("#person-{0}").autocomplete({
+      source: "/ejvnetdev/?t=odata&a=_ldapuw&c=name",
+      minLength: 2,
+      select: function (event, ui) {
+        $("#full_email-{0}").val(ui.item.mail);
+        $("#box_num-{0}").val(ui.item.mailstop);
+      }
+    });
+  });
+</script>
+<td class="jvtable" width="10px" align="center">
+<input type=checkbox id="delmailto-{0}" name="delmailto-{0}">
+</td>
+<td class="jvtable" width="260px">
+<input class="required" title="Email is required!" type="text" id="full_email-{0}" name="full_email-{0}" maxlength=35 size=35 value="Full Email">
+</td>
+<td class="jvtable" width="160px">
+<input class="required" title="Person name is required!" type="text" id="person-{0}" name="person-{0}" maxlength=25 size=30 value="pserson">
+</td>
+<td class="jvtable" align="right">
+<input type="text" id="box_num-{0}" name="box_num-{0}" maxlength=6 size="6 " value="0">
+</td>
+<td class="jvtable" align="right">
+<input type="text" id="copies-{0}" name="copies-{0}" size=1 value="0"></td>
+<td class="jvtable" align="right">
+<input type="text" id="attach-{0}" name="attach-{0}" size=1 value="0"></td>
+</tr>
+</textarea>

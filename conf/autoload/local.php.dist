@@ -27,10 +27,11 @@ $sqlite = [
     ],
 ];
 
+$db=[];
 if ($dbtype == "pdo-mysql") {
     $db = $pdomysql;
 } else if ($dbtype == "pdo-sqlsrv") {
-    $db = $pdomysql;
+    $db = $pdosqlsrv;
 } else if ($dbtype == "sqlite") {
     $db = $sqlite;
 }

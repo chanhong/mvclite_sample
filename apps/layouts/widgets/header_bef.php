@@ -5,7 +5,7 @@ $buff = "";
 foreach (@$pageData['meta'] as $meta) {
     $buff .= $this->h->meta($meta);
 }
-if ($pageData['title']!="") {
-        $buff .= $this->h->tag("title", $pageData['title']);
+if (isset($pageData['title']) && $pageData['title']!="") {
+        $buff .= $this->h->tag("title", $pageData['title'])??'';
 }
 echo $buff;

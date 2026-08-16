@@ -15,11 +15,11 @@
         "twbs/bootstrap": "^4.5",        
         "chanhong/pdolite": "1.0.x-dev",
         "chanhong/phploaderlite": "1.0.x-dev",
-        "php": ">=5.3.0"
+        "php": ">=8.0"
     },
     "autoload": {
         "psr-4": {
-            "MvcLite\\": "lib/mvclite/src/"
+            "MvcLite\\": "apps/Lib/mvclite/src/"
         }
     },
     "autoload-dev": {

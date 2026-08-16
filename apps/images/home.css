@@ -1,0 +1,45 @@
+BODY {
+	BACKGROUND: #ffffff; COLOR: black
+}
+H1 {
+	FONT-FAMILY: arial, helvetica, sans-serif
+}
+H2 {
+	FONT-FAMILY: arial, helvetica, sans-serif
+}
+H3 {
+	FONT-FAMILY: arial, helvetica, sans-serif
+}
+H4 {
+	FONT-FAMILY: arial, helvetica, sans-serif
+}
+H5 {
+	FONT-FAMILY: arial, helvetica, sans-serif
+}
+H6 {
+	FONT-FAMILY: arial, helvetica, sans-serif
+}
+ADDRESS {
+	FONT-FAMILY: arial, helvetica, sans-serif; FONT-SIZE: 75%
+}
+.nav {
+	padding-right: 8px;
+}
+A:link {
+	COLOR: #333399
+}
+A:visited {
+	COLOR: #336666
+}
+.barlink {
+	COLOR: #ffffff; FONT-FAMILY: arial, helvetica, sans-serif; FONT-SIZE: 0.75em; FONT-WEIGHT: bold; TEXT-DECORATION: none;
+}
+.navlink {
+	FONT-FAMILY: arial, helvetica, sans-serif; FONT-SIZE: 0.75em; FONT-WEIGHT: bold; TEXT-DECORATION: none;
+}
+.navlinkbig {
+	FONT-FAMILY: arial, helvetica, sans-serif; FONT-SIZE: 0.85em; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.navarea {
+	BACKGROUND: #DCE1D7; COLOR: #000000
+}

@@ -4,14 +4,8 @@
 <head>
 <?php
     echo @$pageData['header_bef'];
-    echo $this->h->css($this->vendorFolder . '/' .'twbs/bootstrap/dist/css/bootstrap.min.css');
-    echo $this->h->css($this->publicFolder . '/' .'css/sticky-footer-navbar.css');
-    echo $this->h->css($this->publicFolder . '/' .'css/dashboard.css');  
-    echo $this->h->css($this->publicFolder . '/' .'css/custom.css');
-    echo $this->h->jsSrc($this->vendorFolder . '/' ."components/jquery/jquery.min.js");
-    echo $this->h->jsSrc($this->vendorFolder . '/' ."components/jqueryui/jquery-ui.min.js");
-    echo $this->h->jsSrc($this->vendorFolder . '/' ."twbs/bootstrap/dist/js/bootstrap.min.js");
-    echo $this->h->jsSrc($this->publicFolder . '/' ."js/ie-emulation-modes-warning.js");
+    include_once("widgets/hdrcdncssjs.php");
+    include_once("widgets/hdrcss.php");    
 ?>
 </head>
 

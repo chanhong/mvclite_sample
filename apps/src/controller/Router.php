@@ -2,6 +2,8 @@
 namespace MvcLite;
 #namespace MvcSample;
 
+use MvcLite\CUtil;
+
 class Router extends BaseController
 {
 
@@ -9,10 +11,15 @@ class Router extends BaseController
     {
 
         parent::__construct();
+                $this->layout = "bootstrap";
+CUtil::setActiveCtrl(CUtil::qsValue() ?? []);                
     }
 
     public function start($args = false)
     { // DI: was static
+
+        //pln($sel, "Router");
+//          pln($_SESSION['uinfo'], "uinfo");
         // must get userinfo from SESSION, when redirect or new route, only session will retain the value
         if (!empty($_SESSION['cache']['uinfo'])) {
             CSetting::$_usrInfo = $_SESSION['cache']['uinfo'];

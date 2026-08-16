@@ -11,7 +11,6 @@ class Books extends BaseController {
         $this->model = new BookModel($this->meTable);  
         $this->_view_data['profile'] = CSetting::$_usrInfo;            
 //        $this->_view_data['profile'] = CCore::$_usrInfo;            
-        $this->_view_data['submenu'] = $this->h->getLiMenu($this->cfg->get('menu.submenu.front'));
     }
 
     public function start($args = false) {

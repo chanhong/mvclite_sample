@@ -1,7 +1,7 @@
 <?PHP
 use MvcLite\CCore;
 use mvclite\CSetting;
-//pln($this->stg->get('_usrInfo'),'uin@user');
+//pln($this->stg->_get('_usrInfo'),'uin@user');
 //pln($_SESSION,'s@user');
 $this->_view_data['header_title'] = 'Users';
 $usrQryUrl = $this->h->tap('/users/index');

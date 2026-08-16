@@ -1,0 +1,48 @@
+/* 
+    Document   : menu
+    Created on : Oct 7, 2010, 1:20:26 PM
+    Author     : cong
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/* style sheet for Online JV navigation menu */
+#hmenu {
+/*	background-color:#B9CFB5; */
+    background-color:#9cAF99;
+/*	background-color:#A0BF9B; */
+    padding:3px;
+    margin: 0 auto;          
+    text-align:center;
+    color: White;
+    width:99%;
+}
+
+#hnav {
+    color: #eee;
+    padding: 5px;
+    margin: 0;
+    font-weight: Bold;
+}
+
+#hnav a {
+    color: #1B3F14;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    font-weight: Bold;
+}
+
+#hnav a:hover {
+    background: #EDFEEB;
+}
+/* style sheet for Online JV navigation menu */

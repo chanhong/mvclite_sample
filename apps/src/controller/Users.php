@@ -16,10 +16,10 @@ class Users extends BaseController
     {
 
         parent::__construct();
+                $this->layout = "bootstrap";        
         $this->meTable = "users";
         $this->model = new UserModel($this->meTable);
-        //        $this->_view_data['cmenu'] = $this->h->getLiMenu($this->cfg->get('menu.cmenu.front'));        
-        $this->_view_data['submenu'] = $this->h->getLiMenu($this->cfg->get('menu.submenu.user'));
+       
     }
 
     public function start($args = false)
@@ -62,7 +62,7 @@ class Users extends BaseController
     public function _winlogin($args = false)
     {
 
-        $this->_view_data['winuser'] = $winUser = $this->Auth->winUser();
+        $this->_view_data['winuser'] = $username = $winUser = $this->Auth->winUser();
         if (!empty($this->post['winbtnlogin'])) {
             $entity = $msg = "";
             if (!empty($winUser)) {
@@ -95,12 +95,12 @@ class Users extends BaseController
             // 1st pass: MD5 where clause (pre-migration users)
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
             $where = "username='$username' and password='" . $hashed_password . "' and is_confirmed = '1'";
-            $userinfo = self::isAuthorized($password, $where, $this->meTable);
+            $userinfo = self::dbIsAuthorized($password, $where, $this->meTable);
 
             // 2nd pass: username-only lookup (post-migration bcrypt users)
             if (empty($userinfo)) {
                 $where = "username='$username' and is_confirmed = '1'";
-                $userinfo = self::isAuthorized($password, $where, $this->meTable);
+                $userinfo = self::dbIsAuthorized($password, $where, $this->meTable);
             }
 
             if (!empty($userinfo)) {

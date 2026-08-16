@@ -1,0 +1,37 @@
+﻿@using Co;
+
+@{
+  Layout = CUtils.GetLayout("_bootstrap_2c");
+  if (PageData["Title"] == AppState["Name"])
+  {
+    PageData["Title"] = "KO Read";
+  }
+}
+
+<h2>Index</h2>
+
+<p>
+  Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+  <tr>
+    <th>
+      Course Name
+    </th>
+    <th>
+      Course Description
+    </th>
+    <th></th>
+  </tr>
+  <tbody data-bind="foreach: Courses">
+    <tr>
+      <td data-bind="text: CourseName"></td>
+      <td data-bind="text: CourseDescription"></td>
+      <td>
+        <a data-bind="attr: { 'href': 'Url.Action(" Edit", "Home" )/' + CourseID }" class="btn-link">Edit</a>
+        <a data-bind="attr: { 'href': 'Url.Action(" Delete", "Home" )/' + CourseID }" class="btn-link">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<script src="~/Scripts/KOScripts/KORead.js"></script>

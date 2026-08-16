@@ -1,0 +1,53 @@
+﻿/**********************************
+
+Name: EditForm Styles
+
+***********************************/
+form.EditForm {
+  width: 570px;
+  font-size: 90%;
+  color: #333;
+}
+
+form.EditForm fieldset {
+  padding: 1em;
+  font: 90%/1 sans-serif;
+  border: 1px solid #B9CFB5;
+}
+
+form.EditForm label {
+  float: left;
+  width: 40%;
+  margin-right: 0.5em;
+  padding-top: 0.2em;
+  text-align: right;
+  font-weight: bold;
+}
+
+form.EditForm input {
+  width: 50%;
+}
+
+  form.EditForm legend {
+    color: #333;
+    width: auto;
+  }
+
+form.EditForm fieldset p, form.EditForm fieldset fieldset {
+  padding: 2px 0px 0px;
+}
+
+form.EditForm fieldset {
+  background: none;
+}
+form.EditForm legend {
+  padding-left: 0;
+}
+
+form.EditForm label.error, label.error {
+  color: red;
+  font-style: italic
+}
+form.EditForm .gray * {
+  color: gray;
+}

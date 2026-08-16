@@ -5,7 +5,6 @@ class Debug extends BaseController {
     public function __construct() {
         parent::__construct();
         $this->layout = "bootstrap";
-        $this->_view_data['submenu'] = $this->h->getLiMenu($this->cfg->get('menu.submenu.debug'));
 
     }
 

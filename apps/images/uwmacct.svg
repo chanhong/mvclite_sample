@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="122px"
+   height="30px"
+   viewBox="0 0 122 30"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="uwmacct.svg"
+   inkscape:version="0.92.1 r15371"
+   inkscape:export-filename="E:\work\ejvnet\ejvnet\Shared\images\uwmacct.png"
+   inkscape:export-xdpi="156.8"
+   inkscape:export-ydpi="156.8">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="4.1967213"
+     inkscape:cx="27.878906"
+     inkscape:cy="75.320312"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1714"
+     inkscape:window-height="1101"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs804" />
+  <metadata
+     id="metadata807">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot853"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:18.66666667px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion855"><rect
+           id="rect857"
+           width="6.9101562"
+           height="20.730469"
+           x="21.207031"
+           y="-15.035156" /></flowRegion><flowPara
+         id="flowPara859" /></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:21.56394958px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.95456046"
+       x="-0.011978602"
+       y="17.443104"
+       id="text863"
+       transform="scale(0.95456053,1.0476025)"><tspan
+         sodipodi:role="line"
+         x="-0.011978602"
+         y="17.443104"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.10805511px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face';stroke-width:0.95456046"
+         id="tspan869">UW Medicine</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.91616535px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.02339053"
+       x="38.818581"
+       y="27.487629"
+       id="text863-6"
+       transform="scale(1.0233905,0.97714412)"><tspan
+         sodipodi:role="line"
+         x="38.818581"
+         y="27.487629"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.18712425px;font-family:'Yu Gothic UI';-inkscape-font-specification:'Yu Gothic UI Italic';stroke-width:1.02339053"
+         id="tspan869-6">Accounting</tspan></text>
+  </g>
+</svg>

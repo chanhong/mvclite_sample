@@ -1,0 +1,40 @@
+/* base css for both JV archive file and JV Online */
+.jvbody {
+    font-family: Calibri;
+    background-color: #FDFFFD;
+    color: #6F3E3E;
+}
+/*
+fix max width
+*/
+.jvExplanation {
+    font-family: "Courier New";
+    text-wrap: normal;     
+    word-wrap: break-word;
+    word-break: break-all;
+}
+table.jvtable { 
+    margin: 0 auto;      
+    width: 100%;
+    text-align: center;
+    border: 1px solid #e2efe0;
+    border-collapse: separate; 	
+}
+th.jvtable, .jvcolhdr {
+    font-size: larger;
+    text-align: center;
+    background-color: #B9CFB5; 
+    color: #6F3E3E;
+}
+td.jvtable {  
+    /*	border: 1px dashed #ffefff; */
+    /*    text-align: center; */
+    vertical-align: top;
+}
+.jvheader {
+    font-size: larger;
+    text-align: center;
+    background-color: #e2efe0; 
+    color: #6F3E3E;
+    padding: 2px;	
+}

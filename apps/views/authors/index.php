@@ -3,7 +3,7 @@ use MvcLite\CCore;
 use mvclite\CSetting;
 
 $this->_view_data['header_title'] = 'Authors';
-//pln($this->stg->get('_usrInfo'),'_usrinfo');
+//pln($this->stg->_get('_usrInfo'),'_usrinfo');
 //pln($pageData["profile"],'profile');
 //pln($_SESSION,'s@authors');
 

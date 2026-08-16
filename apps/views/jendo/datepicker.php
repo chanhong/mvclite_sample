@@ -1,0 +1,26 @@
+<?php
+  $Layout = CUtil::GetLayout("_bootstrap_2c");
+  if ($PageData["Title"] == $AppState["Name"])
+  {
+    PageData["Title"] = "Date Picker";
+  }
+?>
+<div id="example">
+  <div class="box">
+    <h4>Kendo UI &hearts; Bootstrap</h4>
+    <input id="dtepicker" />
+    <script>
+      $(function () {
+        $("#dtepicker").kendoDatePicker();
+      });
+    </script>
+    <ul>
+      <li style="line-height: 1.3em; padding-bottom: 1em;">
+        This demo shows how to use Kendo UI and <a href="http://getbootstrap.com/" target="_blank" title="Bootstrap">Twitter Bootstrap</a> on the same page.
+      </li>
+      <li>
+        <a class="k-button k-primary" target="_blank" href="https://demos.telerik.com/kendo-ui/bootstrap/">Launch Demo</a>
+      </li>
+    </ul>
+  </div>
+</div>

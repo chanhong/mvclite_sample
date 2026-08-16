@@ -1,5 +1,7 @@
 {
     "codegpt.apiKey": "ollama",
     "codegpt.baseUrl": "http://192.168.68.114:11434",
-    "php.version": "8.5"
+    "php.version": "8.5",
+    "CodeGPT.apiKey": "OpenRouter",
+    "aiderAgent.provider": "local"
 }    

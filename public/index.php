@@ -5,14 +5,12 @@
  *
  * Responsibilities:
  *   1. Bootstrap the environment (session, constants, autoloader).
- *   2. Build the DI container with all singleton registrations.
- *   3. Sync the legacy CConfig::$_cfg static bridge (remove once migrated).
- *   4. Hand off to the Router.
+ *   2. Populate legacy static bridges.
+ *   3. Get the DI container from initDI() in global.php.
+ *   4. Wire static facades and sync boot-time values.
+ *   5. Hand off to the Router.
  *
- * New classes that have only type-hinted constructor parameters do NOT need
- * a manual entry here — CContainer::resolve() will auto-wire them on first
- * use via reflection.  Only register services that need special construction
- * (credentials, factory methods, or primitives that can't be type-hinted).
+ * To add a new service: add it to initDI() in global.php only.
  */
 
 use MvcLite\Router;
@@ -20,69 +18,72 @@ use MvcLite\Router;
 session_start();
 
 define('DOCROOT', realpath(dirname(__FILE__) . '/../'));
-require_once DOCROOT . '/conf/bootstrap.php';  
+require_once DOCROOT . '/conf/bootstrap.php';
 
 // ---------------------------------------------------------------------------
-// 1. Load raw configuration array from cfg.php
+// STEP 1 — Load raw configuration arrays
 // ---------------------------------------------------------------------------
 
 $cfgArray = require DOCROOT . '/conf/autoload/cfg.php';
+$stgArray = require DOCROOT . '/conf/autoload/stg.php';
 
 // ---------------------------------------------------------------------------
-// 2. Legacy bridge — lets any code still using CConfig::$_cfg keep working.
-//    Delete this block once all call-sites use $cfg->get('key') instead.
+// STEP 2 — Populate static bridges
+//   Legacy code that reads these directly keeps working until fully migrated.
 // ---------------------------------------------------------------------------
 
-\MvcLite\CConfig::$_cfg = $cfgArray;
-
-// debug — remove after testing
-/*
-var_dump(\PhpLoaderLite\NsClassLoader::$classFolders);
-pln(class_exists('CFront') ? 'yes' : 'no', 'manual class_exists CFront');
-*/
-// ---------------------------------------------------------------------------
-// 3. Build the DI container
-//
-//    Rule of thumb:
-//      • Register here when construction needs something the container
-//        cannot infer from type hints alone (e.g. a config array, a salt
-//        string, or a named factory method).
-//      • Everything else is auto-wired by CContainer::resolve() on demand.
-// ---------------------------------------------------------------------------
-
-$container = new \MvcLite\CContainer();
-
-/*
-Key styleUse for'cfg', 'db', 'auth'manually registered singletons
-'MvcLite\CFront'auto-wired classes
-*/
-// must be here
-$container->singleton('cfg',   fn() => new \MvcLite\CConfig($cfgArray));
-// --- Auth / error (use factory methods, not plain new) ---
-$container->singleton('auth',  fn() => \MvcLite\CAuth::getAuth('MvcLiteSALT'));
-$container->singleton('error', fn() => \MvcLite\CError::getError());
-
-// optional due to CCore::resolve auto wired DI but could end up with muliple instances
-// --- Infrastructure / external ---
-$container->singleton('db',    fn() => new \PdoLite\PdoLite());
-
-// --- Config & settings (need constructor arguments) ---
-$container->singleton('stg',   fn() => new \MvcLite\CSetting());
-
-// --- Utilities (auto-wireable, but registered explicitly for clarity) ---
-$container->singleton('util',   fn() => new \MvcLite\CUtil());
-$container->singleton('helper', fn() => new \MvcLite\CHelper());
-// optional due to CCore::resolve auto wired DI but could end up with muliple instances
+\MvcLite\CConfig::$_cfg  = $cfgArray;
+\MvcLite\CCore::$_cfg    = $cfgArray;
+\MvcLite\CCore::$_stg    = $stgArray;
+\MvcLite\CSetting::$_stg = $stgArray;
 
 // ---------------------------------------------------------------------------
-// 4. Make the container globally available to CCore, then start routing
+// STEP 3 — Build task→group master list (set in CUtil::getTopMenu())
+// ---------------------------------------------------------------------------
+
+// \MvcLite\CUtil::TaskGroup("_cfgtg");
+
+// ---------------------------------------------------------------------------
+// STEP 4 — Set active controller + login URL + top menu from query string
+// ---------------------------------------------------------------------------
+
+// \MvcLite\CUtil::setActiveCtrl(\MvcLite\CUtil::qsValue() ?? []); // even empty, set selctrl from default value
+\MvcLite\CUtil::setActiveCtrl(); // even empty, set selctrl from default value
+
+// ---------------------------------------------------------------------------
+// STEP 5 — Build the DI container (all registrations live in initDI())
+// ---------------------------------------------------------------------------
+
+$container = initDI($cfgArray, $stgArray);  // ← one line, all services registered
+
+// ---------------------------------------------------------------------------
+// STEP 6 — Make the container globally available to CCore
 // ---------------------------------------------------------------------------
 
 \MvcLite\CCore::setContainer($container);
 
-//pCStat('CFront');
-// autowire test — remove after testing
-//$front = $container->make(\MvcLite\CFront::class);
-//pln(get_class($front), 'autowire test');
+// ---------------------------------------------------------------------------
+// STEP 7 — Wire static facades to their DI instances
+// ---------------------------------------------------------------------------
 
-(new Router())->start(); // DI: was Router::start()
+\MvcLite\CConfig::setInstance($container->make('cfg'));
+\MvcLite\CSetting::setInstance($container->make('stg'));
+
+// STEP 7b — Wire CUtil facade
+\MvcLite\CUtil::setInstance($container->make('util'));
+
+// ---------------------------------------------------------------------------
+// STEP 8 — Sync boot-time values into DI instances
+// ---------------------------------------------------------------------------
+
+// cfg: seed the instance with the full config array
+$container->make('cfg')->setAll($cfgArray);
+
+// stg: already seeded at construction via initDI() — no sync needed.
+// CSetting::set() keeps $_stg and the instance in sync from here on.
+
+// ---------------------------------------------------------------------------
+// STEP 9 — Start routing
+// ---------------------------------------------------------------------------
+
+(new Router())->start();

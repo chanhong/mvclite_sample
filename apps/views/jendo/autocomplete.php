@@ -1,0 +1,84 @@
+
+<?php
+  /**/
+  $Layout = CUtil::GetLayout("_bootstrap_2c");
+
+  if ($PageData["Title"] == CConfig::get("Name"))
+  {
+    $PageData["Title"] = "AutoComplete";
+  }
+
+?>
+
+<div id="example">
+  <div class="demo-section k-content">
+    <h4><label for="countries">Choose shipping countries:</label></h4>
+    <input id="countries" style="width: 100%;" />
+    <div class="demo-hint">Start typing the name of an European country</div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      var data = [
+        "Albania",
+        "Andorra",
+        "Armenia",
+        "Austria",
+        "Azerbaijan",
+        "Belarus",
+        "Belgium",
+        "Bosnia & Herzegovina",
+        "Bulgaria",
+        "Croatia",
+        "Cyprus",
+        "Czech Republic",
+        "Denmark",
+        "Estonia",
+        "Finland",
+        "France",
+        "Georgia",
+        "Germany",
+        "Greece",
+        "Hungary",
+        "Iceland",
+        "Ireland",
+        "Italy",
+        "Kosovo",
+        "Latvia",
+        "Liechtenstein",
+        "Lithuania",
+        "Luxembourg",
+        "Macedonia",
+        "Malta",
+        "Moldova",
+        "Monaco",
+        "Montenegro",
+        "Netherlands",
+        "Norway",
+        "Poland",
+        "Portugal",
+        "Romania",
+        "Russia",
+        "San Marino",
+        "Serbia",
+        "Slovakia",
+        "Slovenia",
+        "Spain",
+        "Sweden",
+        "Switzerland",
+        "Turkey",
+        "Ukraine",
+        "United Kingdom",
+        "Vatican City"
+      ];
+
+      //create AutoComplete UI component
+      $("#countries").kendoAutoComplete({
+        dataSource: data,
+        filter: "startswith",
+        placeholder: "Select country...",
+        separator: ", "
+      });
+    });
+  </script>
+</div>

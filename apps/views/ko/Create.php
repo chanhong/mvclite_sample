@@ -1,0 +1,36 @@
+﻿@using Co;
+@{
+  //@model MVCCRUDKnockout.Models.Course
+  Layout = CUtils.GetLayout("_bootstrap_2c");
+  PageData["Title"] = "KO Create";
+  //  @Html.ActionLink("Back to List", "Read")
+}
+
+<div class="form-horizontal">
+  <h4>Course</h4>
+  <hr>
+
+  <div class="form-group">
+    <label class="control-label col-md-2" for="CourseName">CourseName</label>
+    <div class="col-md-10">
+      <input class="form-control text-box single-line" id="CourseName" name="CourseName" type="text" value="" data-bind="value: CourseName">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-2" for="CourseDescription">CourseDescription</label>
+    <div class="col-md-10">
+      <input class="form-control text-box single-line" id="CourseDescription" name="CourseDescription" type="text" value="" data-bind="value: CourseDescription">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <input type="button" data-bind="click: createCourse" value="Create" class="btn btn-default">
+    </div>
+  </div>
+</div>
+
+<div>
+</div>
+<script src="~/Scripts/KOScripts/KOCreate.js"></script>

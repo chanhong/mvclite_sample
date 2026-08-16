@@ -1,6 +1,6 @@
   <?php
   $this->_view_data['header_title'] = 'Static Page';
-    $file=CString::FixBackSlash($this->cfg->path['view']).'/'.basename(__DIR__).'/css/static.css';
+    $file=CString::FixBackSlash($this->cfg->path['view']).'/'.basename(__DIR__).'/_r_/static.css';
 
   /*
   Layout = CUtils.GetLayout("_static_top");
@@ -31,7 +31,7 @@
     */
 
 ?>
-<link rel="stylesheet" href="$file" />
+<link rel="stylesheet" href="<?=$file; ?>" />
 <style>
 
 </style>

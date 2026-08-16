@@ -9,9 +9,7 @@ class Authors extends BaseController {
         $this->meTable = "authors";         
         $this->model = new AuthorModel($this->meTable);   
         $this->_view_data['profile'] = CSetting::$_usrInfo;            
-//        $this->_view_data['profile'] = $this->stg->get('_usrInfo'); 
-
-        $this->_view_data['submenu'] = $this->h->getLiMenu($this->cfg->get('menu.submenu.front'));
+//        $this->_view_data['profile'] = $this->stg->_get('_usrInfo'); 
     }
 
     public function start($args = false) {

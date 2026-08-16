@@ -1,17 +1,18 @@
 <?php
-use MvcLite\CAuth;
 use MvcLite\CCore;
-use MvcLite\CSetting;
+use MvcLite\CSecs;
+use MvcLite\CUtil;
+use MvcLite\CString;
 
-$this->_view_data['header_title'] = 'Front';
-
-$uname = $this->ut->getSafeVar($_SESSION, "loggedin", "raw");
-$usrn = $this->getUser($uname,"users"); // query users table
-$this->stg->set('_usrInfo', $usrn);  // ← correct
-$this->stg->set('uinfo', $usrn);  // ← correct,  use uinfo going forward, _usrInfo old
-pln($this->stg->get('uinfo'),'suin@front');  // CCore::pln only after loggedin
-//pln($_SESSION,'s@front');
-//pln($this->_profile,'prf@front');
-?>
-This is front
+  // don't set layout in index for consistency and avoid double layout
+  $_qsa = CCore::qs2nvWithDefaultValue();
+  CUtil::setActiveCtrl($_qsa);
+CUtil::setLoginUrl()  ;
+  $PageData["Title"] = "Front Page";
+  CSecs::setUsersInfo(); // MUST set it before it is being used in the class
+  $retViewFile = CUtil::getReturnViewFileFromSess();
+  $vFile = (CString::IsEmpty($retViewFile) == false)
+    ? $retViewFile // return to view before redirect to login
+    : "_main.php";
+include($vFile);
 

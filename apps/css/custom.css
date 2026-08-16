@@ -1,0 +1,186 @@
+/* my custom css code 
+ set a max-width for horizontal fluid layout and make it centered 
+ */
+
+.footer {
+  color: #999999;
+  text-align: right;
+  font-size: smaller;
+  padding: 10px;
+}
+
+  .footer a {
+    color: #999999;
+    padding-right: 13px;
+  }
+
+.mainbody {
+  background-image: url('../images/background.png');
+  /* must batch #footer width if use fixed bottom */
+  width: 98%;
+  background: none repeat scroll 0 0 transparent;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: arial, helvetica, sans-serif;
+  min-height: 80%;
+  height: auto;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.main-content {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  max-width: 100%;
+}
+
+.main-body {
+  text-align: center;
+  max-width: 90%;
+}
+
+#topHeader {
+/*  background-image: url('../images/UWMedCenter.jpg'); 
+  background-position: left;
+  background-repeat: no-repeat;
+  */
+  color: #eeeeee;
+  height: 70px;
+  margin: 0 auto;
+  padding-right: 8px;
+  text-align: right;
+  font-size: 2em;
+  line-height: 2em;
+  /* to vertical center title text */
+}
+
+.hmenu {
+  background: #eaeaf1;
+  /*  font-size: 12px; */
+  font-size: 14px;
+  padding-left: 15px;
+  padding-right: 0px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  /*
+      padding-top: 0;
+  padding-bottom: 0;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  line-height: 22px;
+  padding-right: 8px;
+  text-align: right;
+  */
+}
+
+.list-group {
+  margin: auto;
+  float: right;
+  padding-top: 0;
+}
+
+.vmenu {
+  text-align: left;
+  float: right;
+  max-width: 10%;
+  background: #eaeaf1;
+  font-size: 13px;
+  padding-left: 5px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.screenOdd {
+  text-align: left;
+  background-color: #fdfffc;
+}
+
+.screenEven {
+  text-align: left;
+  background-color: #e2efe0;
+}
+table.jvtable {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #e2efe0;
+  border-collapse: separate;
+}
+
+th.jvtable, .jvcolhdr {
+  /*  font-size: larger; #e2efe0 #F6FAEE */
+  text-align: center;
+  background-color: #B9CFB5;
+  color: #6F3E3E;
+  /*
+  background-color: #eaeaf1;
+  color: #6F3E3E;
+    */
+}
+
+td.jvtable {
+  /*	border: 1px dashed #ffefff; */
+  /*    text-align: center; */
+  vertical-align: top; 
+}
+
+.txtRt {
+  text-align: right;
+}
+.txtReadOnly {
+  background-color: lightgray;
+}
+
+/*
+.navcontainer {
+  color: #eeeeee;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  list-style-type: none;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+}
+
+.topnav {
+  background: #333399;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+   valign 
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 13px;
+  line-height: 36px;
+}
+
+.bottomnav {
+  background: #5a5a93;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+   valign 
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 13px;
+  line-height: 36px;
+}
+
+
+#liMenu li {
+  display: inline;
+}
+
+#liMenu li a {
+  color: #ffffff;
+  padding-right: 8px;
+}
+
+.containerex {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 100%;
+    text-align: center;
+}
+*/

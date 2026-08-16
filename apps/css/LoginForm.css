@@ -1,0 +1,44 @@
+﻿/**********************************
+
+Name: loginform Styles
+
+***********************************/
+form.LoginForm {
+	width: 370px; 
+/*  width: 30%; */
+  font-size: 90%;
+/*  font-size: 1.0em; */
+  color: #333;
+}
+
+form.LoginForm legend {
+  padding-left: 0;
+}
+
+  form.LoginForm legend, form.LoginForm label {
+    width: auto;
+    color: #333;
+  }
+
+form.LoginForm fieldset {
+  border: 1px solid #B9CFB5;
+}
+
+form.LoginForm fieldset fieldset {
+  background: none;
+}
+
+form.LoginForm fieldset p, form.LoginForm fieldset fieldset {
+  padding: 5px 10px 7px;
+}
+
+form.LoginForm label.error, label.error {
+  /* remove the next line when you have trouble in IE6 with labels in list */
+  color: red;
+  font-style: italic
+}
+
+
+form.LoginForm .gray * {
+  color: gray;
+}
