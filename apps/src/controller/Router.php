@@ -11,8 +11,9 @@ class Router extends BaseController
     {
 
         parent::__construct();
-                $this->layout = "bootstrap";
-CUtil::setActiveCtrl(CUtil::qsValue() ?? []);                
+        $this->layout = "bootstrap";
+        CUtil::setActiveCtrl(CUtil::qsValue() ?? []);
+//        print(print_r($this->stg->get('tg'),true));        
     }
 
     public function start($args = false)

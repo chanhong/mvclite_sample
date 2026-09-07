@@ -14,7 +14,6 @@ $nvValue=[];
 $dbinfo = "coazportal_db";
 
 $qsa = CUtil::qs2nv();
-//  pln($qsa,'qsa');
 $scmd = (empty($qsa["c"]) <> true) ? strtolower($qsa["c"]) : '';
 switch ($scmd) {
   case "links":
@@ -27,6 +26,7 @@ switch ($scmd) {
   default:
     break;
 }
+//pln("here: t:$tname w:$where");
 /*
 http://localhost:8000/?t=odata&a=_acctlinks
   [-QSA-] Array ( [t] => odata [a] => _acctlinks ) [-M-] Array ( [t] => odata [a] => _acctlinks ) here
@@ -75,7 +75,7 @@ try {
         // must use third param to ensure to use param in exec code
         $nvValue = CDbHelper::nv2NvLike($nvValue);
         CAjx::Get($tname, $sparm, $nvValue, $dbinfo); // wrapper WORK
-
+//pln("here: t:$tname w:$where");
 //      CAjx::PdoGet($this, $tname, "select", $where);
       break;
   }

@@ -4,12 +4,14 @@ use MvcLite\CSetting;
 $grp=CCore::$_usr["usrgroup"]??'';
 $grpno=CCore::$_usr["usrgrpno"]??'';
 $uinfo=$_SESSION["uinfo"]??'';
+$tile=$pageData['header_title']??'';
+ $usrinfo=$pageData["usrinfo"]??'';
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 
 <head>
-  <title><?php echo @$pageData['header_title']; ?></title>
+  <title><?php echo $tile; ?></title>
   <meta content="text/html; charset=windows-1252" http-equiv="Content-Type">
   <?php
   echo $this->renderWidget('header_bef');
@@ -34,7 +36,7 @@ $uinfo=$_SESSION["uinfo"]??'';
           </td>
           <td></td>
           <td align="right">
-            <font color="LightGrey" face="helvetica, sans-serif;" size="6"><?php echo @$pageData["header_title"]; ?>
+            <font color="LightGrey" face="helvetica, sans-serif;" size="6"><?php echo $tile; ?>
             </font>
           </td>
         </tr>
@@ -53,7 +55,7 @@ $uinfo=$_SESSION["uinfo"]??'';
       <div class="text-right">&nbsp;
         <font color="LightGrey">
           <?php
-          echo @$pageData["usrinfo"];
+          echo  $usrinfo;
           ?>
         </font>
       </div>
@@ -65,11 +67,11 @@ $uinfo=$_SESSION["uinfo"]??'';
       </div>
       <div class="main-body">
         <?php 
-            pln($this->stg->get('tg'),'tg');
-                    pln($grp.''.':'.$grpno,'g:n');
+//            pln($this->stg->get('tg'),'bootstrap: tg');
+//                    pln($grp.''.':'.$grpno,'g:n');
                     // [-UINFO-SS-] Array ( [usrname] => admin [usrgroup] => admin [usrgrpno] => 90 [usrpw] => 96e79218965eb72c92a549dd5a330112 [appid] => FRONT [usrentity] => [litype] => web [level] => admin )
 //pln($uinfo,'uinfo-ss');
-            pln("Global task group<br />");
+//            pln("Global task group<br />");
         echo $this->doBody(); ?>
       </div>
     </div>

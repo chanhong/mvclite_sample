@@ -1,8 +1,8 @@
 <?php
 
 $buff = "";
-
-foreach (@$pageData['meta'] as $meta) {
+$pmeta=$pageData['meta']??[];
+foreach ($pmeta as $meta) {
     $buff .= $this->h->meta($meta);
 }
 if (isset($pageData['title']) && $pageData['title']!="") {

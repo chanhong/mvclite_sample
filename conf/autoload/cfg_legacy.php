@@ -30,7 +30,7 @@ $r = [
         'router' => 'router',
         'viewext' => '.php',
         'layout' => 'bootstrap',
-        'apps' => '_ajws,front,learn,static',   // comma-separated app list
+        'apps' => 'ajws,front,learn,static',   // comma-separated app list
         'defctrl' => 'front',
         'selctl' => '',
     ],

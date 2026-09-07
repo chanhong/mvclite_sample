@@ -41,7 +41,10 @@ $stgArray = require DOCROOT . '/conf/autoload/stg.php';
 // STEP 3 — Build task→group master list (set in CUtil::getTopMenu())
 // ---------------------------------------------------------------------------
 
-// \MvcLite\CUtil::TaskGroup("_cfgtg");
+\MvcLite\CUtil::TaskGroup("_cfgtg");
+//echo "here";
+//            pln(\MvcLite\CCore::$_tg);
+//            pln(\MvcLite\CCore::$_cfg['tg']);
 
 // ---------------------------------------------------------------------------
 // STEP 4 — Set active controller + login URL + top menu from query string
