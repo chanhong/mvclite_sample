@@ -40,8 +40,9 @@ class BaseController extends CController
     {
         $isGood = false;
         //        pln($_SESSION['uinfo'],'uinfo');
-//        isset($_SESSION['uinfo']) ?? 
-        (isset($_SESSION['uinfo'])) ?? pln($_SESSION['uinfo'], 'uinfo');
+        if (isset($_SESSION['uinfo'])) {
+            pln($_SESSION['uinfo'], 'uinfo');
+        }
         //        $_SESSION['uinfo']['level']=(isset($_SESSION['uinfo']['usrgroup']) )?  $_SESSION['uinfo']['usrgroup']:'';
         $uname = $_SESSION['uinfo']['username'] ?? $_SESSION['uinfo']['usrname'] ?? ''; // authenticate from user table or default security
         $ugrp = $_SESSION['uinfo']['level'] ?? $_SESSION['uinfo']['usrgroup'] ?? ''; // authenticate from user table or default security
