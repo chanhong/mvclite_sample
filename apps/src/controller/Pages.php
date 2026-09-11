@@ -10,7 +10,7 @@ class Pages extends BaseController {
     }
 
     public function start($args = false) {
-
+//pln($_SESSION['lastUrl']); 
         $ret = $this->doAction($args, static::class);  // static resolve to calling class name      
 
     }

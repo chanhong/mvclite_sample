@@ -69,12 +69,12 @@ $r =
         "404" => "Error",
         "logoff" => "",           // username to force logoff
 
-        '404' => "Error",
+//        '404' => "Error",
         'siteroot' => CUtil::rootSite(),
         'urlsite' => CUtil::siteURL(),
         "urllogin" => "/front/_login",  // overwritten at runtime by setActiveCtrl()
-//        "urllogout" => "/action/logout", // until add action controller
-        "urllogout" => "?logout",
+        "urllogout" => "/action/logout", // until add action controller
+//        "urllogout" => "?logout", // old alias logout
 
         "imgpath" => "/apps/images",
         "sharedpath" => "/apps",
@@ -135,6 +135,7 @@ $r =
             'super' => '70',
             'admin' => '90',
         ],
+        'tgExemptControllers' => ['action'],        // handle logout, etc
         // -----------------------------------------------------------------------
         // App registry — TOP LEVEL (not inside menu)
         // -----------------------------------------------------------------------

@@ -17,6 +17,7 @@ class Front extends BaseController
                 //        pln($this->cfg->get('mnutop'));
 
                 //        var_dump(spl_object_id($this->db)); //int(16)
+//    pln($_SESSION['lastUrl'] ?? 'NOT SET', 'lastUrl-check');             
                 $ret = $this->doAction($args, self::class);
         }
 

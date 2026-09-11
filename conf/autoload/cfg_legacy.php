@@ -95,7 +95,10 @@ $r = [
         'page404' => '404',
         'alias' => [
             'mya' => ['contacts', 'usefullinks'],
-            'users' => ['login', 'logout', 'register', 'weblogin', 'winlogin'],
+            // aliaslookup() will produce t=users&a=logout // turn off to use router&a=logout
+//            'users' => ['login', 'logout', 'register', 'weblogin', 'winlogin'],
+            'users' => ['login', 'register', 'weblogin', 'winlogin'],
+//            'router' => ['logout'],
         ],
     ],
 
