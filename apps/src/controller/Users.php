@@ -88,7 +88,8 @@ class Users extends BaseController
     {
 // migrated away from md5
         $userinfo = "";
-        extract($this->post);
+        $username = $this->post['username'] ?? null;
+        $password = $this->post['password'] ?? null;
         $r = $this->model->isUserExist($username);
         if (!empty($username) and !empty($r) and !empty($password)) {
 
@@ -126,7 +127,8 @@ class Users extends BaseController
     {
 
         $userinfo = "";
-        extract($this->post); // extract array into respective variables  
+        $username = $this->post['username'] ?? null;
+        $password = $this->post['password'] ?? null;  
         $r = $this->model->isUserExist($username);
         if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);

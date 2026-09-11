@@ -22,7 +22,9 @@ class AuthorModel extends BaseModel {
     public function edit($rInfo) {
         
         permDbg($rInfo,'rInfo in model');
-        extract($rInfo); // extract array into respective variables
+        $name = $rInfo['name'];
+        $biography = $rInfo['biography'];
+        $id = $rInfo['id'];
         $sqlUpdList = ['name'=>$name, 'biography'=>$biography];
         $this->_dbt("update",['fl'=>$sqlUpdList, 'where'=>"id='$id'"]);
     }   

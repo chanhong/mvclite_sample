@@ -27,7 +27,11 @@ class UserModel extends BaseModel
 // migrated away from md5
 
         $this->ut->debug($userInfo);
-        extract($userInfo); // extract array into respective variables
+        $username = $userInfo['username'];
+        $password = $userInfo['password'] ?? null;
+        $level = $userInfo['level'] ?? null;
+        $id = $userInfo['id'] ?? null;
+        $nid = $userInfo['nid'] ?? null;
         if (!empty($this->_dbt("dbrow", ['where' => "username='$username'"]))) {
             self::Add2SessVar("feedback", "Failed to create " . $userInfo['username'] . "!");
             return false;
@@ -55,7 +59,12 @@ class UserModel extends BaseModel
     {
 // migrated away from md5
         permDbg($userInfo, 'userInfo in model');
-        extract($userInfo); // extract array into respective variables
+        $username = $userInfo['username'];
+        $password = $userInfo['password'] ?? null;
+        $level = $userInfo['level'] ?? null;
+        $is_confirmed = $userInfo['is_confirmed'] ?? null;
+        $id = $userInfo['id'];
+        $nid = $userInfo['nid'] ?? null;
         // Leave the password alone if it's not set
         if (!empty($password)) {
             // new password with nid as salt
