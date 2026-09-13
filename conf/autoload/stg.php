@@ -74,6 +74,7 @@ $r =
         'urlsite' => CUtil::siteURL(),
         "urllogin" => "/front/_login",  // overwritten at runtime by setActiveCtrl()
         "urllogout" => "/action/logout", // until add action controller
+        "404s" => ['action','router'], // 404 view locations
 //        "urllogout" => "?logout", // old alias logout
 
         "imgpath" => "/apps/images",

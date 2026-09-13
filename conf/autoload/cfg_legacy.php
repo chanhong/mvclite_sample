@@ -98,7 +98,7 @@ $r = [
             // aliaslookup() will produce t=users&a=logout // turn off to use router&a=logout
 //            'users' => ['login', 'logout', 'register', 'weblogin', 'winlogin'],
             'users' => ['login', 'register', 'weblogin', 'winlogin'],
-//            'router' => ['logout'],
+            'action' => ['404'], // for ?404
         ],
     ],
 
