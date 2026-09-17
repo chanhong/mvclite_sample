@@ -56,8 +56,8 @@
       <div class="vmenu">
         <ul class="navbar-nav ml-auto">
           <?php
-//          echo @$pageData["submenu"];
-                  echo $this->ut->getMenu("sub"); 
+          echo @$pageData["submenu"];
+//                  echo $this->ut->getMenu("sub"); 
           ?>
         </ul>
       </div>

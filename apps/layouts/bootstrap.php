@@ -61,8 +61,8 @@ $tile=$pageData['header_title']??'';
       </div>
       <div class="navbar navbar-expand-sm hmenu">
         <ul class="navbar-nav ml-auto text-center"><?php 
-//        echo $this->ut->getSubMenu(); 
-        echo $this->ut->getMenu("sub"); 
+        echo $this->ut->getSubMenu(); 
+//        echo $this->ut->getMenu("sub"); 
         ?></ul>
       </div>
       <div class="main-body">

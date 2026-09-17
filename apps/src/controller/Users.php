@@ -16,10 +16,12 @@ class Users extends BaseController
     {
 
         parent::__construct();
-                $this->layout = "bootstrap";        
+        $this->layout = "bootstrap";
         $this->meTable = "users";
         $this->model = new UserModel($this->meTable);
-       
+        //        pln($this->_class_path,'me'); 
+        $this->home = "?t=" . $this->_class_path . "&a=index";   // loop back to the calling homne page of this view     
+
     }
 
     public function start($args = false)
@@ -86,7 +88,7 @@ class Users extends BaseController
 
     public function _weblogin($args = false)
     {
-// migrated away from md5
+        // migrated away from md5
         $userinfo = "";
         $username = $this->post['username'] ?? null;
         $password = $this->post['password'] ?? null;
@@ -105,15 +107,32 @@ class Users extends BaseController
             }
 
             if (!empty($userinfo)) {
+
                 // Rehash from MD5 to bcrypt on first login
                 if ($this->Auth->needsRehash) {
                     $newHash = password_hash($password, PASSWORD_DEFAULT);
                     $this->model->updatePassword($userinfo['id'], $newHash);
                 }
-                $_SESSION["loggedin"] = $username;
-                $_SESSION["uinfo"] = $userinfo;
-                self::Add2SessVar("feedback", "You has been login as [$username]!");
-                self::redirect2Url($this->retUrl);
+
+            // need to see how to use front login in users
+                $imnureqgrpno = CSecs::getGroupNo($userinfo["level"]);
+                $_SESSION["uinfo"] = $userinfo; // get litype into session
+                $_SESSION["uinfo"]['usrgroup']=$userinfo["level"]; // just as front login
+                $loggedin = "[$username] (".$userinfo['level'].":$imnureqgrpno)";
+                $msg = "Users: You are login as " . $loggedin; // this set the variable for a successful login
+// pln won't show due to redirect, do it in the view after redirect.
+/*
+                pln($_SESSION["uinfo"], "users");
+                pln($userinfo, "userinfo");
+*/
+                $_SESSION["loggedin"] = $loggedin; // also set loggedin in session for consistency and future checks
+                static::$_usr["loggedin"] = $loggedin; // set loggedin for the current user session
+//                CUtil::Cookie_Usr($_SESSION["uinfo"]); // why this prevent the logout to show???
+                CUtil::Add2SessVar("feedback", $msg);
+
+                //                $_SESSION["loggedin"] = $username; // old users code
+
+                self::redirect2Url($this->home);
             }
         }
 
@@ -128,7 +147,7 @@ class Users extends BaseController
 
         $userinfo = "";
         $username = $this->post['username'] ?? null;
-        $password = $this->post['password'] ?? null;  
+        $password = $this->post['password'] ?? null;
         $r = $this->model->isUserExist($username);
         if (!empty($username) and !empty($r) and !empty($password)) {
             $hashed_password = $this->Auth->md5Hash($password, $r['nid']);
@@ -182,7 +201,7 @@ class Users extends BaseController
         $this->redirect2Url($this->home);
     }
 
-    public function edit($args = false)
+    public function _edit($args = false)
     {
         $u = null;
         if (!empty($this->get['p1'])) {
@@ -205,9 +224,11 @@ class Users extends BaseController
         } elseif (!empty($u)) {
             $this->_view_data['arr'] = (array) $u;
             $this->_view_data['arr']['p1'] = $u->id;
-            echo $this->doView($this, "edit");
+            echo $this->doView($this, "_edit");
         } else {
-            $this->redirect2Url();
+            //            $this->redirect2Url();
+            self::Add2SessVar("feedback", "No user selected to edit.");
+            $this->redirect2Url($this->home);
         }
     }
 

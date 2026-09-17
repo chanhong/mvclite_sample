@@ -41,7 +41,7 @@ class BaseController extends CController
         $isGood = false;
         //        pln($_SESSION['uinfo'],'uinfo');
         if (isset($_SESSION['uinfo'])) {
-            pln($_SESSION['uinfo'], 'uinfo');
+//            pln($_SESSION['uinfo'], 'uinfo');
         }
         //        $_SESSION['uinfo']['level']=(isset($_SESSION['uinfo']['usrgroup']) )?  $_SESSION['uinfo']['usrgroup']:'';
         $uname = $_SESSION['uinfo']['username'] ?? $_SESSION['uinfo']['usrname'] ?? ''; // authenticate from user table or default security
@@ -50,11 +50,11 @@ class BaseController extends CController
         if (!empty($uname) && !empty($ugrp))
         //        (($_SESSION['uinfo']['level']=="admin")|| $_SESSION['uinfo']['usrgroup']=="admin"))
         {
-            permDbg(CSetting::$_usrInfo, "Y:");
+//            permDbg(CSetting::$_usrInfo, "Y:");
             $isGood = true;
         } else {
-            permDbg(CSetting::$_usrInfo, "N:");
-            permDbg($_SESSION, "N:");
+//            permDbg(CSetting::$_usrInfo, "N:");
+//            permDbg($_SESSION, "N:");
         }
         return $isGood;
     }

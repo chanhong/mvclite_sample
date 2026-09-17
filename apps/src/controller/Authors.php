@@ -36,7 +36,7 @@ class Authors extends BaseController {
         echo $this->doView($this, $args['a']);        
     }
 
-    public function edit($args = false) {
+    public function _edit($args = false) {
         
         if (!empty($this->get['p1'])) {
             $r = $this->db->findRow("SELECT * FROM authors where id =".$this->get['p1']);
@@ -46,7 +46,7 @@ class Authors extends BaseController {
             $this->_view_data['arr']['id'] = $r->id;
             $this->Error->blank($this->post['name'], 'Name');
             if ($this->Error->ok()) {
-                $this->model->edit($this->_view_data['arr']);
+                $this->model->_edit($this->_view_data['arr']);
                 self::Add2SessVar("feedback", $this->post['name'] . " has been saved!");
                 $this->redirect2Url($this->home);
             } 

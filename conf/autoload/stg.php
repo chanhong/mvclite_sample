@@ -176,15 +176,18 @@ $r =
                 "spage" => ",",
                 "pages" => ",",
             ],
-            'users' => [
+            'users' => [ // group, title
                 "list" => ",User List",
-                "create" => "admin,Create new user",
+                "create" => "admin,Create user",
+                "_edit" => "admin,Edit user",
                 "register" => ",",
             ],
             'authors' => [
-                "login" => ",",
+                "_edit" => "admin,Edit Author",
             ],
-
+            'books' => [
+                "_edit" => "admin,Edit Book",
+            ],
             'spage' => [],
         ],
 

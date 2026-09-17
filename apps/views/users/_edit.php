@@ -1,12 +1,12 @@
 <?PHP
 $this->_view_data['header_title'] = 'Users Edit';
-$rUrl = $this->h->tap('/users/edit');
+$rUrl = $this->h->tap('/users/_edit');
 //$this->requireAdmin($rUrl); // if not admin redirect to login and return here
 $user = $pageData['arr'];
 ?>
 
 <div>
-    <form action="<?php echo $this->h->tap('/users/edit/' . $user['p1']); ?>" method="post">
+    <form action="<?php echo $this->h->tap('/users/_edit/' . $user['p1']); ?>" method="post">
         <p><label for="username">Username</label> <input type="text" name="username" id="username" value="<?PHP echo $user['username']; ?>" class="text"></p>
         <p><label for="password">Password</label> <input type="password" name="password" id="password" value="" class="text">
         <br /><span class="info">Leave the password blank if you do not wish to change it</span></p>

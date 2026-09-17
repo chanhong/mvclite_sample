@@ -1,6 +1,6 @@
 <?php
   /**/
-  $Layout = CUtils.GetLayout("_bootstrap_2c");
+  $Layout = CUtil::GetLayout("_bootstrap_2c");
     $commfile = CCore::MeViewPath() +"/"+AppState["_rp"]+"/comments.js";
 CMsg::_pdmsg($commfile, "file"); 
   $carfile = CCore::MeViewPath() +"/"+AppState["_rp"]+"/ford.js";

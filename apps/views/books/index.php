@@ -40,7 +40,7 @@ $recs = $pageData['arr'];
                         <td>
                         <?php 
                         $eUrl = $dUrl = "";
-                        $uPath = '/books/edit/'. $r['id']; 
+                        $uPath = '/books/_edit/'. $r['id']; 
                         if ($this->isAllow($uPath)==true) {
                             $eUrl = $this->h->alink(['title'=>'Edit','path'=>$uPath]); 
                         }
