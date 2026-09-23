@@ -10,7 +10,7 @@ namespace MvcLite;
 
 use MvcLite\CCore;
 
-class BaseCore extends CCore {
+class BaseCore extends CCore{
     
     public function __construct() {
         

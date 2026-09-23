@@ -16,7 +16,7 @@ namespace MvcLite;
 // defined in autoload/local.php
   // set the global configuration value here
    $host = $db = $dbuser= $dbpw= $env ="";
-  //  CMsg._pdmsg(env, "env");
+  //  CMsg::_pdmsg(env, "env");
   // "" for integrated security or sql security
   $dbuser = "acctazure";
   $dbpw = "@Azure#8510";
@@ -40,7 +40,7 @@ namespace MvcLite;
 $r = [
 
     "_rp" => '_rp_',
-    "viewpath" => "apps/views",
+//    "viewpath" => "apps/views", // setting
     "layoutpath" => "apps/layouts",
 
     // -----------------------------------------------------------------------
@@ -52,7 +52,7 @@ $r = [
 
     // GOOD, KEEP, DON'T CHANGE, clear validation, try to fix eflag left over from previous validation, during jv approval
     /*
-    CCore._eflag = new NameValueCollection {
+    CCore::$_eflag = new array [
             { "debitcredit",""},
             { "sumamt",""},
     };
@@ -63,7 +63,7 @@ $r = [
 
     //    'users' => [], // set in CSecs.setUsersInfo()
     'uinfo' => [], // set in CSecs.setUsersInfo()
-//    'mnutop' => [], // dynamic top-level menu, need to write to CSetting rather than CCore or CConfig
+//    'mnutop' => [], // dynamic top-level menu, need to write to CSetting rather than CCore::or CConfig
 
 
     // load and convert this into user,group NV
@@ -104,10 +104,10 @@ $r = [
     ],
 
     'mnu_static' => [
-        ['Bing' => 'http://bing.com/,_blank,navarrow.gif'],
-        ['MSN' => 'https://msn.com,_blank,navarrow.gif'],
-        ['Google' => 'https://google.com,_blank,navarrow.gif'],
-        ['DuckDuckGo' => 'https://duckduckgo.com/,_blank,navarrow.gif'],
+        'Bing' => 'http://bing.com/,_blank,navarrow.gif',
+        'MSN' => 'https://msn.com,_blank,navarrow.gif',
+        'Google' => 'https://google.com,_blank,navarrow.gif',
+        'DuckDuckGo' => 'https://duckduckgo.com/,_blank,navarrow.gif',
     ],
     'mnu_learn' => [
         ['TEST' => '/test/index'],

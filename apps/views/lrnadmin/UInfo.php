@@ -1,7 +1,5 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-  Page.Title = "UInfo";
-  Layout = CUtils.GetLayout("_bootstrap_top");
-}
-@RenderPage(AppState["viewpath"] + "/" + AppState["_rp"] + "/UInfo.cshtml")
+<?php
+use MvcLite\CCore;
+  $pageTitle = "UInfo";
+  //Layout = CUtil::GetLayout("_bootstrap_top");
+include($CSetting::get("viewpath") . "/" . CSetting::get("_rp") . "/UInfo.cshtml");

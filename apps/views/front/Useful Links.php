@@ -10,7 +10,7 @@ $ajax_qs = CUtil::Tap2Qs("/odata/acctlinks") . "&c=links"; // refine ajx with &c
   pln($msg,'in');
   pln($ajax_qs,'aj');
   CUtil::Add2SessVar("feedback", $msg);
-  // WORK with _dbt and CModel change to val.Url, val.Name
+  // WORK with _dbt and CModel::change to val.Url, val.Name
 ?>
 <script>
       $(document).ready(function () { // load json file using jquery ajax

@@ -1,24 +1,23 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-  Page.Title = "Filter By";
-  string meqs = CUtils.tap("/jvtpl/_jvlist");
-  string sel = "";
-  string filterMaker = "";
-  string dbenv = CJv.DbEnv();
-  if (IsPost)
+<?php
+use MvcLite\CCore;
+  $pageTitle = "Filter By";
+  $meqs = CUtil::tap("/jvtpl/_jvlist");
+  $sel = "";
+  $filterMaker = "";
+  $dbenv = CJv::DbEnv();
+  if ($_SERVER["REQUEST_METHOD"] == "POST")
   {
-    filterMaker = CCore.getSafeVar(Request.Form, "maker", "raw");
+    $filterMaker = CUtil::getSafeVar($_POST, "maker", "raw");
   }
   else
   {
-    filterMaker = CUtils.getSessTxt("name"); // session name setUserProfile
+    $filterMaker = CUtil::getSessTxt("name"); // session name setUserProfile
   }
-  //  CMsg._pdmsg(filterMaker, "filtermaker");
-  List<string> makers = new List<string>();
-  makers = CJv.getJVListMakers(dbenv);
-  sel = CHtml.dropDnList("maker", makers, filterMaker);
-}
+  //  CMsg::_pdmsg(filterMaker, "filtermaker");
+  $makers = array();
+  $makers = CJv::getJVListMakers($dbenv);
+  $sel = CHtml::dropDnList("maker", $makers, $filterMaker);
+?>
 <div>
   @Html.Raw(CHtml.FrmBeg(meqs))
   Filter by:&nbsp;&nbsp; @Html.Raw(sel)

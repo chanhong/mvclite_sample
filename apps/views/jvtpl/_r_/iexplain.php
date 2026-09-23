@@ -1,9 +1,8 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-  Page.Title = "Explanation goes here";
-  NameValueCollection onejv = PageData["onejv"];
-}
+<?php
+use MvcLite\CCore;
+  $pageTitle = "Explanation goes here";
+  $onejv = $PageData["onejv"];
+?>
 <table class="jvtable">
   <tbody>
     <tr class="jvtable"><td class="jvtable" colspan="9"><b>Explanation:</b></td></tr>

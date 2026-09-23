@@ -1,17 +1,16 @@
-@using System.Collections.Specialized;
-@using System.Data.OleDb;
-@using Co;
-@{
+<?php
+use MvcLite\CCore;
+
   //  Layout is already in _main
-  PageData["Title"] = "My Links";
-  string dbenv = CCore._DbEnv("dbacct");
-  string ajax_qs = CUtils.Tap2Qs("/udata/_acctlinks") + "&c=mylinks"; // refine ajx with &c=cmd
-  string msg = PageData["Title"];
-  //  CMsg._dmsg(msg, "in");
-  //  CUtils.Add2SessVar("feedback", msg);
-  CCore._usr = CUtils.getSessNv("uinfo"); // use session instead
-  CMsg._pdmsg(CCore._usr, "_usr");
-}
+  $PageData["Title"] = "My Links";
+  $dbenv = CCore::_DbEnv("dbacct");
+  $ajax_qs = CUtil::Tap2Qs("/udata/_acctlinks") + "&c=mylinks"; // refine ajx with &c=cmd
+  $msg = $PageData["Title"];
+  //  CMsg::_dmsg(msg, "in");
+  //  CUtil::Add2SessVar("feedback", msg);
+  CCore::$_usr = CUtil::getSessNv("uinfo"); // use session instead
+  CMsg::_pdmsg(CCore::$_usr, "_usr");
+?>
 <script>
       $(document).ready(function () { // load json file using jquery ajax
         $.getJSON("@Html.Raw(ajax_qs)", function (data) {

@@ -1,9 +1,10 @@
-﻿@using Co;
-@{
-  Layout = CUtils.GetLayout("_bootstrap");
-  if (PageData["Title"] == AppState["Name"])
+﻿<?php
+use MvcLite\CCore;
+
+  //Layout = CUtil::GetLayout("_bootstrap");
+  if ($PageData["Title"] == CSetting::get("Name"))
   {
-    PageData["Title"] = "Hello";
+    $PageData["Title"] = "Hello";
   }
-}
+?>
 @ServerInfo.GetHtml()

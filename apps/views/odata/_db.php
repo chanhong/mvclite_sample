@@ -7,7 +7,7 @@ use mvcLite\CMsg;
 
 try {
         $this->meTable = "sample_data";
-        $this->model = new CModel($this->meTable); // create a mini model class in model folder
+        $this->model = new CModel($this->meTable);// create a mini model class in model folder
         $where = "1 = 1";
         $rows= $this->model->_dbt("select", ['where' => $where]);        
             \CUtil::outJson(json_encode($rows)); // Assuming static method call                  

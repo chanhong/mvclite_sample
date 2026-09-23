@@ -1,9 +1,9 @@
-﻿@using Co;
+﻿<?php
+use MvcLite\CCore;
 
-@{
-  Layout = CUtils.GetLayout("_bootstrap_2c");
-  PageData["Title"] = "KO Edit";
-}
+  //Layout = CUtil::GetLayout("_bootstrap_2c");
+  $PageData["Title"] = "KO Edit";
+?>
 <h2>Edit</h2>
 
 

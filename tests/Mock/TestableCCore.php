@@ -3,7 +3,7 @@ namespace Tests\Mock;
 
 use MvcLite\CCore;
 
-class TestableCCore extends CCore {
+class TestableCCore extends CCore{
 
     private array $stubbedRows = [];
 

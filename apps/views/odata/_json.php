@@ -8,7 +8,7 @@ use mvcLite\CMsg;
   $tname="";
 
   $sparm = [];
-  $nvValue;
+  
 
   // ---------------------------------------------------------------
 // Required extensions:

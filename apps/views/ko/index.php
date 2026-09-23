@@ -1,5 +1,6 @@
-@using Co;
-@{
-  PageData["Title"] = "KO Index";
-}
-@RenderPage("hello.cshtml")
+<?php
+use MvcLite\CCore;
+
+  $PageData["Title"] = "KO Index";
+
+include("hello.cshtml");

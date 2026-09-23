@@ -3,28 +3,28 @@
     $file=CString::FixBackSlash($this->cfg->path['view']).'/'.basename(__DIR__).'/_r_/static.css';
 
   /*
-  Layout = CUtils.GetLayout("_static_top");
+  //Layout = CUtil::GetLayout("_static_top");
 
-  string file = CCore.MeViewPath() + "/" + AppState["_rp"] + "/static.css";
-  CMsg._pdmsg(file, "file");
+  string file = CCore::MeViewPath() + "/" + CSetting::get("_rp") + "/static.css";
+  CMsg::_pdmsg(file, "file");
 
   // don't set layout in index for consistency and avoid double layout
-  NameValueCollection _qsa = CCore.qs2nvWithDefaultValue();
-  CUtils.setActiveCtrl(_qsa);
+  NameValueCollection _qsa = CCore::qs2nvWithDefaultValue();
+  CUtil::setActiveCtrl(_qsa);
   $PageData["Title"] = "Static Page";
   CSecs.setUsersInfo(); // MUST set it before it is being used in the class
 
-  NameValueCollection mnuLinks = (NameValueCollection)CCore._cfg["mnu_static"];
+  NameValueCollection mnuLinks = (NameValueCollection)CCore::_cfg["mnu_static"];
   string[] lnka = null;
 */
     /*
     @foreach (string s in mnuLinks.AllKeys)
     {
-      if (CString.IsEmpty(s) == false)
+      if (CString::IsEmpty(s) == false)
       {
-        lnka = CUtils.mnu_nv2a(mnuLinks, s);
+        lnka = CUtil::mnu_nv2a(mnuLinks, s);
         <div class="item">
-          @Html.Raw(CUtils.a2ahref(lnka))
+          @Html.Raw(CUtil::a2ahref(lnka))
         </div>
       }
     }

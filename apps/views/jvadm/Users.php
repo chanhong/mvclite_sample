@@ -1,9 +1,8 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
+﻿<?php
+use MvcLite\CCore;
   // layout already in _search
-  PageData["Title"] = "JV Users";
-}
+  $PageData["Title"] = "JV Users";
+?>
 <div align=center>
-    @RenderPage("_search.cshtml")
+<?php    include("_search.php"); ?>
 </div>

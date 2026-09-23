@@ -1,8 +1,9 @@
-@using Co;
-@{
-  PageData["Title"] = "JV wait for approvel";
-  PageData["meqs"] = CUtils.tap("/jvapv/index/");
-  CJvApv.PbOrRr(CUtils.MyUrl(), CJv.DbEnv()); // process Post/Get Request, use index instead of _pb to simplify logic
-  CJv.IsJvUserForcedLogoff(CJv.DbEnv());
-}
-@RenderPage("JV_Approval.cshtml")
+<?php
+use MvcLite\CCore;
+
+  $PageData["Title"] = "JV wait for approvel";
+  $PageData["meqs"] = CUtil::tap("/jvapv/index/");
+  CJvApv::PbOrRr(CUtil::MyUrl(), CJv::DbEnv()); // process Post/Get Request, use index instead of _pb to simplify logic
+  CJv::IsJvUserForcedLogoff(CJv::DbEnv());
+
+include("JV_Approval.php");

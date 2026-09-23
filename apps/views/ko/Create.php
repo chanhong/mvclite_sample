@@ -1,10 +1,11 @@
-﻿@using Co;
-@{
+﻿<?php
+use MvcLite\CCore;
+
   //@model MVCCRUDKnockout.Models.Course
-  Layout = CUtils.GetLayout("_bootstrap_2c");
-  PageData["Title"] = "KO Create";
+  //Layout = CUtil::GetLayout("_bootstrap_2c");
+  $PageData["Title"] = "KO Create";
   //  @Html.ActionLink("Back to List", "Read")
-}
+?>
 
 <div class="form-horizontal">
   <h4>Course</h4>

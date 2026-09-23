@@ -1,61 +1,60 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-  Page.Title = "Detail";
-  string tsk = "jvtpl";
-  string mepath = string.Format("/{0}/_edit/", tsk);  // c use as sub-action such as clone, add, etc
-  string iPath = CUtils.imgPath();
-  List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-  string[] ka = null;
-  string stitle = "", salign = "", slen = "", ssize = "";
-  string tblcls = "jvtable";
-  string linecls = "";
+<?php
+use MvcLite\CCore;
+  $pageTitle = "Detail";
+  $tsk = "jvtpl";
+  $mepath = sprintf("/%s/_edit/", $tsk);  // c use as sub-action such as clone, add, etc
+  $iPath = CUtil::imgPath();
+  $rows = array();
+  $ka = null;
+  $stitle = ""; $salign = ""; $slen = ""; $ssize = "";
+  $tblcls = "jvtable";
+  $linecls = "";
 
-  NameValueCollection fName = new NameValueCollection {
+  $fName = array(
               // fldname, fldhdr, fldformat, maxlength, size
-                  { "ordering","!,left,3,3"},
-                  { "descript","Description *,left,30,30"},
-                  { "budget","Budget *,,7,9"},
-                  { "acctcode","AcctCode *,,8,10"},
-                  { "task","Task,,3,3"},
-                  { "optn","Option,,3,3"},
-                  { "proj","Project,,6,6"},
-                  { "debit","Debit *,right,13,13"},
-                  { "credit","Credit *,right,13,13"},
-              };
-  int cnt = 0;
-  NameValueCollection _qsa = CCore.qs2nvWithDefaultValue();
+                  "ordering" => "!,left,3,3",
+                  "descript" => "Description *,left,30,30",
+                  "budget"   => "Budget *,,7,9",
+                  "acctcode" => "AcctCode *,,8,10",
+                  "task"     => "Task,,3,3",
+                  "optn"     => "Option,,3,3",
+                  "proj"     => "Project,,6,6",
+                  "debit"    => "Debit *,right,13,13",
+                  "credit"   => "Credit *,right,13,13",
+              );
+  $cnt = 0;
+  $_qsa = CCore::qs2nvWithDefaultValue();
   // [detail]:(t=[jvtpl],a=[_edit],p1=[3110],p2=[TEST CWH_112113_001_Testing TE])
- // CMsg._pdmsg(_qsa, "detail");
+ // CMsg::_pdmsg($_qsa, "detail");
 
-  string orderby;
-  string where;
-  string strQry;
-  string colspan; // colspan for the total line
+  $orderby = "";
+  $where = "";
+  $strQry = "";
+  $colspan = ""; // colspan for the total line
 
-  string jvid = _qsa["p1"];
-  string action = _qsa["a"];
-  if (!CString.IsEmpty(jvid))  // edit or create
+  $jvid = $_qsa["p1"];
+  $action = $_qsa["a"];
+  if (!CString::IsEmpty($jvid))  // edit or create
   {
-    orderby = " order by ordering,sub_id asc";
-    where = String.Format(" where jvid= '{0}'", jvid);
-    strQry = "select distinct * from jvdetail" + where + " " + orderby;
-//    CMsg._pdmsg(strQry, "strQry");
-    rows = CDbOle.oleGetRows(strQry, CJv.DbEnv());
-//    CMsg._pdmsg(rows.Count, "rows-cnt");
+    $orderby = " order by ordering,sub_id asc";
+    $where = sprintf(" where jvid= '%s'", $jvid);
+    $strQry = "select distinct * from jvdetail" . $where . " " . $orderby;
+//    CMsg::_pdmsg(strQry, "strQry");
+    $rows = CDbPdo::oleGetRows($strQry, CJv::DbEnv());
+//    CMsg::_pdmsg(rows.Count, "rows-cnt");
   }
-}
+?>
 @{
   foreach (Dictionary<string, object> r in rows)
   {
   <script type="text/JavaScript">
 $(function () {
-    @Html.Raw(CJv.Js4AutoComplete("budget", "/udata/_ejvauto", r["sub_id"].ToString(), "4")) // require auth
-    @Html.Raw(CJv.Js4AutoComplete("acctcode", "/udata/_ejvauto", r["sub_id"].ToString(), "3")) // require auth
+    @Html.Raw(CJv::Js4AutoComplete("budget", "/udata/_ejvauto", r["sub_id"].ToString(), "4")) // require auth
+    @Html.Raw(CJv::Js4AutoComplete("acctcode", "/udata/_ejvauto", r["sub_id"].ToString(), "3")) // require auth
 });
   </script>
   }
-  string addDetUrl = CUtils.tap(mepath + jvid, "adddetail");
+  string addDetUrl = CUtil::tap(mepath + jvid, "adddetail");
 }
 <table class="jvtable" id="jvDetail">
   <tbody>
@@ -65,7 +64,7 @@ $(function () {
         </th>
       @foreach (string s in fName.AllKeys)
       {
-        ka = CUtils.Str2a(',', fName[s]); // get value of fName[s]
+        ka = CUtil::Str2a(',', fName[s]); // get value of fName[s]
         stitle = (ka[0].Length > 0) ? ka[0] : s;
           <th class="@tblcls">@Html.Raw(stitle)</th>
       }
@@ -79,15 +78,15 @@ $(function () {
 
       foreach (Dictionary<string, object> r in rows)
       {
-        NameValueCollection rNv = CUtils.dict2nv(r); // convert Nv to get field name
+        NameValueCollection rNv = CUtil::dict2nv(r); // convert Nv to get field name
         cnt++;
-//        CMsg._pdmsg(cnt, "cnt");
-        linecls = "screen" + CUtils.evenOrOdd(cnt);
+//        CMsg::_pdmsg(cnt, "cnt");
+        linecls = "screen" + CUtil::evenOrOdd(cnt);
         string sid = rNv["sub_id"];
         string deldet_sid = "deldet" + sid;
         debitsum += Convert.ToDecimal(rNv["debit"]);
         creditsum += Convert.ToDecimal(rNv["credit"]);
-        flagdbcr = CJvTpl.FlagDebitCredit(rNv["debit"], rNv["credit"]);
+        flagdbcr = CJvTpl::FlagDebitCredit(rNv["debit"], rNv["credit"]);
         <tr class='jvtable'>
             <td class="jvtable" width="20px" align="center">
               <input type=checkbox id="@deldet_sid" name="@deldet_sid"
@@ -95,7 +94,7 @@ $(function () {
             </td>
           @foreach (string s in fName)
           {
-            //            ka = CUtils.Str2a(',', fName[s]); // get value of fName[s]
+            //            ka = CUtil::Str2a(',', fName[s]); // get value of fName[s]
             ka = fName[s].Split(','); // split into array
             salign = (ka.Count() > 1 && ka[1].Length > 0) ? ka[1] : "center";
             slen = (ka.Count() > 2 && ka[2].Length > 0) ? ka[2] : "3";
@@ -113,16 +112,16 @@ $(function () {
             else if (s == "descript")
             {
               cTitle = "title=\"Desciption is required!\"";
-              flagFmt = CJvTpl.FlagRed(rNv[s], s, "desc");
+              flagFmt = CJvTpl::FlagRed(rNv[s], s, "desc");
             }
             else if (s == "budget")
             {
-              flagFmt = CJvTpl.FlagRed(rNv[s], s, "budget");
+              flagFmt = CJvTpl::FlagRed(rNv[s], s, "budget");
               cTitle = "title=\"Budget is required!(ex: xx - xxxx)\"";
             }
             else if (s == "acctcode")
             {
-              flagFmt = CJvTpl.FlagRed(rNv[s], s, "acctcode");
+              flagFmt = CJvTpl::FlagRed(rNv[s], s, "acctcode");
               cTitle = "title=\"AcctCode is required! (ex: xx-xx-xx)\"";
             }
             else if (s == "debit")
@@ -150,13 +149,13 @@ $(function () {
       {
         colspan = (fName.Count - 1).ToString(); // colspan for the no detail line, 1 less for delete column
 
-        <tr class="jvtable" @Html.Raw(CJvTpl.FlagRed("nodetail", "nodetail"))>
+        <tr class="jvtable" @Html.Raw(CJvTpl::FlagRed("nodetail", "nodetail"))>
           <td class="jvtable" width="20px">&nbsp;</td>
           <td class="jvtable" width="40px">&nbsp;</td>
           <td class="jvtable" colspan="@colspan" align="center">&nbsp;</td>
         </tr>
       }
-      flagsumamt = CJvTpl.FlagSumAmt(debitsum, creditsum);
+      flagsumamt = CJvTpl::FlagSumAmt(debitsum, creditsum);
       colspan = (fName.Count - 2).ToString(); // colspan for the total line, 1 less for delete column
     }
     <tr class="jvtable" @Html.Raw(flagsumamt)>

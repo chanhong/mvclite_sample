@@ -1,15 +1,14 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-  Page.Title = "Update JVNum";
-  string meqs = PageData["meqs"];
+<?php
+use MvcLite\CCore;
+  $pageTitle = "Update JVNum";
+  $meqs = $PageData["meqs"];
 //  int bieniummonth = 0;
 //  bieniummonth =Convert.ToInt32(PageData["acctmo"]);
 
-//  string dbenv = CJv.DbEnv();
-//    bieniummonth = Convert.ToInt32(CJv.GetAcctMo(dbenv)); // show number only
-  //  CMsg._pdmsg(PageData["meqs"], "meqs");
-}
+//  string dbenv = CJv::DbEnv();
+//    bieniummonth = Convert.ToInt32(CJv::GetAcctMo(dbenv)); // show number only
+  //  CMsg::_pdmsg(PageData["meqs"], "meqs");
+?>
 <div>
   @Html.Raw(CHtml.FrmBeg(meqs))
   <input type="text"

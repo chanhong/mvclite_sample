@@ -1,21 +1,18 @@
-@using System;
-@using System.Collections;
-@using System.Collections.Generic;
-@using System.Collections.Specialized;
-@using Co;
-@{
-  PageData["Title"] = "Lost Password";
+
+<?php
+use MvcLite\CCore;
+  $PageData["Title"] = "Lost Password";
   if (IsPost)
   {
-    CJvAdm.SendPw(Request.Form, CJv.DbEnv());
-    CUtils.Redirect("?");
+    CJvAdm::SendPw(Request.Form, CJv::DbEnv());
+    CUtil::Redirect("?");
   }
-}
+?>
 <div align="center">
   <p>
     A new generated password will be sent to your email address obtained from our record.
   </p>
-  <form id="formLostPW" ACTION=@CUtils.tap("/jv/_pwlost") METHOD="POST">
+  <form id="formLostPW" ACTION=@CUtil::tap("/jv/_pwlost") METHOD="POST">
     <fieldset>
       <legend>Lost Password Form</legend>
       <p>

@@ -1,7 +1,7 @@
 <?php
 namespace MvcLite;
 use MvcLite\CUtil;
-use MvcLite\Ccore;
+use MvcLite\CCore;
 
 class UserModel extends BaseModel
 {

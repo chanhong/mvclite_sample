@@ -69,7 +69,7 @@ try {
         $nvValue = CDbHelper::nv2NvLike($nvValue); // patch % into nv
         $lke = CDbHelper::Nv2sLike($nvValue, "?");
         $lke = CDbHelper::AndOrNot($lke, ""); // add () to like
-                                        //      CMsg._pdmsg(lke, "lke");
+                                        //      CMsg::_pdmsg(lke, "lke");
         $where = $lke;
         $sparm = [ "fl"=> "*" , "top"=> "1000", "where"=> $where  ];
         // must use third param to ensure to use param in exec code

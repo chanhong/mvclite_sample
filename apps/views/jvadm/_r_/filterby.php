@@ -1,33 +1,31 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-  Page.Title = "Filter By";
-  string meqs = CUtils.tap("/jvadm/_search");
+﻿<?php
+use MvcLite\CCore;
+  $PageData["Title"] = "Filter By";
+  $meqs = CUtil::tap("/jvadm/_search");
 
-  string sel = "";
-  string filterMaker = "";
+  $sel = "";
+  $filterMaker = "";
 
-  List<string> aiList = new List<string>();
-  aiList = MJvAdm.GetAIList(CJv.DbEnv());
+  $aiList = MJvAdm::GetAIList(CJv::DbEnv());
 
-  if (IsPost)
+  if ($_SERVER["REQUEST_METHOD"] === "POST")
   {
-    filterMaker = CCore.getSafeVar(Request.Form, "isconfirmed", "raw");
-    //    CMsg._pdmsg(filterMaker, "jvadm");
+    $filterMaker = CUtil::getSafeVar($_POST, "isconfirmed", "raw");
+    //    CMsg::_pdmsg(filterMaker, "jvadm");
   };
-  if (filterMaker == "")
+  if ($filterMaker == "")
   {
-    filterMaker = "Active";
+    $filterMaker = "Active";
   }
-  sel = CHtml.dropDnList("isconfirmed", aiList, filterMaker);
-}
+  $sel = CHtml::dropDnList("isconfirmed", $aiList, $filterMaker);
+?>
 <div>
-  @Html.Raw(CHtml.FrmBeg(meqs))
-  Filter by:&nbsp;&nbsp; @Html.Raw(sel)
+  <?= CHtml::FrmBeg($meqs) ?>
+  Filter by:&nbsp;&nbsp; <?= $sel ?>
   <input type="text"
          name="q"
          title="Search Users (By Username or Email)"
          value="" id="q">&nbsp;
   <input type="submit" name="submit" value="Go">
-  @Html.Raw(CHtml.FrmEnd(meqs))
+  <?= CHtml::FrmEnd($meqs) ?>
 </div>

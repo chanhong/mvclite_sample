@@ -1,14 +1,15 @@
 <?php
   /**/
   $Layout = CUtil::GetLayout("_bootstrap_2c");
-    $logo = CUtil::imgPath()+"/logo.svg";
-    $file1 = CCore::MeViewPath() +"/"+AppState["_rp"]+"/App.js";
+    $logo = CUtil::imgPath()."/logo.svg";
+    $file1 = CCore::MeViewPath() ."/".CSetting::get("_rp")."/App.js";
 CMsg::_pdmsg($file1, "file"); 
-  $file2 = CCore::MeViewPath() +"/"+AppState["_rp"]+"/comments.js";
+  $file2 = CCore::MeViewPath() ."/".CSetting::get("_rp")."/comments.js";
 CMsg::_pdmsg($file2, "file"); 
+pln($logo);
 ?>
-    <link rel="stylesheet" href="~/Shared/css/index.css" />
-    <link rel="stylesheet" href="~/Shared/css/App.css" />
+    <link rel="stylesheet" href="apps/css/index.css" />
+    <link rel="stylesheet" href="apps/css/App.css" />
    <script type="text/babel" src="<?php echo $file1 ?>"></script> 
   <script type="text/babel" src="<?php echo $file2 ?>"></script> 
     Hi, index
@@ -33,5 +34,5 @@ CMsg::_pdmsg($file2, "file");
         document.getElementById('comm')
       );
 
-      ReactDOM.render(<App logo='@logo' />, document.getElementById('app'));
+      ReactDOM.render(<App logo="<?=$logo?>" />, document.getElementById('app'));
     </script>

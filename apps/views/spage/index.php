@@ -1,14 +1,14 @@
 ﻿<?php
     $file=CString::FixBackSlash($this->cfg->path['view']).'/'.basename(__DIR__).'/css/static.css';
     /*
-  Layout = CUtils.GetLayout("_static_top");
+  //Layout = CUtil::GetLayout("_static_top");
 
-//  string file = CCore.MeViewPath() + "/" + CSetting::get("_rp") + "/static.css";
-  //CMsg._pdmsg(file, "file");
-  //CMsg._cwl($"static: f={file}");
+//  string file = CCore::MeViewPath() + "/" + CSetting::get("_rp") + "/static.css";
+  //CMsg::_pdmsg(file, "file");
+  //CMsg::_cwl($"static: f={file}");
 
   string pfile = "/Shared" + "/css/" + "static.css";
-  //CMsg._cwl($"static: f={pfile}");
+  //CMsg::_cwl($"static: f={pfile}");
 */
   // don't set layout in index for consistency and avoid double layout
   $_qsa = CCore::qs2nvWithDefaultValue();
@@ -34,10 +34,10 @@ $this->_view_data['header_title'] = 'SPage';
   <div class="grid-layout">
     <?php
    foreach ($mnuLinks as $title => $path) {
-    /*
-        pln($title, "title");
-        pln($path, "path");
-        */
+    
+//        pln($title, "title");
+//        pln($path, "path");
+        
       if (CString::IsEmpty($title) == false)
       {
         $lnka = CUtil::mnu_nv2a($mnuLinks, $title);

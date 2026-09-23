@@ -1,68 +1,57 @@
-@using System;
-@using System.Text;
-@using System.Collections;
-@using System.Collections.Generic;
-@using System.Data.Common;
-@using System.Data.SqlClient;
-@using System.Data.OleDb;
-@using System.Web.Script;
-@using System.Web.Services;
-@using System.Collections.Specialized;
-@using Co;
-@using System.Globalization;
-@{
-  string msg = "";
-  string where = "";
-  string tname="";
+<?php
+use MvcLite\CCore;
 
-  NameValueCollection sparm = new NameValueCollection();
-  NameValueCollection nvValue;
+  $msg = "";
+  $where = "";
+  $tname="";
 
-  string dbinfo = CCore._DbEnv("db");
+  $sparm = array();
+  $nvValue;
 
-  NameValueCollection qsa = CUtils.qs2nv();
-  string scmd = qsa["c"].ToLower();
-  switch (scmd)
+  $dbinfo = CCore::_DbEnv("db");
+
+  $qsa = CUtil::qs2nv();
+  $scmd = strtolower($qsa["c"]);
+  switch ($scmd)
   {
     case "client":
-      tname = "client";
+      $tname = "client";
       break;
     case "sample":
-      tname = "sample_data";
+      $tname = "sample_data";
       break;
     default:
       break;
   }
 
-  string method = Request.ServerVariables["request_method"].ToLower();
+  $method = $Request.ServerVariables["request_method"].ToLower();
   try
   {
-    switch (method)
+    switch ($method)
     {
       default:
       case "get":
         // work
         // string strU = "http://localhost:83/portal/?t=odata&a=sample_data&id=1&first_name=&last_name=&age=&gender=";
-        nvValue = CModel.request2Nv(CUtils.qs2nv(), tname, dbinfo);
-        nvValue = CUtils.nv2NvLike(nvValue); // patch % into nv
-        string lke = CUtils.Nv2sLike(nvValue, "?");
-        lke = CUtils.AndOrNot(lke, ""); // add () to like
-        CMsg._pdmsg(lke, "lke");
-        where = lke;
-        sparm = new NameValueCollection { { "fl", "*" }, { "top", "1000" }, { "where", where } };
+        $nvValue = CModel::request2Nv(CUtil::qs2nv(), $tname, $dbinfo);
+        $nvValue = CUtil::nv2NvLike($nvValue); // patch % into nv
+        $lke = CUtil::Nv2sLike($nvValue, "?");
+        $lke = CUtil::AndOrNot($lke, ""); // add () to like
+        CMsg::_pdmsg($lke, "lke");
+        $where = $lke;
+        $sparm = array( array("fl", "*"), array("top", "1000"), array("where", $where) );
         // must use third param to ensure to use param in exec code
-        nvValue = CUtils.nv2NvLike(nvValue);
-        CAjx.Get(tname, sparm, nvValue, dbinfo);
+        $nvValue = CUtil::nv2NvLike($nvValue);
+        CAjx::Get($tname, $sparm, $nvValue, $dbinfo);
         break;
     }
   }
-  catch (Exception e)
+  catch (Exception $e)
   {
     //    Response.Write(e.ToString());
-    string rUrl = CUtils.getReturnUrl();
-    CMsg._dmsg(rUrl, "rUrl");
-    msg = "catch:" + method+ e.ToString();
-    CUtils.Add2SessVar("feedback", msg);
-    CUtils.Redirect(rUrl);
+    $rUrl = CUtil::getReturnUrl();
+    CMsg::_dmsg($rUrl, "rUrl");
+    $msg = "catch:" . $method . $e->getMessage();
+    CUtil::Add2SessVar("feedback", $msg);
+    CUtil::Redirect($rUrl);
   }
-}

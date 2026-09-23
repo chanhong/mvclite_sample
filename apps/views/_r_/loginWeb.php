@@ -33,7 +33,7 @@
     });
   });
 </script>
-<?php echo (CHtml::FrmBeg(CUtil::tap("/" . strtolower($app) . "/login"), "LoginForm")); ?>
+<?php echo (CHtml::FrmBeg(CUtil::tap("/" . strtolower($app) . "/_login"), "LoginForm")); ?>
 <fieldset>
   <legend>Web <?php echo $app; ?> Login Form</legend>
   <p />

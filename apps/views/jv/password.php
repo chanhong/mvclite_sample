@@ -1,13 +1,16 @@
-@using Co;
-@{
-  Layout = CUtils.GetLayout("_ejv");
-  PageData["Title"] = "eJV System";
-  if (CCore.GetUsrName() != "")
+<?php
+use MvcLite\CCore;
+
+  //Layout = CUtil::GetLayout("_ejv");
+  $PageData["Title"] = "eJV System";
+  if (CCore::GetUsrName() != "")
   {
-    @RenderPage("_pwchg.cshtml")
+    include(__DIR__ . "/_pwchg.php");
   }
+?>
   else
   {
-    @RenderPage("_pwlost.cshtml")
+    include(__DIR__ . "/_pwlost.php");
   }
 }
+?>

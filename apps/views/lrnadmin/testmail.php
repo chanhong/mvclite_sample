@@ -1,5 +1,5 @@
 ﻿<?php
-  $layout = CUtils.GetLayout("_bootstrap");
+  $//Layout = CUtil::GetLayout("_bootstrap");
   $PageData["Title"] = "Test Email";
   $meqs = CUtil::tap("/admin/testmail");
   $message = "";
@@ -23,7 +23,7 @@
   {
     $message = "Email could not be sent!";
   }
-}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

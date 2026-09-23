@@ -1,10 +1,9 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-  Page.Title = "Explanation goes here";
-  NameValueCollection onejv = PageData["onejv"];
-  string uploadedFile = onejv["uploadedfiles"];
-}
+<?php
+use MvcLite\CCore;
+  $pageTitle = "Explanation goes here";
+  $onejv = $PageData["onejv"];
+  $uploadedFile = $onejv["uploadedfiles"];
+?>
 <table class="jvtable">
   <tbody>
     <tr class="jvtable"><td class="jvtable" colspan="9"><b>Explanation:</b></td></tr>

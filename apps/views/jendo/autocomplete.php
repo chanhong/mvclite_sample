@@ -3,7 +3,7 @@
   /**/
   $Layout = CUtil::GetLayout("_bootstrap_2c");
 
-  if ($PageData["Title"] == CConfig::get("Name"))
+  if (@$PageData["Title"] == CSetting::get("Name"))
   {
     $PageData["Title"] = "AutoComplete";
   }

@@ -3,8 +3,8 @@
   $this->_view_data['header_title'] = "Links";
   $ajax_qs = CUtil::Tap2Qs("/udata/_acctlinks") . "&c=links"; // refine ajx with &c=cmd
   $msg = $this->_view_data['header_title'];
-//  CMsg._dmsg(msg, "in");
-  //  CUtils.Add2SessVar("feedback", msg);
+//  CMsg::_dmsg(msg, "in");
+  //  CUtil::Add2SessVar("feedback", msg);
 ?>
 <style>
   .hide {

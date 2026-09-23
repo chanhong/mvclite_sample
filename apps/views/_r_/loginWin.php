@@ -6,7 +6,7 @@
   $rUrl = CUtil::getReturnUrl();
   pln($rUrl, "rUrl");
 ?>
-<?php echo (CHtml::FrmBeg(CUtil::tap("/" . strtolower($app) + "/login"), "LoginForm")); ?>
+<?php echo (CHtml::FrmBeg(CUtil::tap("/" . strtolower($app) + "/_login"), "LoginForm")); ?>
 <fieldset>
   <legend>Win <?php echo $app; ?> Login Form</legend>
   <p>

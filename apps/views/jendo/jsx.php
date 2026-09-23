@@ -1,6 +1,6 @@
 <?php
   $Layout = CUtil::GetLayout("_bootstrap_top");
-  $file = CCore::MeViewPath() +"/"+AppState["_rp"]+"/jsx2j1.jsx";
+  $file = CCore::MeViewPath() ."/".CSetting::get("_rp")."/jsx2j1.jsx";
   CMsg::_pdmsg($file, "file");
 ?>
     <h2>Add React in One Minute</h2>

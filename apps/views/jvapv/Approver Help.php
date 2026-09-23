@@ -1,13 +1,11 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-
-@{
-  Layout = CUtils.GetLayout("_ejv");
-  if (PageData["Title"] == AppState["Name"])
+﻿<?php
+use MvcLite\CCore;
+  //Layout = CUtil::GetLayout("_ejv");
+  if ($PageData["Title"] == CSetting::get("Name"))
   {
-    PageData["Title"] = "JV Approver Help";
+    $PageData["Title"] = "JV Approver Help";
   }
-}
+?>
 <div>
   <table>
     <tbody><tr><td>

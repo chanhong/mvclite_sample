@@ -1,9 +1,9 @@
 <?php
   /**/
-  $Layout = CUtils.GetLayout("_bootstrap_2c");
-   $commfile = CCore::MeViewPath() +"/"+AppState["_rp"]+"/comments.js";
+  //Layout = CUtil::GetLayout("_bootstrap_2c");
+   $commfile = CCore::MeViewPath() ."/".CSetting::get("_rp")."/comments.js";
 CMsg::_pdmsg($commfile, "file"); 
-  $carfile = CCore::MeViewPath() +"/"+AppState["_rp"]+"/car.js";
+  $carfile = CCore::MeViewPath() ."/".CSetting::get("_rp")."/car.js";
 CMsg::_pdmsg($carfile, "file");
 ?>
     <div id="j1"></div>

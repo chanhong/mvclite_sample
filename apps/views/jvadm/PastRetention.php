@@ -1,21 +1,23 @@
-@using System.Collections.Specialized;
-@using Co;
-
-@{
-  Layout = CUtils.GetLayout("_ejv");
-  string dbinfo = CJv.DbEnv();
-  int retentionYears = Int32.Parse(CSetting::get(("retentionyrs"));
+<?php
+use MvcLite\CCore;
+  $dbinfo = CJv::DbEnv();
+  $retentionYears = (int)CSetting::get("retentionyrs");
   /*
-    string dateBeg = CJvAdm.OldestJvfromLog(retentionYears, dbinfo);
+    string dateBeg = CJvAdm::OldestJvfromLog(retentionYears, dbinfo);
     string dateEnd = CDate.DateAfterRetention(retentionYears).ToShortDateString();
   */
-  NameValueCollection purgeDays = CJvAdm.PastRetention(retentionYears, dbinfo);
-  string dateBeg = purgeDays["datebeg"]; 
-  string dateEnd = purgeDays["dateend"];
+  $purgeDays = CJvAdm::PastRetention($retentionYears, $dbinfo);
+  $dateBeg = $purgeDays["datebeg"] ?? "";
+  $dateEnd = $purgeDays["dateend"] ?? "";
 
-  List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
-  string meqs = CUtils.tap("/jvadm/PastRetention");
-}
+  $rows = [];
+  $meqs = CUtil::tap("/jvadm/PastRetention");
+  if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    CJvAdm::PurgeJVLogInDateRange($_POST, $dbinfo);
+    CUtil::Redirect($meqs);
+  }
+  $rows = CJvAdm::jvLogPastRetention($dateBeg, $dateEnd, $dbinfo);
+?>
 <table class="jvtable">
   <tbody>
     <tr class="jvtable">
@@ -23,11 +25,11 @@
         <table>
           <tr>
             <td class="jvtable" align="center">
-              <form method="post" action="@meqs" )">
+              <form method="post" action="<?= htmlspecialchars($meqs) ?>">
                 Retention Years:
-                <input class="txtReadOnly" type="text" size=3 name="retention" value="@retentionYears" READONLY />
-                <input type="hidden" size=3 name="datebeg" value="@dateBeg" />
-                <input type="hidden" size=3 name="dateend" value="@dateEnd" />
+                <input class="txtReadOnly" type="text" size=3 name="retention" value="<?= $retentionYears ?>" READONLY />
+                <input type="hidden" size=3 name="datebeg" value="<?= htmlspecialchars($dateBeg) ?>" />
+                <input type="hidden" size=3 name="dateend" value="<?= htmlspecialchars($dateEnd) ?>" />
                 <input type="submit" name="submit" value="Purge All Listed Below!">
               </form>
             </td>
@@ -35,45 +37,30 @@
         </table>
       </td>
     </tr>
-    @if (IsPost)
-    {
-      <p>
-        Purging Journal Vouchers Log between @dateBeg and @dateEnd
-      </p>
-      CJvAdm.PurgeJVLogInDateRange(Request.Form, dbinfo);
-      CUtils.Redirect(meqs);
-    }
-    else
-    {
-      CCore._rows = CJvAdm.jvLogPastRetention(dateBeg, dateEnd, dbinfo);
-      if (CCore._rows.Count > 0)
-      {
-        <p>
-          Purge Journal Vouchers Log between @dateBeg and @dateEnd
-        </p>
+    <?php if (count($rows) > 0): ?>
+        <tr>
+          <td colspan="11" align="center">
+            <p>Purge Journal Vouchers Log between <?= htmlspecialchars($dateBeg) ?> and <?= htmlspecialchars($dateEnd) ?></p>
+          </td>
+        </tr>
         <tr class="jvtable">
           <th class="jvtable">JV Year</th>
           <th class="jvtable">JV Month</th>
           <th class="jvtable">Total JV</th>
         </tr>
-        rows = CCore._rows; // from jv_search or jv_archive
-        int cnt = 0;
-        foreach (Dictionary<string, object> r in rows)
-        {
-          cnt++;
-          NameValueCollection rNv = CUtils.dict2nv(r); // convert Nv to get field name
-        string linecls = "screen" + CUtils.evenOrOdd(cnt);
-          <tr class='@linecls'>
-            <td class="jvtable" align="center">@rNv["jvyear"]</td>
-            <td class="jvtable" align="center">@rNv["jvmonth"]</td>
-            <td class="jvtable" align="center">@rNv["jvcnt"]</td>
+        <?php $cnt = 0; foreach ($rows as $r): $cnt++; $linecls = "screen" . CUtil::evenOrOdd($cnt); ?>
+          <tr class="<?= htmlspecialchars($linecls) ?>">
+            <td class="jvtable" align="center"><?= htmlspecialchars((string)($r["jvyear"] ?? "")) ?></td>
+            <td class="jvtable" align="center"><?= htmlspecialchars((string)($r["jvmonth"] ?? "")) ?></td>
+            <td class="jvtable" align="center"><?= htmlspecialchars((string)($r["jvcnt"] ?? "")) ?></td>
           </tr>
-        }
-      }
-      else
-      {
-        CUtils.Add2SessVar("feedback", "<p />No JV logs past retention periods are found!");
-      }
-    }
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+          <td colspan="11" align="center">
+            No JV logs past the retention period were found.
+          </td>
+        </tr>
+    <?php endif; ?>
   </tbody>
 </table>

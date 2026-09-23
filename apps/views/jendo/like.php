@@ -1,6 +1,6 @@
 <?php
   $Layout = CUtil::GetLayout("_bootstrap_top");
-  $file = CCore::MeViewPath() + "/" + $AppState["_rp"] + "/like_button2j1.js";
+  $file = CCore::MeViewPath() . "/" . CSetting::get("_rp") . "/like_button2j1.js";
   CMsg::_pdmsg($file, "file");
 ?>
 

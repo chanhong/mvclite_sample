@@ -1,20 +1,18 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-
-@{
-  Page.Title = "Maker";
-  string dbenv = CJv.DbEnv();
-  NameValueCollection onejv = PageData["onejv"];
-  CCore._uprf = CUtils.getSessNv("uinfo");
+<?php
+use MvcLite\CCore;
+  $pageTitle = "Maker";
+  $dbenv = CJv::DbEnv();
+  $onejv = $PageData["onejv"];
+  CCore::$_uprf = CUtil::getSessNv("uinfo");
 
   /*
-  CMsg._pdmsg(CCore._usr, "_usr");
-  CMsg._pdmsg(CCore._uprf, "_uprf");
+  CMsg::_pdmsg(CCore::_usr, "_usr");
+  CMsg::_pdmsg(CCore::$_uprf, "_uprf");
   */
-  NameValueCollection jvInfo = CJv.GetJVnumInfo(onejv["jvid"], onejv["title"], onejv["approved"]);
-  string acctmo = CJv.GetAcctMo(dbenv);
-  string flag = CJvTpl.FlagRed(acctmo, "acctmo");
-}
+  $jvInfo = CJv::GetJVnumInfo($onejv["jvid"], $onejv["title"], $onejv["approved"]);
+  $acctmo = CJv::GetAcctMo($dbenv);
+  $flag = CJvTpl::FlagRed($acctmo, "acctmo");
+?>
 <table class="jvtable">
   <tbody>
     <tr class="jvcolhdr">
@@ -27,7 +25,7 @@
     </tr>
     <tr class="jvtable">
       <td class="jvtable" align="right">Department:</td>
-      <td class="jvtable">@CCore._uprf["apventity"]</td>
+      <td class="jvtable">@CCore::$_uprf["apventity"]</td>
       <td class="jvtable"@Html.Raw(flag)>
             Biennium Month: &nbsp;&nbsp;
             <input class="txtReadOnly" type="text" name="acctmo" size="2" value="@acctmo" readonly>

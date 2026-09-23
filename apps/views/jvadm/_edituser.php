@@ -1,47 +1,40 @@
-﻿@using System.Collections.Specialized;
-@using Co;
+﻿<?php
+use MvcLite\CCore;
+  //Layout = CUtil::GetLayout("_ejv");
 
-@{
-  Layout = CUtils.GetLayout("_ejv");
+  $PageData["Title"] = "Edit a User Form";
+  $iPath = CUtil::imgPath();
 
-  PageData["Title"] = "Edit a User Form";
-  string iPath = CUtils.imgPath();
-
-  string tsk = "jvadm";
-  string mepath = string.Format("/{0}/index/", tsk);  // c use as sub-action such as clone, add, etc
-  string meqs = CUtils.tap(mepath);
-  string cmd = "";
-  NameValueCollection one = new NameValueCollection {
+  $tsk = "jvadm";
+  $mepath = sprintf("/%s/index/", $tsk);  // c use as sub-action such as clone, add, etc
+  $meqs = CUtil::tap($mepath);
+  $cmd = "";
+  $one = [
     // field,"vaue"
-    {"name","JV User" },
-    {"email","chanhong@uw.edu" },
-    {"password","password" },
-    {"is_confirmed","0" },
-    {"winuser","" },
-    {"jvgroup","user" },
-    {"jventity","UWMC" },
-    {"jventities","UWMC|TEST" },
-};
+    "name" => "JV User", "email" => "chanhong@uw.edu", "password" => "password",
+    "is_confirmed" => "0", "winuser" => "", "jvgroup" => "user",
+    "jventity" => "UWMC", "jventities" => "UWMC|TEST", "email_login" => ""
+  ];
 
-  NameValueCollection _qsa = CCore.qs2nvWithDefaultValue();
-  string usrid = _qsa["p1"];
-  if (CString.IsEmpty(usrid) == false)
+  $_qsa = CCore::qs2nvWithDefaultValue();
+  $usrid = $_qsa["p1"];
+  if (CString::IsEmpty($usrid) == false)
   {
-    cmd = "saveedit";
-    PageData["title"] = "Edit a User Form";
-    PageData["buttontitle"] = "Edit a User Info";
-    PageData["action"] = meqs + "&c" + cmd;
-    one = MJvAdm.GetUser("user_id='"+usrid+"'", CJv.DbEnv());
+    $cmd = "saveedit";
+    $PageData["Title"] = "Edit a User Form";
+    $PageData["buttontitle"] = "Edit a User Info";
+    $PageData["action"] = $meqs . "&c=" . $cmd;
+    $one = MJvAdm::GetMakerUser("user_id='" . $usrid . "'", CJv::DbEnv());
   }
   else
   {
-    cmd = "savenew";
-    PageData["title"] = "Create New User Form";
-    PageData["buttontitle"] = "Create User";
+    $cmd = "savenew";
+    $PageData["Title"] = "Create New User Form";
+    $PageData["buttontitle"] = "Create User";
 //    PageData["action"] = meqs + "&c=savenew";
-    PageData["action"] = meqs + "&c" + cmd;
+    $PageData["action"] = $meqs . "&c=" . $cmd;
   }
-}
+?>
 <script>
   $(document).ready(function () {
     // validate the form when it is submitted
@@ -150,5 +143,5 @@
              title="Edit User Info" type="submit" value="Save" />
     </p>
   </fieldset>
-  @Html.Raw(CHtml.FrmEnd(CUtils.getReturnUrl()))
+  @Html.Raw(CHtml.FrmEnd(CUtil::getReturnUrl()))
 </div>

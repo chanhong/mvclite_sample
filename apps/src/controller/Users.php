@@ -1,7 +1,7 @@
 <?php
 //namespace MvcSample;
 namespace MvcLite;
-use MvcLite\Ccore;
+use MvcLite\CCore;
 use MvcLite\BaseController;
 use MvcLite\CUtil;
 use MvcLite\MvcRouter;

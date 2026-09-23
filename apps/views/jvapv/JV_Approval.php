@@ -1,27 +1,26 @@
-@using System.Collections.Specialized;
-@using Co;
-@{
-  Layout = CUtils.GetLayout("_ejv");
-  PageData["Title"] = "JV Approval";
-  //  CMsg._pdmsg(PageData["meqs"], "meqs");
-        string dbenv = CJv.DbEnv();
-      CCore._uprf = CUtils.getSessNv("uinfo");  
-  if (!CString.IsEmpty(dbenv) && CString.IsEmpty(CCore._uprf["name"])) { 
-CJv.setUserProfile(dbenv);  
+<?php
+use MvcLite\CCore;
+  //Layout = CUtil::GetLayout("_ejv");
+  $PageData["Title"] = "JV Approval";
+  //  CMsg::_pdmsg(PageData["meqs"], "meqs");
+        $dbenv = CJv::DbEnv();
+      CCore::$_uprf = CUtil::getSessNv("uinfo");  
+  if (!CString::IsEmpty($dbenv) && CString::IsEmpty(CCore::$_uprf["name"])) { 
+CJv::setUserProfile($dbenv);  
   }
-         PageData["acctmo"] = "0";
-      PageData["jvnum"] = "0";          
-  if (!CString.IsEmpty(dbenv) && !CString.IsEmpty(CCore._uprf["apventity"])) { 
-      PageData["acctmo"] = Convert.ToInt32(CJv.GetAcctMo(dbenv));
-      PageData["jvnum"] = Convert.ToInt32(CJv.GetJvNum(dbenv)); // show number only   
-    CMsg._pdmsg(dbenv, "dbenv");
-    CMsg._pdmsg(CCore._uprf, "uprf");
+         $PageData["acctmo"] = "0";
+      $PageData["jvnum"] = "0";          
+  if (!CString::IsEmpty($dbenv) && !CString::IsEmpty(CCore::$_uprf["apventity"])) { 
+      $PageData["acctmo"] = Convert.ToInt32(CJv::GetAcctMo($dbenv));
+      $PageData["jvnum"] = Convert.ToInt32(CJv::GetJvNum($dbenv)); // show number only   
+    CMsg::_pdmsg($dbenv, "dbenv");
+    CMsg::_pdmsg(CCore::$_uprf, "uprf");
 
-    CMsg._pdmsg(PageData["acctmo"], "acctmo");         
-    CMsg._pdmsg(PageData["jvnum"], "jvnum");         
+    CMsg::_pdmsg($PageData["acctmo"], "acctmo");         
+    CMsg::_pdmsg($PageData["jvnum"], "jvnum");         
   } else{
-    CCore._Logout();
-    CUtils.Redirect(CUtils.getReturnUrl());    
+    CCore::_Logout();
+    CUtil::Redirect(CUtil::getReturnUrl());    
   }
 
   /*
@@ -36,16 +35,16 @@ CJv.setUserProfile(dbenv);
   </tr>
   <tr class="jvtable">
     <td class="jvtable" COLSPAN="6" align="center">
-      @RenderPage("_r_/updjvnum.cshtml")
+      include("_r_/updjvnum.cshtml")
     </td>
     <td class="jvtable" COLSPAN="6" align="center">
-      @RenderPage("_r_/updacctmo.cshtml")
+      include("_r_/updacctmo.cshtml")
     </td>
-    @RenderPage("_r_/jvapproval.cshtml")
+    include("_r_/jvapproval.cshtml")
   </tr>
   <table class="jvtable">
   <tbody>
-    @RenderPage("_r_/jvapproval.cshtml")
+    include("_r_/jvapproval.cshtml")
   </tbody>
 </table>
 <p />
@@ -56,7 +55,7 @@ CJv.setUserProfile(dbenv);
   </B>
 </center>
   */
-}
+?>
 <table class="jvtable" border="0">
   <tbody>
     <tr class="jvheader">
@@ -70,10 +69,10 @@ CJv.setUserProfile(dbenv);
     </tr>
     <tr class="jvtable">
       <td class="jvtable" align="right">
-        @RenderPage("_r_/updjvnum.cshtml")
+        <?php include("_r_/updjvnum.cshtml"); ?>
       </td>
       <td class="jvtable" align="left">
-        @RenderPage("_r_/updacctmo.cshtml")
+        <?php include("_r_/updacctmo.cshtml"); ?>
       </td>
     </tr>
     <tr class="jvheader">
@@ -91,4 +90,5 @@ CJv.setUserProfile(dbenv);
       </tr>
   </tbody>
 </table>
-@RenderPage("_r_/jvapproval.cshtml")
+<?php
+include("_r_/jvapproval.cshtml");

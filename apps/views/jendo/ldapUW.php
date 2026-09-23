@@ -1,6 +1,6 @@
 <?php
   $Layout = CUtil::GetLayout("_bootstrap_2c");
-  if ($PageData["Title"] == $AppState["Name"])
+  if (@$PageData["Title"] == CSetting::get("Name"))
   {
     $PageData["Title"] = "Ldap UW";
   }

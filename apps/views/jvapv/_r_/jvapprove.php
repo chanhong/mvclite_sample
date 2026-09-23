@@ -1,15 +1,14 @@
-@using System.Collections.Specialized;
-@using Co;
-@{
+<?php
+use MvcLite\CCore;
   //  Layout is already in index
-  PageData["Title"] = "JV Approve";
-  string msg;
-  string meqs = PageData["meqs"];
-  msg = "Email the accountant before approving this!";
-  NameValueCollection qsa = CUtils.qs2nv(meqs);
-  string apvbutton = CJvApv.ShowApprovalButton(qsa);
-  //  CMsg._pdmsg(PageData["meqs"], "meqs");
-}
+  $PageData["Title"] = "JV Approve";
+  $msg;
+  $meqs = $PageData["meqs"];
+  $msg = "Email the accountant before approving this!";
+  $qsa = CUtil::qs2nv($meqs);
+  $apvbutton = CJvApv::ShowApprovalButton(qsa);
+  //  CMsg::_pdmsg(PageData["meqs"], "meqs");
+?>
 <div>
   @Html.Raw(CHtml.FrmBeg(meqs))
     <table border=0 width=100% align="center">

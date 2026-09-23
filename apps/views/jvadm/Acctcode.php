@@ -1,13 +1,12 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-  Layout = CUtils.GetLayout("_ejv");
-  PageData["Title"] = "JV Acctcode";
-  string ajax_qs = CUtils.Tap2Qs("/udata/_ejv") + "&c=acctcode"; // refine ajx with &c=cmd
-  string msg = PageData["Title"];
-//  CMsg._dmsg(msg, "in");
-  //  CUtils.Add2SessVar("feedback", msg);
-}
+﻿<?php
+use MvcLite\CCore;
+  //Layout = CUtil::GetLayout("_ejv");
+  $PageData["Title"] = "JV Acctcode";
+  $ajax_qs = CUtil::Tap2Qs("/udata/_ejv") . "&c=acctcode"; // refine ajx with &c=cmd
+  $msg = $PageData["Title"];
+//  CMsg::_dmsg(msg, "in");
+  //  CUtil::Add2SessVar("feedback", msg);
+?>
 <style>
   .hide {
     display: none;

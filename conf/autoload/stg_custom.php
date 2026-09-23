@@ -52,8 +52,8 @@ $r = [
 
     "archivepath" => "//abc/data/rchive/archive",
     "oldarchivepath" => "//cde/share$/archive",
-    "archive" => "", // set in CUtils.getEnv()
-    "oldarchive" => "", // set in CUtils.getEnv()
+    "archive" => "", // set in CUtil::getEnv()
+    "oldarchive" => "", // set in CUtil::getEnv()
     "archivetype" => "pdf",
     "textfiles" => "textfiles",
     "support_docs" => "_support_docs",

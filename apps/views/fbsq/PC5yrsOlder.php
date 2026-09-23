@@ -1,48 +1,46 @@
-﻿@using System.Collections.Specialized;
-@using System.Data.OleDb;
-@using Co;
+﻿<?php
+use MvcLite\CCore;
+use MvcLite\CHtml;
 
-@{
-  string tblcls = "jvtable";
+$tblcls = "jvtable";
 
-  string hdrMsg = "";
-  List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+$hdrMsg = "";
+$rows = [];
 
-  Layout = CUtils.GetLayout("_bootstrap_top");
-  PageData["Title"] = "PC older then 5 yrs List";
-  hdrMsg = string.Format("<H2>List of PC {0} yrs older</H2>", "5");
+// Layout = CUtil::GetLayout("_bootstrap_top");
+$PageData["Title"] = "PC older then 5 yrs List";
+$hdrMsg = sprintf("<H2>List of PC %s yrs older</H2>", "5");
 
-  string dbenv = CCore._DbEnv("dbitinvt");
-  NameValueCollection clsName = new NameValueCollection
-  {
-    { "tcls", tblcls },
-    { "rcls", "screen" },
-  };
-  NameValueCollection fName = new NameValueCollection {
-  // fldname, fldhdr, fldformat
-  { "DiffYrs","Yrs,"},
-  { "ComputerName",","},
-  { "Subnet",","},
-  { "Description",","},
-  { "Model",","},
-  { "UserID",","},
-  { "OS_Arch",","},
-    { "OS",","},
-  { "ImageType",","},
-  { "DeployedDate","Deployed<br />Date,"},
-  { "Location",","},
-  };
-  rows = CFbsQ.getPCGt5YrsRows(dbenv);
-}
+$dbenv = CCore::_DbEnv("dbitinvt");
+$clsName = [
+    "tcls" => $tblcls,
+    "rcls" => "screen"
+];
+$fName = [
+    "DiffYrs" => ["Yrs", ""],
+    "ComputerName" => ["", ""],
+    "Subnet" => ["", ""],
+    "Description" => ["", ""],
+    "Model" => ["", ""],
+    "UserID" => ["", ""],
+    "OS_Arch" => ["", ""],
+    "OS" => ["", ""],
+    "ImageType" => ["", ""],
+    "DeployedDate" => ["Deployed<br />Date", ""],
+    "Location" => ["", ""]
+];
+$rows = CFbsQ::getPCGt5YrsRows($dbenv);
+?>
+
 <div>
   <div>
-    @Html.Raw(hdrMsg)
+    <?php echo $hdrMsg; ?>
   </div>
-  <div align=center>
+  <div align="center">
     <p />
     <table class="jvtable">
       <tbody>
-        @Html.Raw(CHtml.OutTblRows(fName, rows, clsName))
+        <?php echo CHtml::OutTblRows($fName, $rows, $clsName); ?>
       </tbody>
     </table>
   </div>

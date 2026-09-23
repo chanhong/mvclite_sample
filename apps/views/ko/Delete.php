@@ -1,10 +1,11 @@
-﻿@using Co;
-@{
+﻿<?php
+use MvcLite\CCore;
+
   //@model MVCCRUDKnockout.Models.Course
-  Layout = CUtils.GetLayout("_bootstrap_2c");
-  PageData["Title"] = "KO Delete";
+  //Layout = CUtil::GetLayout("_bootstrap_2c");
+  $PageData["Title"] = "KO Delete";
   //  @Html.ActionLink("Back to List", "Read")
-}
+?>
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>

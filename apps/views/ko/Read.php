@@ -1,12 +1,12 @@
-﻿@using Co;
+﻿<?php
+use MvcLite\CCore;
 
-@{
-  Layout = CUtils.GetLayout("_bootstrap_2c");
-  if (PageData["Title"] == AppState["Name"])
+  //Layout = CUtil::GetLayout("_bootstrap_2c");
+  if ($PageData["Title"] == CSetting::get("Name"))
   {
-    PageData["Title"] = "KO Read";
+    $PageData["Title"] = "KO Read";
   }
-}
+?>
 
 <h2>Index</h2>
 

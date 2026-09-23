@@ -191,7 +191,7 @@ $r =
             'spage' => [],
         ],
 
-        //        'mnutop' => [], // NOTused, dynamic top-level menu, need to write to CSetting rather than CCore or CConfig
+        //        'mnutop' => [], // NOTused, dynamic top-level menu, need to write to CSetting rather than CCore::or CConfig
     ];
 // ---------------------------------------------------------------------------
 // Build and return the full settings array

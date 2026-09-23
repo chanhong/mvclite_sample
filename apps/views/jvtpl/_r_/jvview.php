@@ -1,7 +1,6 @@
-﻿@using System.Collections.Specialized;
-@using Co;
-@{
-}
+<?php
+use MvcLite\CCore;
+?>
 <table class="jvtable">
   <tbody>
     <tr class="jvtable">
@@ -12,20 +11,20 @@
     </tr>
     <tr class="jvtable">
       <td class="jvtable" width="60%">
-        @RenderPage("vmailto.cshtml")
+        include("vmailto.cshtml")
       </td>
       <td class="jvtable" width="40%">
-        @RenderPage("vmaker.cshtml")
+        include("vmaker.cshtml")
       </td>
     </tr>
     <tr class="jvtable">
       <td class="jvtable" colspan="2">
-        @RenderPage("vdetail.cshtml")
+        include("vdetail.cshtml")
       </td>
     </tr>
     <tr class="jvExplanation">
       <td class="jvExplanation" colspan="2">
-        @RenderPage("vexplain.cshtml")
+        include("vexplain.cshtml")
       </td>
     </tr>
   </tbody>

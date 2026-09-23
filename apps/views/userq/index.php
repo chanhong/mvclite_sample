@@ -1,5 +1,6 @@
-@using Co;
-@{
-  PageData["Title"] = "UserQ Index";
-}
-@RenderPage("_main.cshtml")
+<?php
+use MvcLite\CCore;
+
+  $PageData["Title"] = "UserQ Index";
+
+include("_main.cshtml");

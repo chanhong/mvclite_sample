@@ -8,10 +8,10 @@
 #namespace MvcSample;
 namespace MvcLite;
 
-use MvcLite\CModel;
+use mvcLite\CModel;
 use MvcLite\CUtil;
 
-class BaseModel extends CModel {
+class BaseModel extends CModel{
     
     public function __construct($tname, $id = null) {
         

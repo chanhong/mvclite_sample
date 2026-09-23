@@ -1,56 +1,56 @@
-﻿@using System.Collections.Specialized;
-@using System.Data.OleDb;
-@using Co;
-@{
-  string seljvt="";
-  string filterN = "";
-  string hdrMsg = "";
-  List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+﻿<?php
+use MvcLite\CCore;
+use MvcLite\CUtil;
+use MvcLite\CFbsQ;
+use MvcLite\CHtml;
 
-  Layout = CUtils.GetLayout("_bootstrap_top");
-  PageData["Title"] = "ADQuery User's Groups List";
-  string dbenv = CCore._DbEnv("dbadq");
-  string meqs = CUtils.tap("/fbsq/ADQ-UsrGrps");
 
-  string tblcls = "jvtable";
-  NameValueCollection clsName;
-  NameValueCollection fName;
-  clsName = new NameValueCollection
-  {
-    { "tcls", tblcls },
-    { "rcls", "screen" },
-  };
-  fName = new NameValueCollection {
-  // fldname, fldhdr, fldformat
-  { "cn",",left"},
-  { "description",",left"},
-  };
+$seljvt = "";
+$filterN = "";
+$hdrMsg = "";
+$rows = [];
 
-  if (IsPost)
-  {
-    filterN = CCore.getSafeVar(Request.Form, "user", "raw");
-    //    CMsg._pdmsg(filterN,"users");
-    hdrMsg = string.Format("<H2>List of {0}'s groups</H2>", filterN);
-    rows = CFbsQ.getADQUsersRows(filterN, dbenv);
-  };
-  seljvt = CHtml.dropDnList("user", CFbsQ.getADQUsersList(dbenv), filterN);
+// Layout = CUtil::GetLayout("_bootstrap_top");
+$PageData["Title"] = "ADQuery User's Groups List";
+$dbenv = CCore::_DbEnv("dbadq");
+$meqs = CUtil::tap("/fbsq/ADQ-UsrGrps");
+
+$tblcls = "jvtable";
+$clsName = [
+    "tcls" => $tblcls,
+    "rcls" => "screen"
+];
+$fName = [
+    // "fldname", "fldhdr", "fldformat"
+    "cn" => [",", "left"],
+    "description" => [",", "left"]
+];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $filterN = CUtil::getSafeVar($_REQUEST, "user", "raw");
+    // CMsg::_pdmsg(filterN,"users");
+    $hdrMsg = sprintf("<H2>List of %s' groups</H2>", $filterN);
+    $rows = CFbsQ::getADQUsersRows($filterN, $dbenv);
 }
+
+$seljvt = CHtml::dropDnList("user", CFbsQ::getADQUsersList($dbenv), $filterN);
+?>
+
 <div>
   <div>
-    @Html.Raw(hdrMsg)
+    <?php echo $hdrMsg; ?>
   </div>
-  <div align=center>
-    @Html.Raw(CHtml.FrmBeg(meqs))
-    Filter by:&nbsp;&nbsp; @Html.Raw(seljvt)
+  <div align="center">
+    <?php echo CHtml::FrmBeg($meqs); ?>
+    Filter by:&nbsp;&nbsp; <?php echo $seljvt; ?>
     <input type="submit" name="submit" value="Go">
-    @Html.Raw(CHtml.FrmEnd(meqs))
-    @if (IsPost)
-    {
+    <?php echo CHtml::FrmEnd($meqs); ?>
+    <?php if ($_SERVER["REQUEST_METHOD"] == "POST") { ?>
       <table>
         <tbody>
-          @Html.Raw(CHtml.OutTblRows(fName, rows, clsName))
+          <?php echo CHtml::OutTblRows($fName, $rows, $clsName); ?>
         </tbody>
       </table>
-    }
+    <?php } ?>
   </div>
 </div>

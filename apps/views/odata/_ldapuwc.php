@@ -9,10 +9,10 @@
     $iType = $_GET["c"]; // use &c=ajax to be consistent
     try
     {
-      if (CString.IsEmpty(iType) == false && CString.IsEmpty(term) == false)
+      if (CString::IsEmpty($iType) == false && CString::IsEmpty($term) == false)
       {
-        $aType = str2lower($iType);
-        switch (aType)
+        $aType = strtolower($iType);
+        switch ($aType)
         {
           case "emailuw":
             $aList = CLdap::LdapListByEmail($host, $searchStr, $term);
@@ -21,16 +21,15 @@
             $aList = CLdap::LdapListByName($host, $searchStr, $term);
             break;
         }
-        CUtil::outJson(CUtils.List2json($aList));
+        CUtil::outJson(CUtil::List2json($aList));
       }
     }
-  catch (Exception e)
+  catch (Exception $e)
   {
     //    Response.Write(e.ToString());
     $rUrl = CUtil::getReturnUrl();
     CMsg::_dmsg($rUrl, "rUrl");
-    $msg = "catch:" + $iType+e.ToString();
+    $msg = "catch:" . $iType . $e->getMessage();
     CUtil::Add2SessVar("feedback", $msg);
     CUtil::Redirect($rUrl);
   }
-}
