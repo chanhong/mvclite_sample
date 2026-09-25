@@ -1,4 +1,5 @@
 <?php
+use mvclite\CSetting;
 $this->_view_data['header_title'] = 'Win Login';
 ?>
 <div>

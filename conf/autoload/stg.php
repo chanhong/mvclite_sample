@@ -153,7 +153,6 @@ $r =
                 "jv" => ",",
                 "learn" => ",",
                 "static" => ",",
-                "pages" => ",",
                 "users" => ",",
                 "books" => ",",
                 "authors" => ",",
@@ -173,8 +172,6 @@ $r =
                 "jsgrid" => "inq,",
                 "ko" => "inq,",
                 "jendo" => ",",
-                "spage" => ",",
-                "pages" => ",",
             ],
             'users' => [ // group, title
                 "list" => ",User List",
@@ -188,7 +185,7 @@ $r =
             'books' => [
                 "_edit" => "admin,Edit Book",
             ],
-            'spage' => [],
+            'static' => [],
         ],
 
         //        'mnutop' => [], // NOTused, dynamic top-level menu, need to write to CSetting rather than CCore::or CConfig

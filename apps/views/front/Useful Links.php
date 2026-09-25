@@ -4,7 +4,7 @@ use Mvclite\CUtil;
   pln('here');
   pln($qsa,'qsa');  
   $PageData["Title"] = "Useful Links";
-//$dbenv = CCore::$DbEnv("dbacct");
+//$dbenv = CCore::DbEnv("dbacct");
 $ajax_qs = CUtil::Tap2Qs("/odata/acctlinks") . "&c=links"; // refine ajx with &c=cmd
   $msg = $PageData["Title"];
   pln($msg,'in');

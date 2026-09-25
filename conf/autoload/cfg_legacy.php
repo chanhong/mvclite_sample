@@ -196,25 +196,6 @@ $r = [
             'logfile' => 'Debug Log Files',
             'clear'   => 'Clear Debug',
         ],
-        'authors' => [
-            'index' => 'Authors List',
-        ],
-        'books' => [
-            'index' => 'Books List',
-        ],
-        'users' => [
-            'index' => 'Users List',
-        ],
-        'front' => [
-            'index' => 'Front Page',
-            'about' => 'About Page',
-        ],
-        'pages' => [
-            'index' => 'Pages',
-            'page1' => 'Page 1',
-            'page2' => 'Page 2',
-        ],
-
     ],
 
     // -----------------------------------------------------------------------
@@ -251,23 +232,6 @@ $r = [
     // -----------------------------------------------------------------------
     // Per-app task/group maps
     // -----------------------------------------------------------------------
-    'front' => [
-        'front'  => ',FP',
-        'admin'  => 'admin,',
-        'fbsq'   => 'inq,FbsQ',
-    ],
-    'learn' => [
-        'learn'    => ',Lrn',
-        'lrnadmin' => 'admin,Admin',
-        'userq'    => 'inq,UserQ',
-        'jsgrid'   => 'inq,',
-        'ko'       => 'inq,',
-        'jendo'    => ',',
-        'static'   => ',',
-    ],
-    'static' => [],
-
-    'tg' => [],         // MASTER task→group map
 
     // -----------------------------------------------------------------------
     // Debug / logging

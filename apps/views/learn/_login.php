@@ -30,10 +30,10 @@ use MvcLite\CSetting;
   }
 
         $vfdr = CSetting::get("viewpath") . "/" . CSetting::get("_rp")."/" ??'';
-        /*
+        
         pln($vfdr,'vfdr');
         pln($PageData["app"],'app');
-*/
+
 ?>
 <div id="main" align="center">
 <?php
@@ -45,8 +45,8 @@ use MvcLite\CSetting;
     {
       if (CSecs::IsWebloginAllowed() == true)
       {
-        include __DIR__."/_rp_/"."_loginWeb.php";
-//        include $vfdr . "loginWeb.php";
+//        include __DIR__."/_rp_/"."_loginWeb.php";
+        include $vfdr . "loginWeb.php";
       }
       if (CSecs::isIntrgUser() == true)
       {

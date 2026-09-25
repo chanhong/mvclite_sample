@@ -4,7 +4,7 @@ use MvcLite\CCore;
   //  Layout is already in _main
   $PageData["Title"] = "My Links";
   $dbenv = CCore::_DbEnv("dbacct");
-  $ajax_qs = CUtil::Tap2Qs("/udata/_acctlinks") + "&c=mylinks"; // refine ajx with &c=cmd
+  $ajax_qs = CUtil::Tap2Qs("/udata/_acctlinks") . "&c=mylinks"; // refine ajx with &c=cmd
   $msg = $PageData["Title"];
   //  CMsg::_dmsg(msg, "in");
   //  CUtil::Add2SessVar("feedback", msg);

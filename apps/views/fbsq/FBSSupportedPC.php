@@ -3,7 +3,7 @@ use MvcLite\CCore;
   //Layout = CUtil::GetLayout("_bootstrap_top");
   $PageData["Title"] = "PC Deployment";
 //  $ajax_qs = CUtil::Tap2Qs("/fbsq/__ajpcdeploy");
-  $ajax_qs = CUtil::Tap2Qs("/udata/_itinvent") + "&c=fbssupportedpc"; // refine ajx with &c=cmd
+  $ajax_qs = CUtil::Tap2Qs("/udata/_itinvent") . "&c=fbssupportedpc"; // refine ajx with &c=cmd
   $msg = $PageData["Title"];
 //  CMsg::_dmsg(msg, "in");
   //  CUtil::Add2SessVar("feedback", msg);

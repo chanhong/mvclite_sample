@@ -1,4 +1,5 @@
 <?php
+use mvcLite\CCore;
 use mvcLite\CUtil;
 use mvcLite\CModel;
 use mvcLite\CMsg;
@@ -12,16 +13,17 @@ $nvValue;
 
 //  $dbinfo = CCore::$_DbEnv("dbacct");
 $dbinfo = "coazportal_db";
-
+$uname=CCore::$_usr["usrname"]??"admin"; // quick fix
 $qsa = CUtil::qs2nv();
 //  pln($qsa,'qsa');
+
 $scmd = (empty($qsa["c"]) <> true) ? strtolower($qsa["c"]) : '';
 switch ($scmd) {
   case "links":
     $tname = "url_Useful";
     break;
     case "mylinks":
-      $tname = "url_" + CCore::$_usr["usrname"];
+      $tname = "url_" . $uname;
       $idKey = "id";
       break;    
   default:

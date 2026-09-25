@@ -29,7 +29,8 @@ use MvcLite\CSetting;
     }
   }
 
-        $vfdr = CSetting::get("viewpath") . "/" . CSetting::get("_rp")."/" ??'';
+//        $vfdr = CSetting::get("viewpath") ."/".$PageData["app"]. "/" . CSetting::get("_rp")."/" ??'';
+        $vfdr = CSetting::get("viewpath") ."/".$PageData["app"]. "/"  ??'';
         /*
         pln($vfdr,'vfdr');
         pln($PageData["app"],'app');
@@ -45,7 +46,8 @@ use MvcLite\CSetting;
     {
       if (CSecs::IsWebloginAllowed() == true)
       {
-        include __DIR__."/"."_weblogin.php";
+//        include __DIR__."/_r_/"."_weblogin.php";
+        include $vfdr . "_weblogin.php";
       }
       if (CSecs::isIntrgUser() == true)
       {

@@ -1,6 +1,9 @@
 <?php
+use mvclite\CSetting;
 $this->_view_data['header_title'] = 'Web Login';
 (!empty($this->post['username'])) ? $username = $this->post['username'] : $username = "";
+        $vfdr = "users". "/" . CSetting::get("_rp") ??'_r_';
+
 ?>
 <div>
     <form action="<?php echo $this->h->tap("/users/_weblogin"); ?>" method="post">

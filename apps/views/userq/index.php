@@ -3,4 +3,4 @@ use MvcLite\CCore;
 
   $PageData["Title"] = "UserQ Index";
 
-include("_main.cshtml");
+include("_main.php");

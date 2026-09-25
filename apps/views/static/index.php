@@ -1,44 +1,53 @@
-  <?php
-  $this->_view_data['header_title'] = 'Static Page';
-    $file=CString::FixBackSlash($this->cfg->path['view']).'/'.basename(__DIR__).'/_r_/static.css';
-
-  /*
+﻿<?php
+    $file=CString::FixBackSlash($this->cfg->path['view']).'/'.basename(__DIR__).'/'. CSetting::get("_rp").'/static.css';
+    /*
   //Layout = CUtil::GetLayout("_static_top");
 
-  string file = CCore::MeViewPath() + "/" + CSetting::get("_rp") + "/static.css";
-  CMsg::_pdmsg(file, "file");
+//  string file = CCore::MeViewPath() + "/" + CSetting::get("_rp") + "/static.css";
+  //CMsg::_pdmsg(file, "file");
+  //CMsg::_cwl($"static: f={file}");
 
-  // don't set layout in index for consistency and avoid double layout
-  NameValueCollection _qsa = CCore::qs2nvWithDefaultValue();
-  CUtil::setActiveCtrl(_qsa);
-  $PageData["Title"] = "Static Page";
-  CSecs.setUsersInfo(); // MUST set it before it is being used in the class
-
-  NameValueCollection mnuLinks = (NameValueCollection)CCore::_cfg["mnu_static"];
-  string[] lnka = null;
+  string pfile = "/Shared" + "/css/" + "static.css";
+  //CMsg::_cwl($"static: f={pfile}");
 */
-    /*
-    @foreach (string s in mnuLinks.AllKeys)
-    {
-      if (CString::IsEmpty(s) == false)
-      {
-        lnka = CUtil::mnu_nv2a(mnuLinks, s);
-        <div class="item">
-          @Html.Raw(CUtil::a2ahref(lnka))
-        </div>
-      }
-    }
-    */
+  // don't set layout in index for consistency and avoid double layout
+  $_qsa = CCore::qs2nvWithDefaultValue();
+  CUtil::setActiveCtrl($_qsa);
+//  $ViewData["Title"] = "SPage";
+$this->_view_data['header_title'] = 'SPage';  
+  CSecs::setUsersInfo(); // MUST set it before it is being used in the class
 
-?>
-<link rel="stylesheet" href="<?=$file; ?>" />
+//  $mnuLinks = CCore::$_cfg["mnu_static"];
+//  $mnuLinks = CConfig::get('menus.spage') ?? [];
+  $mnuLinks = CConfig::get('mnu_static') ?? [];
+  pln($mnuLinks, "mnuLinks");
+  $lnka = null;
+
+  ?>
+<link rel="stylesheet" href="<?php echo $file;?>" />
 <style>
 
 </style>
 <div id="logo">
-<img src="/public/img/logo.svg" height=200 width=600>
+<img src="public/img/logo.svg" height=200 width=600>
 </div>
   <div class="grid-layout">
-    Static Page
-    <!-- code here -->
+    <?php
+   foreach ($mnuLinks as $title => $path) {
+    
+//        pln($title, "title");
+//        pln($path, "path");
+        
+      if (CString::IsEmpty($title) == false)
+      {
+        $lnka = CUtil::mnu_nv2a($mnuLinks, $title);
+        ?>
+        <div class="item">
+          <?php echo CUtil::a2ahref($lnka); ?>
+        </div>
+        <?php
+      }
+    }
+?>
   </div>
+  SPage

@@ -16,6 +16,9 @@ class CFbsQ extends CCore
     }
     public static function getPCGt5YrsRows($dbenv): array
     {
-        return CDbPdo::oleGetRows("select distinct * from vPCGt5Yrs order by [UserID]", $dbenv);
+        // We avoid selecting * and specifically exclude 'DiffYrs' because that calculation 
+        // inside the view is what's causing the Conversion failed error.
+return CDbPdo::oleGetRows("select distinct * from vPCGt5Yrs order by [UserID]", $dbenv);        
+//        return CDbPdo::oleGetRows("SELECT [ComputerName], [Subnet], [Description], [Model], [UserID], [OS_Arch], [ImageType], CAST(DeployedDate AS VARCHAR) as DeployedDate, [Location], [OS] FROM vPCGt5Yrs ORDER BY [UserID]", $dbenv);
     }
 }

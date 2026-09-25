@@ -121,41 +121,9 @@ $r = [
     // use setting instead, remove these later
 
     // Ajax Web Services
-    'ajws' => [ // group, title
-        "odata" => ",", // open not required authenticate
-        "udata" => "inq,", // required authenticate
-    ],
-    'front' => [ // group, title
-        "front" => ",FP",
-        "admin" => "admin,",
-        "fbsq" => "inq,FbsQ",
-        "jv" => ",",
-        "learn" => ",",
-        "static" => ",",
-        "pages" => ",",
-        "users" => ",",
-        "books" => ",",
-        "authors" => ",",
-    ],
-    'jv' => [ // group, title
-        "jv" => ",eJV",
-        "jvadm" => "admin,JV Admin",
-        "jvapv" => "approver,JV Approver",
-        "jvtpl" => "user,JV Templates",
-        "jvinq" => "inq,JV Inquery",
-    ],
-    'learn' => [ // group, title
-        "learn" => ",Lrn",
-        "lrnadmin" => "admin,Admin",
-        "userq" => "inq, UserQ",
-        "jsgrid" => "inq,",
-        "ko" => "inq,",
-        "jendo" => ",",
-        "spage" => ",",
-        "pages" => ",",
-    ],
-    'static' => [], // no group
-    'tg' => [],
+    /*
+
+    */
 ];
 
 return $r;

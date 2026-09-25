@@ -6,4 +6,4 @@ use MvcLite\CCore;
 ?>
 <font color="LightGrey" face="helvetica, sans-serif;" size="6">@Page.title</font>
 <H2>A simple web pages to do proof of concept on User queries</H2>
-include("_mylinks.cshtml")
+<?php include("_mylinks.php"); ?>

@@ -33,14 +33,14 @@ use MvcLite\CCore;
       loadData: function (filter) {
         return $.ajax({
           type: "GET",
-          url: "@Html.Raw(ajax_qs)",
+          url: "<?=($ajax_qs)?>",
           data: filter
         });
       },
       insertItem: function (item) {
         return $.ajax({
           type: "POST",
-          url: "@Html.Raw(ajax_qs)",
+          url: "<?=($ajax_qs)?>",
           data: item,
           success: function (item) {
             location.reload(); //reload the page on the success
@@ -50,7 +50,7 @@ use MvcLite\CCore;
       updateItem: function (item) {
         return $.ajax({
           type: "PUT",
-          url: "@Html.Raw(ajax_qs)",
+          url: "<?=($ajax_qs)?>",
           data: item,
           success: function (item) {
             location.reload(); //reload the page on the success
@@ -60,7 +60,7 @@ use MvcLite\CCore;
       deleteItem: function (item) {
         return $.ajax({
           type: "DELETE",
-          url: "@Html.Raw(ajax_qs)",
+          url: "<?=($ajax_qs)?>",
           data: item
         });
       },
