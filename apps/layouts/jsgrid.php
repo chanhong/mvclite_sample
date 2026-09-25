@@ -2,6 +2,7 @@
 $jsgrid = $this->publicFolder . '/' . 'jsgrid'.'/';
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- jsgrid -->
 <html>
 <head>
   <title><?php echo @$pageData['header_title']; ?></title>

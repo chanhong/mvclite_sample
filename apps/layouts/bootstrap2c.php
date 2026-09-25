@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
+<!-- bootstrap2c -->
 
 <head>
   <title><?php echo @$pageData['header_title']; ?></title>
@@ -62,6 +63,7 @@
         </ul>
       </div>
       <div class="main-body">
+                pln(CSetting::get('menus.app'), "mnu_apps");        
         <?php echo $this->doBody(); ?>
       </div>
     </div>

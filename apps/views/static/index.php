@@ -14,7 +14,7 @@
   $_qsa = CCore::qs2nvWithDefaultValue();
   CUtil::setActiveCtrl($_qsa);
 //  $ViewData["Title"] = "SPage";
-$this->_view_data['header_title'] = 'SPage';  
+$this->_view_data['header_title'] = 'Static';  
   CSecs::setUsersInfo(); // MUST set it before it is being used in the class
 
 //  $mnuLinks = CCore::$_cfg["mnu_static"];
@@ -28,9 +28,6 @@ $this->_view_data['header_title'] = 'SPage';
 <style>
 
 </style>
-<div id="logo">
-<img src="public/img/logo.svg" height=200 width=600>
-</div>
   <div class="grid-layout">
     <?php
    foreach ($mnuLinks as $title => $path) {
@@ -50,4 +47,4 @@ $this->_view_data['header_title'] = 'SPage';
     }
 ?>
   </div>
-  SPage
+Static

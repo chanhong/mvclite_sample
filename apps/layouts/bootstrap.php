@@ -9,7 +9,7 @@ $tile=$pageData['header_title']??'';
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-
+<!-- bootstrap -->
 <head>
   <title><?php echo $tile; ?></title>
   <meta content="text/html; charset=windows-1252" http-equiv="Content-Type">
@@ -68,6 +68,8 @@ $tile=$pageData['header_title']??'';
       <div class="main-body">
         <?php 
 //            pln($this->stg->get('tg'),'bootstrap: tg');
+                pln(CSetting::get('menus.app'), "menus.apps-sel:".CSetting::get("selctrl"));
+
 //                    pln($grp.''.':'.$grpno,'g:n');
                     // [-UINFO-SS-] Array ( [usrname] => admin [usrgroup] => admin [usrgrpno] => 90 [usrpw] => 96e79218965eb72c92a549dd5a330112 [appid] => FRONT [usrentity] => [litype] => web [level] => admin )
 //pln($uinfo,'uinfo-ss');

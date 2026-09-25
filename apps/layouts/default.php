@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- default -->
 <head>
   <?php
   use MvcLite\CConfig;
@@ -40,6 +40,7 @@
         </ul>
       </div>
       <div class="main-body">
+                pln(CSetting::get('menus.app'), "mnu_apps");        
         <?php echo $this->doBody(); ?>
 
       </div>

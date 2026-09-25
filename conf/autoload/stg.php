@@ -148,7 +148,6 @@ $r =
             ],
             'front' => [ // group, title
                 "front" => ",FP",
-                "admin" => "admin,",
                 "fbsq" => "inq,FbsQ",
                 "jv" => ",",
                 "learn" => ",",
@@ -157,6 +156,14 @@ $r =
                 "books" => ",",
                 "authors" => ",",
             ],
+            'static' => [ // group, title
+                "front" => ",FP",
+                "users" => ",",
+                "books" => ",",
+                "authors" => ",",
+                "alogo" => ",React Logo", 
+                "page1" => ",Item List", 
+            ],
             'jv' => [ // group, title
                 "jv" => ",eJV",
                 "jvadm" => "admin,JV Admin",
@@ -164,7 +171,7 @@ $r =
                 "jvtpl" => "user,JV Templates",
                 "jvinq" => "inq,JV Inquery",
             ],
-            'learn' => [ // group, title
+            'learn' => [ // cmenu and group, title and for submenu
                 "front" => ",FP",
                 "learn" => ",Lrn",
                 "lrnadmin" => "admin,Admin",
@@ -173,19 +180,22 @@ $r =
                 "ko" => "inq,",
                 "jendo" => ",",
             ],
-            'users' => [ // group, title
-                "list" => ",User List",
+            'users' => [ // cmenu and group, title and for submenu
+                "front" => ",FP",
+                "books" => ",",
+                "authors" => ",",
+                "register" => ",", // for submenu
+                "index" => ",User List", 
                 "create" => "admin,Create user",
-                "_edit" => "admin,Edit user",
-                "register" => ",",
             ],
             'authors' => [
-                "_edit" => "admin,Edit Author",
+                "front" => ",FP",
+                "_edit" => "admin,Edit Author", // for submenu
             ],
             'books' => [
-                "_edit" => "admin,Edit Book",
+                "front" => ",FP",
+                "_edit" => "admin,Edit Book", // for submenu
             ],
-            'static' => [],
         ],
 
         //        'mnutop' => [], // NOTused, dynamic top-level menu, need to write to CSetting rather than CCore::or CConfig

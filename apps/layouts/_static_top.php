@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
+<!-- _static_top -->  
 <head>
   <title>@ViewData["Title"]</title>
   <meta content="text/html; charset=windows-1252" http-equiv="Content-Type">

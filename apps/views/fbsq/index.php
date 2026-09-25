@@ -6,11 +6,11 @@ use MvcLite\CSetting;
 $this->_view_data['header_title'] = 'FBSQ';
 
 
+  $_qsa = CCore::qs2nvWithDefaultValue();
+  CUtil::setActiveCtrl($_qsa);
 
 
-
-$qsa = CCore::qs2nvWithDefaultValue();  
-  CUtil::setActiveCtrl($qsa);
+  
  CSecs::setUsersInfo(); // MUST set it before it is being used in the class
 
 $uname = $this->ut->getSafeVar($_SESSION, "loggedin", "raw");
