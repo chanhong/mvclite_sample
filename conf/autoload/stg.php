@@ -141,7 +141,8 @@ $r =
         // App registry — TOP LEVEL (not inside menu)
         // -----------------------------------------------------------------------
         'apps' => [
-            "list" => "ajws,front,jv,learn,static,users", // for taskgroup until later 
+//            "list" => "ajws,front,jv,learn,static,users", // for taskgroup until later 
+            "list" => "ajws,front,jv,learn,static", // for taskgroup until later 
             'ajws' => [ // group, title
                 "odata" => ",", // open not required authenticate
                 "udata" => "inq,", // required authenticate
