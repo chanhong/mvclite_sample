@@ -7,10 +7,10 @@ use MvcLite\CCore;
   {
     include(__DIR__ . "/_pwchg.php");
   }
-?>
+
   else
   {
     include(__DIR__ . "/_pwlost.php");
   }
-}
+
 ?>
