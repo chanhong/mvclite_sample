@@ -4,7 +4,7 @@ use MvcLite\CCore;
   $PageData["Title"] = "Lost Password";
   if ($_SERVER['REQUEST_METHOD'] === 'POST')
   {
-    CJvAdm::SendPw(Request.Form, CJv::DbEnv());
+    CJvAdm::SendPw($_POST, CJv::DbEnv());
     CUtil::Redirect("?");
   }
 ?>
@@ -12,7 +12,7 @@ use MvcLite\CCore;
   <p>
     A new generated password will be sent to your email address obtained from our record.
   </p>
-  <form id="formLostPW" ACTION=@CUtil::tap("/jv/_pwlost") METHOD="POST">
+  <form id="formLostPW" ACTION="<?php echo CUtil::tap("/jv/_pwlost"); ?>" METHOD="POST">
     <fieldset>
       <legend>Lost Password Form</legend>
       <p>
