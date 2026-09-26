@@ -317,7 +317,11 @@ class CJv extends CCore
     {
         if ($fieldName === "" || $strDate === "")
             return "";
-        return "CONVERT(DATETIME, $fieldName) $opr CONVERT(DATETIME, '$strDate')";
+        
+        $date = \DateTime::createFromFormat('n/j/Y', $strDate);
+        $formattedDate = $date ? $date->format('Y-m-d') : $strDate;
+        
+        return "CONVERT(DATETIME, $fieldName) $opr CONVERT(DATETIME, '$formattedDate')";
     }
 
     public static function GetJvlogInfo($logid, $dbinfo = "")
