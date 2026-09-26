@@ -310,7 +310,7 @@ class CJv extends CCore
     {
         $end = new \DateTime();
         $beg = (clone $end)->modify("-7 days");
-        return ["datebeg" => $beg->format("n/j/Y"), "dateend" => $end->format("n/j/Y")];
+        return ["datebeg" => $beg->format("Y-m-d"), "dateend" => $end->format("Y-m-d")];
     }
 
     public static function GetConvertedDate($fieldName, $strDate, $opr = "<=")
@@ -318,7 +318,7 @@ class CJv extends CCore
         if ($fieldName === "" || $strDate === "")
             return "";
         
-        $date = \DateTime::createFromFormat('n/j/Y', $strDate);
+        $date = \DateTime::createFromFormat('Y-m-d', $strDate) ?: \DateTime::createFromFormat('n/j/Y', $strDate);
         $formattedDate = $date ? $date->format('Y-m-d') : $strDate;
         
         return "CONVERT(DATETIME, $fieldName) $opr CONVERT(DATETIME, '$formattedDate')";
