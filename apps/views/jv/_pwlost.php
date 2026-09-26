@@ -2,7 +2,7 @@
 <?php
 use MvcLite\CCore;
   $PageData["Title"] = "Lost Password";
-  if (IsPost)
+  if ($_SERVER['REQUEST_METHOD'] === 'POST')
   {
     CJvAdm::SendPw(Request.Form, CJv::DbEnv());
     CUtil::Redirect("?");
